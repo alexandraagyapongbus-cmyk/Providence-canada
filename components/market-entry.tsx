@@ -1,9 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
 
 const destinations = [
@@ -24,16 +21,17 @@ const destinations = [
 ];
 
 export function MarketEntry() {
-  const router = useRouter();
-
-  useEffect(() => {
-    const remembered = window.localStorage.getItem('providence-market');
-    if (remembered === 'canada' || remembered === 'ghana') router.replace(`/${remembered}`);
-  }, [router]);
-
   function remember(market: 'canada' | 'ghana') {
-    window.localStorage.setItem('providence-market', market);
-    document.cookie = `providence-market=${market};path=/;max-age=31536000;samesite=lax`;
+    try {
+      window.localStorage.setItem('providence-market', market);
+    } catch {
+      // Navigation must still work when browser storage is unavailable.
+    }
+    try {
+      document.cookie = `providence-market=${market};path=/;max-age=31536000;samesite=lax`;
+    } catch {
+      // The market shell will retain the active market in the URL.
+    }
   }
 
   return (
@@ -47,7 +45,7 @@ export function MarketEntry() {
         <p className="entry-supporting-copy">Select the country you’re in—or the market you’d like to explore. You can switch between Canada and Ghana at any time.</p>
         <div className="market-choices" aria-label="Choose a Providence market">
           {destinations.map((destination) => (
-            <Link
+            <a
               key={destination.market}
               href={`/${destination.market}`}
               className={`market-destination market-destination-${destination.market}`}
@@ -61,7 +59,7 @@ export function MarketEntry() {
               <strong className="market-card-title">{destination.title}</strong>
               <p>{destination.description}</p>
               <span className="market-card-cta">Enter {destination.country}<ArrowRight aria-hidden="true" /></span>
-            </Link>
+            </a>
           ))}
         </div>
       </section>

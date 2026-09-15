@@ -26,8 +26,16 @@ export function MarketShell({ market, children }: { market: MarketName; children
   const otherPath = `/${otherMarket}${suffix}`;
 
   function rememberMarket(nextMarket: MarketName) {
-    window.localStorage.setItem('providence-market', nextMarket);
-    document.cookie = `providence-market=${nextMarket};path=/;max-age=31536000;samesite=lax`;
+    try {
+      window.localStorage.setItem('providence-market', nextMarket);
+    } catch {
+      // The selected market remains explicit in the URL.
+    }
+    try {
+      document.cookie = `providence-market=${nextMarket};path=/;max-age=31536000;samesite=lax`;
+    } catch {
+      // Navigation must still work when cookie access is unavailable.
+    }
   }
 
   useEffect(() => {
