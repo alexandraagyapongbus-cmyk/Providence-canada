@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
 import { GHANA_CRM_URL, markets, type MarketName } from '@/lib/content';
 
@@ -13,6 +13,11 @@ const navItems = [
   ['Contact', '/contact'],
 ] as const;
 
+const marketFlags: Record<MarketName, string> = {
+  canada: '🇨🇦',
+  ghana: '🇬🇭',
+};
+
 export function MarketShell({ market, children }: { market: MarketName; children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -20,9 +25,13 @@ export function MarketShell({ market, children }: { market: MarketName; children
   const suffix = pathname.replace(/^\/(canada|ghana)/, '') || '';
   const otherPath = `/${otherMarket}${suffix}`;
 
+  function rememberMarket(nextMarket: MarketName) {
+    window.localStorage.setItem('providence-market', nextMarket);
+    document.cookie = `providence-market=${nextMarket};path=/;max-age=31536000;samesite=lax`;
+  }
+
   useEffect(() => {
-    window.localStorage.setItem('providence-market', market);
-    document.cookie = `providence-market=${market};path=/;max-age=31536000;samesite=lax`;
+    rememberMarket(market);
   }, [market]);
 
   useEffect(() => setOpen(false), [pathname]);
@@ -43,9 +52,21 @@ export function MarketShell({ market, children }: { market: MarketName; children
         </nav>
         <div className="header-actions">
           {market === 'ghana' && <a className="crm-link" href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
-          <Link className="compact-market-switch" href={otherPath} onClick={() => window.localStorage.setItem('providence-market', otherMarket)}>
-            <span>{markets[market].name}</span><b>Switch to {markets[otherMarket].name}</b>
-          </Link>
+          <details className="market-switcher">
+            <summary aria-label={`Current market: ${markets[market].name}. Open market switcher.`}>
+              <span aria-hidden="true">{marketFlags[market]}</span>
+              <b>{markets[market].name}</b>
+              <ChevronDown aria-hidden="true" />
+            </summary>
+            <div className="market-switcher-menu">
+              <small>Switch market</small>
+              <Link href={otherPath} onClick={() => rememberMarket(otherMarket)}>
+                <span aria-hidden="true">{marketFlags[otherMarket]}</span>
+                <span><b>{markets[otherMarket].name}</b><small>Open Providence {markets[otherMarket].name}</small></span>
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+            </div>
+          </details>
           <button className="menu-toggle" type="button" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen(!open)}>
             {open ? <X /> : <Menu />}
           </button>
@@ -55,8 +76,10 @@ export function MarketShell({ market, children }: { market: MarketName; children
             {navItems.map(([label, path]) => <Link key={label} href={`/${market}${path}`}>{label}</Link>)}
             {market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
           </nav>
-          <Link className="mobile-market-switch" href={otherPath} onClick={() => window.localStorage.setItem('providence-market', otherMarket)}>
-            Switch to Providence {markets[otherMarket].name}
+          <Link className="mobile-market-switch" href={otherPath} onClick={() => rememberMarket(otherMarket)}>
+            <span aria-hidden="true">{marketFlags[market]}</span>
+            <span>Providence {markets[market].name}</span>
+            <b>Switch to {marketFlags[otherMarket]} {markets[otherMarket].name} <ArrowUpRight aria-hidden="true" /></b>
           </Link>
         </div>
       </header>
