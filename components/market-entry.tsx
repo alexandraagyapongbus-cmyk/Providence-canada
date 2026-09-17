@@ -1,7 +1,10 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
+import { useEffect } from 'react';
+import { marketUrl } from '@/lib/content';
 
 const destinations = [
   {
@@ -21,6 +24,14 @@ const destinations = [
 ];
 
 export function MarketEntry() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const hostname = window.location.hostname.replace(/^www\./, '').toLowerCase();
+    if (hostname === 'providencecanada.ca') router.replace('/canada');
+    if (hostname === 'providencecanadaltd.com') router.replace('/ghana');
+  }, [router]);
+
   function remember(market: 'canada' | 'ghana') {
     try {
       window.localStorage.setItem('providence-market', market);
@@ -39,7 +50,7 @@ export function MarketEntry() {
       <Image src="/providence-hero.png" alt="Providence serving Canada and Ghana" fill priority sizes="100vw" className="entry-image" />
       <div className="entry-overlay" />
       <section className="entry-content" aria-labelledby="market-entry-heading">
-        <div className="wordmark entry-wordmark"><span className="wordmark-mark">P</span><span>Providence</span></div>
+        <div className="wordmark entry-wordmark"><span className="wordmark-logo"><Image src="/providence-logo.jpg" alt="" width={500} height={500} priority /></span><span>Providence</span></div>
         <p className="kicker">One Providence · Two markets</p>
         <h1 id="market-entry-heading">Choose your Providence</h1>
         <p className="entry-supporting-copy">Select the country you’re in—or the market you’d like to explore. You can switch between Canada and Ghana at any time.</p>
@@ -47,7 +58,7 @@ export function MarketEntry() {
           {destinations.map((destination) => (
             <a
               key={destination.market}
-              href={`/${destination.market}`}
+              href={marketUrl(destination.market)}
               className={`market-destination market-destination-${destination.market}`}
               aria-label={`Enter Providence ${destination.country}`}
               onClick={() => remember(destination.market)}

@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
-import { GHANA_CRM_URL, markets, type MarketName } from '@/lib/content';
+import Image from 'next/image';
+import { GHANA_CRM_URL, markets, marketUrl, type MarketName } from '@/lib/content';
 
 const navItems = [
   ['Home', ''],
@@ -23,7 +24,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
   const pathname = usePathname();
   const otherMarket: MarketName = market === 'canada' ? 'ghana' : 'canada';
   const suffix = pathname.replace(/^\/(canada|ghana)/, '') || '';
-  const otherPath = `/${otherMarket}${suffix}`;
+  const otherPath = marketUrl(otherMarket, suffix);
 
   function rememberMarket(nextMarket: MarketName) {
     try {
@@ -49,7 +50,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="site-header full-header">
         <Link className="wordmark" href={`/${market}`} aria-label={`Providence ${markets[market].name} home`}>
-          <span className="wordmark-mark">P</span><span>Providence</span>
+          <span className="wordmark-logo"><Image src="/providence-logo.jpg" alt="" width={500} height={500} priority /></span><span>Providence</span>
         </Link>
         <nav aria-label="Primary navigation" className="desktop-nav">
           {navItems.map(([label, path]) => {
@@ -68,11 +69,11 @@ export function MarketShell({ market, children }: { market: MarketName; children
             </summary>
             <div className="market-switcher-menu">
               <small>Switch market</small>
-              <Link href={otherPath} onClick={() => rememberMarket(otherMarket)}>
+              <a href={otherPath} onClick={() => rememberMarket(otherMarket)}>
                 <span aria-hidden="true">{marketFlags[otherMarket]}</span>
                 <span><b>{markets[otherMarket].name}</b><small>Open Providence {markets[otherMarket].name}</small></span>
                 <ArrowUpRight aria-hidden="true" />
-              </Link>
+              </a>
             </div>
           </details>
           <button className="menu-toggle" type="button" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen(!open)}>
@@ -84,22 +85,22 @@ export function MarketShell({ market, children }: { market: MarketName; children
             {navItems.map(([label, path]) => <Link key={label} href={`/${market}${path}`}>{label}</Link>)}
             {market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
           </nav>
-          <Link className="mobile-market-switch" href={otherPath} onClick={() => rememberMarket(otherMarket)}>
+          <a className="mobile-market-switch" href={otherPath} onClick={() => rememberMarket(otherMarket)}>
             <span aria-hidden="true">{marketFlags[market]}</span>
             <span>Providence {markets[market].name}</span>
             <b>Switch to {marketFlags[otherMarket]} {markets[otherMarket].name} <ArrowUpRight aria-hidden="true" /></b>
-          </Link>
+          </a>
         </div>
       </header>
       <main id="main-content">{children}</main>
       <footer className="site-footer">
         <div className="footer-brand">
-          <Link className="wordmark" href={`/${market}`}><span className="wordmark-mark">P</span><span>Providence</span></Link>
+          <Link className="wordmark" href={`/${market}`}><span className="wordmark-logo footer-wordmark-logo"><Image src="/providence-logo.jpg" alt="" width={500} height={500} /></span><span>Providence</span></Link>
           <p>Helpful service. Dependable communication. Practical technology.</p>
         </div>
         <div className="footer-links">
           <div><strong>{markets[market].shortLabel}</strong>{navItems.map(([label, path]) => <Link key={label} href={`/${market}${path}`}>{label}</Link>)}</div>
-          <div><strong>Other market</strong><Link href={`/${otherMarket}`}>Providence {markets[otherMarket].name}</Link>{market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login</a>}</div>
+          <div><strong>Other market</strong><a href={marketUrl(otherMarket)}>Providence {markets[otherMarket].name}</a>{market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login</a>}</div>
         </div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Providence</span><span>Canada · Ghana</span></div>
       </footer>

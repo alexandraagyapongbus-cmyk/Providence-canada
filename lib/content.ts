@@ -19,6 +19,14 @@ export type MarketName = 'canada' | 'ghana';
 export type SiteSection = 'home' | 'services' | 'about' | 'contact';
 
 export const GHANA_CRM_URL = 'https://providence-ghana-crm.agyapongalexandra.chatgpt.site';
+export const MARKET_ORIGINS: Record<MarketName, string> = {
+  canada: 'https://providencecanada.ca',
+  ghana: 'https://providencecanadaltd.com',
+};
+
+export function marketUrl(market: MarketName, path = '') {
+  return `${MARKET_ORIGINS[market]}/${market}${path}`;
+}
 
 export const markets = {
   canada: {

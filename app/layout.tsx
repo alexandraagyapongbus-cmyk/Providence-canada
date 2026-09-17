@@ -11,18 +11,18 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://providence-canada-ghana.agyapongalexandra.chatgpt.site'),
   title: { default: 'Providence | Canada & Ghana', template: '%s' },
   description,
-  icons: { icon: '/favicon.svg', shortcut: '/favicon.svg' },
+  icons: { icon: '/providence-logo.jpg', shortcut: '/providence-logo.jpg', apple: '/providence-logo.jpg' },
   openGraph: {
     title: 'Providence | Canada & Ghana',
     description,
     type: 'website',
-    images: [{ url: '/og.png', width: 1733, height: 907, alt: 'Providence — Canada connected. Ghana entertained.' }],
+    images: [{ url: '/providence-logo.jpg', width: 500, height: 500, alt: 'Providence Canada Inc logo' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Providence | Canada & Ghana',
     description,
-    images: ['/og.png'],
+    images: ['/providence-logo.jpg'],
   },
 };
 
