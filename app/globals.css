@@ -102,6 +102,7 @@ img { max-width: 100%; }
 .entry-wordmark .wordmark-logo { width: 78px; height: 49px; }
 .footer-wordmark-logo { width: 68px; height: 42px; }
 .desktop-nav { display: flex; align-items: center; gap: clamp(1.2rem, 2.4vw, 2.4rem); color: rgba(255,255,255,.72); font-size: .86rem; font-weight: 700; }
+.desktop-nav-canada { gap: clamp(.7rem,1.15vw,1.3rem); font-size: .73rem; }
 .desktop-nav a { position: relative; padding: .65rem 0; transition: color .2s ease; }
 .desktop-nav a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px; background: var(--gold); transition: right .25s ease; }
 .desktop-nav a:hover, .desktop-nav a[aria-current='page'] { color: white; }
@@ -120,6 +121,11 @@ img { max-width: 100%; }
 .market-switcher[open] summary svg { transform: rotate(180deg); }
 .market-switcher-menu { position: absolute; top: calc(100% + .65rem); right: 0; width: 242px; padding: .65rem; border: 1px solid rgba(255,255,255,.15); background: #08213f; box-shadow: 0 22px 55px rgba(0,0,0,.3); }
 .market-switcher-menu > small { display: block; padding: .35rem .45rem .65rem; color: var(--gold-light); font-size: .6rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+.market-switcher-current { display: grid; grid-template-columns: auto 1fr; gap: .65rem; align-items: center; margin-bottom: .45rem; padding: .72rem .8rem; border: 1px solid rgba(229,184,75,.28); background: rgba(229,184,75,.08); }
+.market-switcher-current > span:first-child { font-size: 1.15rem; }
+.market-switcher-current > span:last-child { display: grid; gap: .18rem; }
+.market-switcher-current b { color: white; font-size: .78rem; }
+.market-switcher-current small { color: rgba(255,255,255,.55); font-size: .63rem; }
 .market-switcher-menu a { display: grid; grid-template-columns: auto 1fr auto; gap: .65rem; align-items: center; padding: .8rem; background: rgba(255,255,255,.06); transition: background .2s ease,transform .2s ease; }
 .market-switcher-menu a:hover { transform: translateX(3px); background: rgba(255,255,255,.12); }
 .market-switcher-menu a > span:first-child { font-size: 1.15rem; }
@@ -134,7 +140,9 @@ img { max-width: 100%; }
 .market-hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding: 10rem clamp(1.25rem, 6.4vw, 7.5rem) 7rem; color: white; background: var(--navy); isolation: isolate; }
 .market-hero-image { z-index: -3; object-fit: cover; object-position: center; animation: hero-arrive 1.35s cubic-bezier(.2,.8,.2,1) both; }
 .market-ghana .market-hero-image { object-position: 68% center; }
+.healthcare-hero .market-hero-image { object-position: center 42%; }
 .market-hero-overlay { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg,rgba(6,24,48,.97) 0%,rgba(7,28,55,.86) 31%,rgba(8,35,68,.3) 65%,rgba(8,35,68,.1)),linear-gradient(0deg,rgba(5,21,43,.86),transparent 56%); }
+.healthcare-hero .market-hero-overlay { background: linear-gradient(90deg,rgba(6,24,48,.98) 0%,rgba(7,28,55,.91) 35%,rgba(8,35,68,.33) 68%,rgba(8,35,68,.12)),linear-gradient(0deg,rgba(5,21,43,.83),transparent 58%); }
 .market-hero-content { width: min(720px, 64vw); animation: content-rise .85s .12s cubic-bezier(.2,.8,.2,1) both; }
 .kicker, .section-kicker { display: flex; align-items: center; gap: .55rem; margin: 0 0 1.2rem; color: #dcecff; font-size: .72rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
 .kicker svg { width: 18px; color: var(--gold); }
@@ -167,7 +175,7 @@ img { max-width: 100%; }
 .content-section, .page-intro, .comparison-section, .journey-section, .values-section { padding: clamp(5.2rem,9vw,9rem) clamp(1.25rem,6.5vw,7.5rem); }
 .section-heading { max-width: 780px; margin-bottom: 3.25rem; }
 .section-heading .section-kicker, .section-kicker { color: var(--blue); }
-.section-heading h2, .partnership-copy h2, .support-section h2, .about-copy h2, .contact-context h2, .truth-section h2, .final-cta h2, .ghana-offer-detail h2 { margin: 0; font: 530 clamp(2.5rem,5.2vw,5.2rem)/1 var(--font-display),sans-serif; letter-spacing: -.058em; text-wrap: balance; }
+.section-heading h2, .partnership-copy h2, .support-section h2, .about-copy h2, .contact-context h2, .truth-section h2, .final-cta h2, .ghana-offer-detail h2, .audience-card h3, .settings-copy h2, .inquiry-overview h2, .grounded-note h2, .telecom-secondary h2, .telecom-contact h2 { margin: 0; font: 530 clamp(2.5rem,5.2vw,5.2rem)/1 var(--font-display),sans-serif; letter-spacing: -.058em; text-wrap: balance; }
 .section-heading > p:last-child { max-width: 660px; margin: 1.2rem 0 0; color: var(--muted-copy); font-size: 1rem; line-height: 1.75; }
 .section-heading.light h2, .section-heading.light > p:last-child { color: white; }
 .section-heading.light > p:last-child { color: rgba(255,255,255,.64); }
@@ -248,6 +256,63 @@ img { max-width: 100%; }
 .campaign-detail { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(3rem,8vw,8rem); align-items: end; }
 .campaign-points { display: grid; border-top: 1px solid rgba(255,255,255,.18); }
 .campaign-points span { padding: 1.25rem 0; border-bottom: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.76); font-size: .9rem; }
+
+.audience-section { background: linear-gradient(145deg,#eef5fc 0%,#f8fafc 48%,#f4ead1 120%); }
+.audience-paths { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.audience-card { min-height: 380px; display: flex; flex-direction: column; align-items: flex-start; padding: clamp(2rem,4vw,3.2rem); border-top: 4px solid var(--blue); background: white; box-shadow: 0 24px 65px rgba(6,16,31,.08); }
+.audience-card.worker-card { border-top-color: var(--gold); color: white; background: var(--navy-2); }
+.audience-card > svg { width: 32px; height: 32px; margin-bottom: 3.2rem; color: var(--blue); }
+.audience-card.worker-card > svg { color: var(--gold); }
+.audience-card .section-kicker { margin-bottom: .8rem; }
+.audience-card h3 { max-width: 540px; font-size: clamp(2rem,3.6vw,3.5rem); }
+.audience-card > p:not(.section-kicker) { max-width: 590px; margin: 1.2rem 0 2rem; color: var(--muted-copy); line-height: 1.75; }
+.audience-card.worker-card > p:not(.section-kicker) { color: rgba(255,255,255,.65); }
+.audience-card .button { margin-top: auto; }
+.audience-paths.compact .audience-card { min-height: 340px; }
+
+.roles-section { padding: clamp(5.2rem,9vw,9rem) clamp(1.25rem,6.5vw,7.5rem); background: white; }
+.healthcare-role-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.healthcare-role-grid article { min-height: 290px; padding: 1.8rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fbfcfe; }
+.healthcare-role-grid article > div { display: flex; align-items: center; justify-content: space-between; }
+.healthcare-role-grid svg { width: 28px; color: var(--blue); }
+.healthcare-role-grid article > div span { color: #728196; font-size: .66rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+.healthcare-role-grid h3 { margin: 5rem 0 .8rem; font: 590 1.15rem/1.25 var(--font-display),sans-serif; }
+.healthcare-role-grid p { margin: 0; color: var(--muted-copy); font-size: .86rem; line-height: 1.7; }
+
+.settings-section { display: grid; grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr); gap: clamp(3rem,8vw,8rem); align-items: start; padding: clamp(5.2rem,9vw,9rem) clamp(1.25rem,6.5vw,7.5rem); background: linear-gradient(135deg,#dfeeff 0%,#f7f9fc 55%,#f0e6c8 125%); }
+.settings-copy h2 { font-size: clamp(2.5rem,4.6vw,4.7rem); }
+.settings-copy > p:last-child { margin: 1.4rem 0 0; color: var(--muted-copy); line-height: 1.8; }
+.care-settings-grid { border-top: 1px solid rgba(10,29,53,.16); }
+.care-settings-grid article { display: grid; grid-template-columns: 45px 1fr; gap: .4rem 1rem; padding: 1.6rem 0; border-bottom: 1px solid rgba(10,29,53,.16); }
+.care-settings-grid article > span { grid-row: span 2; color: var(--blue); font: 600 .76rem/1 var(--font-display),sans-serif; }
+.care-settings-grid h3 { margin: 0; font: 590 1.05rem/1.25 var(--font-display),sans-serif; }
+.care-settings-grid p { margin: 0; color: var(--muted-copy); font-size: .84rem; line-height: 1.6; }
+
+.telecom-secondary, .telecom-contact { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; padding: clamp(4.3rem,7vw,7rem) clamp(1.25rem,6.5vw,7.5rem); border-top: 1px solid var(--line); background: white; }
+.telecom-secondary > div > svg, .telecom-contact > div > svg { width: 30px; height: 30px; margin-bottom: 2rem; color: var(--blue); }
+.telecom-secondary h2, .telecom-contact h2 { font-size: clamp(2.3rem,4vw,4.4rem); }
+.telecom-secondary > div > p:last-child { max-width: 750px; margin: 1.2rem 0 0; color: var(--muted-copy); line-height: 1.75; }
+.telecom-contact { background: var(--gold); }
+.telecom-contact .section-kicker { color: #5b4206; }
+
+.final-cta-actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: flex-end; }
+.grounded-note { display: grid; grid-template-columns: auto minmax(0,860px); gap: 2rem; justify-content: center; padding: clamp(4rem,7vw,7rem) clamp(1.25rem,6.5vw,7.5rem); color: var(--navy); background: var(--gold); }
+.grounded-note > svg { width: 36px; height: 36px; }
+.grounded-note .section-kicker { color: #5b4206; }
+.grounded-note h2 { font-size: clamp(2.4rem,4.5vw,4.7rem); }
+.grounded-note p:last-child { max-width: 770px; color: #493b16; line-height: 1.75; }
+
+.inquiry-overview { display: grid; grid-template-columns: minmax(0,1fr) minmax(340px,.8fr); gap: clamp(3rem,8vw,8rem); padding: clamp(5.2rem,9vw,9rem) clamp(1.25rem,6.5vw,7.5rem); background: white; }
+.inquiry-overview > div:first-child > p:not(.section-kicker) { color: var(--muted-copy); line-height: 1.82; }
+.inquiry-facts { align-self: center; border-top: 1px solid var(--line); }
+.inquiry-facts > div { display: grid; grid-template-columns: 40px 1fr; gap: .25rem 1rem; padding: 1.35rem 0; border-bottom: 1px solid var(--line); }
+.inquiry-facts svg { grid-row: span 2; width: 23px; color: var(--blue); }
+.inquiry-facts strong { font: 590 .98rem/1.2 var(--font-display),sans-serif; }
+.inquiry-facts span { color: var(--muted-copy); font-size: .8rem; line-height: 1.55; }
+.focused-form-section { background: #eef3f8; }
+.contact-path-links { display: grid; gap: .7rem; margin: 0 0 2rem; }
+.contact-path-links a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; border-bottom: 1px solid var(--line); color: var(--blue); font-size: .8rem; font-weight: 800; }
+.contact-path-links svg { width: 16px; }
 
 .about-story { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(3rem,8vw,8rem); padding: clamp(5.2rem,9vw,9rem) clamp(1.25rem,6.5vw,7.5rem); }
 .about-copy > p:not(.section-kicker) { color: var(--muted-copy); line-height: 1.85; }
@@ -351,13 +416,19 @@ img { max-width: 100%; }
 @keyframes content-rise { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+@media (max-width: 1240px) {
+  .site-header { padding-inline: 1.4rem; }
+  .desktop-nav-canada { gap: .62rem; font-size: .67rem; }
+  .desktop-nav-canada + .header-actions .market-switcher summary { min-width: 112px; }
+}
+
 @media (max-width: 1050px) {
   .site-header { grid-template-columns: 1fr auto; }
   .desktop-nav { display: none; }
   .menu-toggle { display: grid; }
   .crm-link { display: none; }
   .mobile-menu { position: absolute; top: 82px; left: 0; right: 0; display: grid; max-height: 0; overflow: hidden; padding: 0 clamp(1.25rem,4vw,3rem); background: #08213f; opacity: 0; transition: max-height .3s ease,opacity .25s ease,padding .3s ease; }
-  .mobile-menu.open { max-height: 520px; padding-top: 1.5rem; padding-bottom: 1.5rem; opacity: 1; }
+  .mobile-menu.open { max-height: calc(100svh - 82px); overflow-y: auto; padding-top: 1.5rem; padding-bottom: 1.5rem; opacity: 1; }
   .mobile-menu nav { display: grid; }
   .mobile-menu nav a { display: flex; justify-content: space-between; padding: .95rem 0; border-bottom: 1px solid rgba(255,255,255,.12); font: 560 1.15rem/1.2 var(--font-display),sans-serif; }
   .mobile-menu nav svg { width: 16px; }
@@ -374,10 +445,12 @@ img { max-width: 100%; }
 @media (max-width: 800px) {
   .site-header { height: 72px; }
   .mobile-menu { top: 72px; }
+  .mobile-menu.open { max-height: calc(100svh - 72px); }
   .market-switcher summary { min-width: 124px; }
   .compact-market-switch b { font-size: .63rem; }
   .market-hero { min-height: 88svh; padding-top: 8rem; padding-bottom: 4.2rem; }
   .market-hero-image { object-position: 57% center; }
+  .healthcare-hero .market-hero-image { object-position: 55% center; }
   .market-ghana .market-hero-image { object-position: 70% center; }
   .market-hero-overlay { background: linear-gradient(0deg,rgba(5,22,44,.98) 5%,rgba(7,28,55,.89) 57%,rgba(8,35,68,.22)); }
   .market-hero-content, .interior-hero .market-hero-content { width: 100%; }
@@ -389,7 +462,11 @@ img { max-width: 100%; }
   .process-grid { grid-template-columns: 1fr; }
   .process-grid article, .process-grid article + article { min-height: auto; padding: 1.7rem 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.15); }
   .process-grid h3 { margin-top: 1.8rem; }
-  .partnership-section, .ghana-offer-detail, .campaign-detail, .about-story, .contact-section { grid-template-columns: 1fr; }
+  .partnership-section, .ghana-offer-detail, .campaign-detail, .about-story, .contact-section, .settings-section, .inquiry-overview, .telecom-secondary, .telecom-contact { grid-template-columns: 1fr; }
+  .audience-paths { grid-template-columns: 1fr; }
+  .healthcare-role-grid { grid-template-columns: 1fr 1fr; }
+  .telecom-secondary, .telecom-contact { align-items: start; }
+  .final-cta-actions { justify-content: flex-start; }
   .offer-band { grid-template-columns: 1fr; }
   .offer-band > div, .offer-band > div:last-child { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
   .journey-section ol { grid-template-columns: 1fr 1fr; }
@@ -410,6 +487,11 @@ img { max-width: 100%; }
   .market-hero { min-height: 93svh; }
   .hero-actions { display: grid; grid-template-columns: 1fr; }
   .service-grid { grid-template-columns: 1fr; }
+  .healthcare-role-grid { grid-template-columns: 1fr; }
+  .healthcare-role-grid article { min-height: 245px; }
+  .healthcare-role-grid h3 { margin-top: 3rem; }
+  .audience-card { min-height: 340px; }
+  .grounded-note { grid-template-columns: 1fr; }
   .service-card { min-height: 240px; }
   .plan-grid { grid-template-columns: 1fr; }
   .plan-grid article + article { border-top: 1px solid rgba(255,255,255,.17); border-left: 0; }

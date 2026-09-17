@@ -5,7 +5,7 @@ import './globals.css';
 const bodyFont = Manrope({ variable: '--font-body', subsets: ['latin'], display: 'swap' });
 const displayFont = Space_Grotesk({ variable: '--font-display', subsets: ['latin'], display: 'swap' });
 
-const description = 'Practical telecommunications, sales support, and home entertainment services from Providence Canada and Providence Ghana.';
+const description = 'Healthcare staffing and telecom services from Providence Canada, and TV box sales, installation, plans, and support from Providence Ghana.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://providence-canada-ghana.agyapongalexandra.chatgpt.site'),

@@ -1,8 +1,9 @@
 import {
   BarChart3,
   BriefcaseBusiness,
-  Cable,
+  Building2,
   Headphones,
+  HeartHandshake,
   Megaphone,
   PhoneCall,
   RadioTower,
@@ -10,13 +11,15 @@ import {
   Settings2,
   ShoppingBag,
   Sparkles,
+  Stethoscope,
   Tv,
+  UserRoundCheck,
   Users,
   Wrench,
 } from 'lucide-react';
 
 export type MarketName = 'canada' | 'ghana';
-export type SiteSection = 'home' | 'services' | 'about' | 'contact';
+export type SiteSection = 'home' | 'healthcare-staffing' | 'care-organizations' | 'healthcare-workers' | 'telecom' | 'services' | 'about' | 'contact';
 
 export const GHANA_CRM_URL = 'https://providence-ghana-crm.agyapongalexandra.chatgpt.site';
 export const MARKET_ORIGINS: Record<MarketName, string> = {
@@ -32,17 +35,18 @@ export const markets = {
   canada: {
     name: 'Canada',
     shortLabel: 'Providence Canada',
-    eyebrow: 'Telecom sales & growth support',
-    heroTitle: 'Clear connections. Confident growth.',
-    heroCopy: 'Providence helps people and businesses understand, select, and access practical telecom solutions—backed by thoughtful sales and campaign support.',
-    primaryCta: 'Explore services',
-    secondaryCta: 'Talk to our team',
-    contactIntro: 'Tell us what you are trying to solve. We will start with the right conversation, not a one-size-fits-all pitch.',
+    eyebrow: 'Healthcare staffing & recruitment in Ontario',
+    heroTitle: 'The right care starts with the right connection.',
+    heroCopy: 'Providence Canada connects healthcare and care-support professionals with Ontario organizations seeking staff—through thoughtful recruiting, matching, placement, and staffing coordination.',
+    primaryCta: 'Find staff',
+    secondaryCta: 'Find work',
+    contactIntro: 'Tell us whether you need healthcare staff, want to explore work opportunities, or have a telecom inquiry. We will route your request to the right Providence Canada conversation.',
     contactOptions: [
+      'Find staff for a care organization',
+      'Explore healthcare work opportunities',
+      'Healthcare staffing question',
       'Internet or telecom inquiry',
-      'Business consultation',
-      'Telesales support',
-      'Marketing or sales partnership',
+      'Telecom sales or marketing partnership',
       'General inquiry',
     ],
     services: [
@@ -54,9 +58,9 @@ export const markets = {
       { icon: Users, title: 'Sales partnerships', text: 'Flexible support for telecom teams and campaigns that need extra sales capacity and coordination.' },
     ],
     process: [
-      ['01', 'Understand the need', 'We clarify the customer, business goal, service need, and practical constraints.'],
-      ['02', 'Shape the right path', 'We help narrow the available solution or build the right sales-support approach.'],
-      ['03', 'Support the next move', 'We help carry the conversation forward with clear communication and organized follow-through.'],
+      ['01', 'Understand the need', 'We learn about the role, location, schedule, timing, and priorities on either side of the staffing conversation.'],
+      ['02', 'Identify a potential fit', 'We compare organizational needs with worker qualifications, interests, and availability.'],
+      ['03', 'Coordinate the next step', 'Where there may be a suitable match, Providence helps organize the conversation and placement process.'],
     ],
   },
   ghana: {
@@ -93,12 +97,35 @@ export const markets = {
   },
 } as const;
 
-export const pageMeta: Record<MarketName, Record<SiteSection, { title: string; description: string }>> = {
+export const healthcareRoles = [
+  { icon: HeartHandshake, title: 'Personal support workers', short: 'PSWs', text: 'Care and daily-living support across residential and community settings.' },
+  { icon: Stethoscope, title: 'Registered practical nurses', short: 'RPNs', text: 'Practical nursing professionals for appropriate care environments and schedules.' },
+  { icon: UserRoundCheck, title: 'Registered nurses', short: 'RNs', text: 'Registered nursing professionals for suitable clinical and care needs.' },
+  { icon: Users, title: 'Care support professionals', short: 'Support', text: 'Other healthcare and care-support roles considered according to each request.' },
+] as const;
+
+export const careSettings = [
+  { title: 'Residential care', text: 'Retirement homes and long-term care homes.' },
+  { title: 'Clinical & comfort care', text: 'Hospitals and hospices where appropriate opportunities arise.' },
+  { title: 'Home & community care', text: 'Organizations supporting people in their homes and communities.' },
+] as const;
+
+export const staffingPrinciples = [
+  { icon: Building2, title: 'Needs-led', text: 'Every conversation starts with the actual role, environment, schedule, and timing.' },
+  { icon: HeartHandshake, title: 'Human matching', text: 'We look beyond a title to understand preferences and practical fit on both sides.' },
+  { icon: UserRoundCheck, title: 'Clear next steps', text: 'Interest is coordinated carefully without promising a placement or staffing outcome.' },
+] as const;
+
+export const pageMeta: Record<MarketName, Partial<Record<SiteSection, { title: string; description: string }>>> = {
   canada: {
-    home: { title: 'Providence Canada | Telecom Sales & Growth Support', description: 'Internet, telecom sales, telesales, marketing, consultation, and campaign support from Providence Canada.' },
-    services: { title: 'Canada Services | Providence', description: 'Explore Providence Canada services for connectivity, telecom sales, telesales, marketing, consultation, and partnerships.' },
-    about: { title: 'About Providence Canada', description: 'Learn how Providence brings helpful service, dependable communication, and practical technology support to Canada.' },
-    contact: { title: 'Contact Providence Canada', description: 'Talk to Providence about a telecom inquiry, business consultation, telesales support, or sales partnership.' },
+    home: { title: 'Providence Canada | Healthcare Staffing & Recruitment', description: 'Providence Canada connects healthcare workers with Ontario care organizations seeking staff, while continuing to offer telecom sales and marketing support.' },
+    'healthcare-staffing': { title: 'Healthcare Staffing | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations.' },
+    'care-organizations': { title: 'Find Healthcare Staff | Providence Canada', description: 'Tell Providence Canada about your healthcare staffing needs, roles, locations, schedules, and timing.' },
+    'healthcare-workers': { title: 'Find Healthcare Work | Providence Canada', description: 'Healthcare and care-support professionals can share qualifications, availability, and work interests with Providence Canada.' },
+    telecom: { title: 'Telecom Sales & Marketing | Providence Canada', description: 'Explore Providence Canada telecom guidance, telesales, customer acquisition, marketing, and campaign coordination.' },
+    services: { title: 'Healthcare Staffing | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations.' },
+    about: { title: 'About Providence Canada', description: 'Learn about Providence Canada healthcare staffing, recruitment, and secondary telecom services.' },
+    contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about healthcare staffing, healthcare work interests, or telecom services.' },
   },
   ghana: {
     home: { title: 'Providence Ghana | TV Box Sales, Installation & Support', description: 'Order a Providence TV box, arrange installation, choose a service plan, or get customer support in Ghana.' },
@@ -109,8 +136,8 @@ export const pageMeta: Record<MarketName, Record<SiteSection, { title: string; d
 };
 
 export const storyValues = [
-  { icon: Cable, title: 'Practical technology', text: 'We focus on technology that solves a clear need and is easier to understand and use.' },
-  { icon: BarChart3, title: 'Dependable follow-through', text: 'Good service means organized communication before, during, and after the decision.' },
+  { icon: HeartHandshake, title: 'Human understanding', text: 'We begin with the people, priorities, and practical details behind each request.' },
+  { icon: BarChart3, title: 'Dependable follow-through', text: 'Good service means organized communication before, during, and after a decision.' },
   { icon: Users, title: 'Helpful by design', text: 'We make room for questions and guide each person toward a sensible next step.' },
 ];
 

@@ -12,14 +12,14 @@ const destinations = [
     country: 'Canada',
     flag: '🇨🇦',
     title: 'Providence Canada',
-    description: 'Telecom sales, connectivity and practical business solutions.',
+    description: 'Healthcare staffing and recruitment, with telecom sales and marketing services.',
   },
   {
     market: 'ghana' as const,
     country: 'Ghana',
     flag: '🇬🇭',
     title: 'Providence Ghana',
-    description: 'TV services, professional setup and dependable customer support.',
+    description: 'TV box services, professional setup and dependable customer support.',
   },
 ];
 
