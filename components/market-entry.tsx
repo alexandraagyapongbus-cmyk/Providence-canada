@@ -50,7 +50,7 @@ export function MarketEntry() {
       <Image src="/providence-hero.png" alt="Providence serving Canada and Ghana" fill priority sizes="100vw" className="entry-image" />
       <div className="entry-overlay" />
       <section className="entry-content" aria-labelledby="market-entry-heading">
-        <div className="wordmark entry-wordmark"><span className="wordmark-logo"><Image src="/providence-logo.jpg" alt="" width={500} height={500} priority /></span><span>Providence</span></div>
+        <div className="wordmark entry-wordmark"><span className="wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} priority /></span><span>Providence</span></div>
         <p className="kicker">One Providence · Two markets</p>
         <h1 id="market-entry-heading">Choose your Providence</h1>
         <p className="entry-supporting-copy">Select the country you’re in—or the market you’d like to explore. You can switch between Canada and Ghana at any time.</p>

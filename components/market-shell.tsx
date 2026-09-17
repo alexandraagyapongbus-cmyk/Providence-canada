@@ -50,7 +50,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="site-header full-header">
         <Link className="wordmark" href={`/${market}`} aria-label={`Providence ${markets[market].name} home`}>
-          <span className="wordmark-logo"><Image src="/providence-logo.jpg" alt="" width={500} height={500} priority /></span><span>Providence</span>
+          <span className="wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} priority /></span><span>Providence</span>
         </Link>
         <nav aria-label="Primary navigation" className="desktop-nav">
           {navItems.map(([label, path]) => {
@@ -95,7 +95,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
       <main id="main-content">{children}</main>
       <footer className="site-footer">
         <div className="footer-brand">
-          <Link className="wordmark" href={`/${market}`}><span className="wordmark-logo footer-wordmark-logo"><Image src="/providence-logo.jpg" alt="" width={500} height={500} /></span><span>Providence</span></Link>
+          <Link className="wordmark" href={`/${market}`}><span className="wordmark-logo footer-wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} /></span><span>Providence</span></Link>
           <p>Helpful service. Dependable communication. Practical technology.</p>
         </div>
         <div className="footer-links">

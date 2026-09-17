@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://providence-canada-ghana.agyapongalexandra.chatgpt.site'),
   title: { default: 'Providence | Canada & Ghana', template: '%s' },
   description,
-  icons: { icon: '/providence-logo.jpg', shortcut: '/providence-logo.jpg', apple: '/providence-logo.jpg' },
+  icons: { icon: '/providence-logo-mark.png', shortcut: '/providence-logo-mark.png', apple: '/providence-logo-mark.png' },
   openGraph: {
     title: 'Providence | Canada & Ghana',
     description,
