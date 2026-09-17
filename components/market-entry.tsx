@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
 import { useEffect } from 'react';
 import { marketUrl } from '@/lib/content';
@@ -24,13 +23,11 @@ const destinations = [
 ];
 
 export function MarketEntry() {
-  const router = useRouter();
-
   useEffect(() => {
     const hostname = window.location.hostname.replace(/^www\./, '').toLowerCase();
-    if (hostname === 'providencecanada.ca') router.replace('/canada');
-    if (hostname === 'providencecanadaltd.com') router.replace('/ghana');
-  }, [router]);
+    if (hostname === 'providencecanada.ca') window.location.replace('/canada');
+    if (hostname === 'providencecanadaltd.com') window.location.replace('/ghana');
+  }, []);
 
   function remember(market: 'canada' | 'ghana') {
     try {

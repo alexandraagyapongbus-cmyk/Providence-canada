@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -59,11 +58,11 @@ function Hero({ market, interior = false, title, copy }: { market: MarketName; i
         <p className="hero-copy">{copy || content.heroCopy}</p>
         {!interior && <div className="hero-actions">
           {isCanada ? <>
-            <Link className="button button-gold" href="/canada/care-organizations">Find staff <ArrowUpRight /></Link>
-            <Link className="button button-glass" href="/canada/healthcare-workers">Find work <ArrowUpRight /></Link>
+            <a className="button button-gold" href="/canada/care-organizations">Find staff <ArrowUpRight /></a>
+            <a className="button button-glass" href="/canada/healthcare-workers">Find work <ArrowUpRight /></a>
           </> : <>
-            <Link className="button button-gold" href="/ghana/contact?interest=Order%20a%20TV%20box">Order a TV box <ArrowUpRight /></Link>
-            <Link className="button button-glass" href="/ghana/contact?interest=Request%20installation">Request installation</Link>
+            <a className="button button-gold" href="/ghana/contact?interest=Order%20a%20TV%20box">Order a TV box <ArrowUpRight /></a>
+            <a className="button button-glass" href="/ghana/contact?interest=Request%20installation">Request installation</a>
           </>}
         </div>}
       </div>
@@ -102,24 +101,24 @@ function AudiencePaths({ compact = false }: { compact?: boolean }) {
       <p className="section-kicker">For care organizations</p>
       <h3>Tell us what your team needs.</h3>
       <p>Share the role, location, schedule, timing, and context. Providence will review the request and coordinate a practical next conversation.</p>
-      <Link className="button button-dark" href="/canada/care-organizations">Find staff <ArrowUpRight /></Link>
+      <a className="button button-dark" href="/canada/care-organizations">Find staff <ArrowUpRight /></a>
     </article>
     <article className="audience-card worker-card">
       <UserRoundCheck />
       <p className="section-kicker">For healthcare workers</p>
       <h3>Tell us where you can contribute.</h3>
       <p>Share your role, qualifications, location, availability, and preferred settings so Providence can consider suitable opportunities.</p>
-      <Link className="button button-gold" href="/canada/healthcare-workers">Find work <ArrowUpRight /></Link>
+      <a className="button button-gold" href="/canada/healthcare-workers">Find work <ArrowUpRight /></a>
     </article>
   </div>;
 }
 
 function CanadaFinalCta() {
-  return <section className="final-cta"><div><p className="section-kicker">Start the right conversation</p><h2>Need staff—or ready to explore healthcare work?</h2></div><div className="final-cta-actions"><Link className="button button-gold" href="/canada/care-organizations">Find staff <ArrowUpRight /></Link><Link className="button button-outline-light" href="/canada/healthcare-workers">Find work</Link></div></section>;
+  return <section className="final-cta"><div><p className="section-kicker">Start the right conversation</p><h2>Need staff—or ready to explore healthcare work?</h2></div><div className="final-cta-actions"><a className="button button-gold" href="/canada/care-organizations">Find staff <ArrowUpRight /></a><a className="button button-outline-light" href="/canada/healthcare-workers">Find work</a></div></section>;
 }
 
 function GhanaFinalCta() {
-  return <section className="final-cta"><div><p className="section-kicker">Start the conversation</p><h2>Ready to set up your TV service?</h2></div><Link className="button button-gold" href="/ghana/contact">Order or get support <ArrowUpRight /></Link></section>;
+  return <section className="final-cta"><div><p className="section-kicker">Start the conversation</p><h2>Ready to set up your TV service?</h2></div><a className="button button-gold" href="/ghana/contact">Order or get support <ArrowUpRight /></a></section>;
 }
 
 function CanadaHome() {
@@ -130,7 +129,7 @@ function CanadaHome() {
     <section className="roles-section"><Reveal><SectionHeading eyebrow="Professionals we connect with" title="Healthcare and care-support roles." copy="Current areas of interest include the role groups below. Other relevant care-support professionals are welcome to inquire." /></Reveal><HealthcareRoleGrid /></section>
     <section className="dark-section"><Reveal><SectionHeading light eyebrow="How the process works" title="Recruiting, matching, and coordination built around real needs." copy="The process begins with information from both sides and moves forward only where there may be an appropriate next step." /></Reveal><StaffingProcess /></section>
     <section className="settings-section"><div className="settings-copy"><p className="section-kicker">Where support may be needed</p><h2>Care settings across Ontario.</h2><p>Providence welcomes conversations from a range of care organizations. These examples describe potential settings—not existing contracts or guaranteed openings.</p></div><CareSettingsGrid /></section>
-    <section className="telecom-secondary"><div><RadioTower /><p className="section-kicker">Also from Providence Canada</p><h2>Telecom sales & marketing.</h2><p>Our established telecom work remains active as a focused secondary service for customer guidance, telesales, acquisition, and campaign coordination.</p></div><Link className="button button-dark" href="/canada/telecom">Explore telecom services <ArrowRight /></Link></section>
+    <section className="telecom-secondary"><div><RadioTower /><p className="section-kicker">Also from Providence Canada</p><h2>Telecom sales & marketing.</h2><p>Our established telecom work remains active as a focused secondary service for customer guidance, telesales, acquisition, and campaign coordination.</p></div><a className="button button-dark" href="/canada/telecom">Explore telecom services <ArrowRight /></a></section>
     <CanadaFinalCta />
   </MarketShell>;
 }
@@ -139,13 +138,13 @@ function GhanaHome() {
   return <MarketShell market="ghana">
     <Hero market="ghana" />
     <section className="offer-band"><div><span>TV box + installation</span><strong>$250</strong><small>One-time customer price</small></div><div><span>Monthly service</span><strong>$50</strong><small>Flexible month-to-month option</small></div><div><span>Three-month service</span><strong>$90</strong><small>One payment for three months</small></div></section>
-    <section className="content-section"><Reveal><SectionHeading eyebrow="The Providence offer" title="A straightforward path to home entertainment." copy="Choose your box and service period, request your installation, and get continuing help when you need it." /></Reveal><ServiceGrid market="ghana" limit={3} /><Link className="text-link" href="/ghana/services">Explore the complete Ghana service <ArrowRight /></Link></section>
+    <section className="content-section"><Reveal><SectionHeading eyebrow="The Providence offer" title="A straightforward path to home entertainment." copy="Choose your box and service period, request your installation, and get continuing help when you need it." /></Reveal><ServiceGrid market="ghana" limit={3} /><a className="text-link" href="/ghana/services">Explore the complete Ghana service <ArrowRight /></a></section>
     <section className="pricing-section"><Reveal><SectionHeading light eyebrow="Transparent pricing" title="Choose the service rhythm that fits." copy="Prices are shown in the supplied dollar amounts. No conversion rate has been assumed." /></Reveal><div className="plan-grid">
-      <article><p>Monthly</p><h3><sup>$</sup>50<span>/ month</span></h3><ul><li><Check />One month of service</li><li><Check />Renew month by month</li><li><Check />Support for service questions</li></ul><Link href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan" className="button button-outline-light">Choose monthly</Link></article>
-      <article className="featured-plan"><div className="plan-label">Better three-month value</div><p>Three months</p><h3><sup>$</sup>90<span>/ 3 months</span></h3><ul><li><Check />Three months of service</li><li><Check />One renewal for the full period</li><li><Check />$60 less than three monthly renewals</li></ul><Link href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan" className="button button-gold">Choose three months</Link></article>
+      <article><p>Monthly</p><h3><sup>$</sup>50<span>/ month</span></h3><ul><li><Check />One month of service</li><li><Check />Renew month by month</li><li><Check />Support for service questions</li></ul><a href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan" className="button button-outline-light">Choose monthly</a></article>
+      <article className="featured-plan"><div className="plan-label">Better three-month value</div><p>Three months</p><h3><sup>$</sup>90<span>/ 3 months</span></h3><ul><li><Check />Three months of service</li><li><Check />One renewal for the full period</li><li><Check />$60 less than three monthly renewals</li></ul><a href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan" className="button button-gold">Choose three months</a></article>
     </div><p className="pricing-note"><ShieldCheck />The TV box sale and installation is a separate one-time $250 charge.</p></section>
     <section className="journey-section"><Reveal><SectionHeading eyebrow="From order to watching" title="Five clear steps. Support continues after setup." /></Reveal><ol>{markets.ghana.process.map(([number, title, text]) => <li key={number}><span>{number}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></section>
-    <section className="support-section"><div><Headphones /><p className="section-kicker">Existing customers</p><h2>Need help with your box or plan?</h2><p>Providence can help with equipment questions, service-plan selection, renewals, and common setup concerns.</p></div><div className="support-actions"><Link className="button button-dark" href="/ghana/contact?interest=Equipment%20support">Contact support <ArrowUpRight /></Link><a href={GHANA_CRM_URL} className="text-link" target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a></div></section>
+    <section className="support-section"><div><Headphones /><p className="section-kicker">Existing customers</p><h2>Need help with your box or plan?</h2><p>Providence can help with equipment questions, service-plan selection, renewals, and common setup concerns.</p></div><div className="support-actions"><a className="button button-dark" href="/ghana/contact?interest=Equipment%20support">Contact support <ArrowUpRight /></a><a href={GHANA_CRM_URL} className="text-link" target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a></div></section>
     <GhanaFinalCta />
   </MarketShell>;
 }
@@ -184,7 +183,7 @@ function TelecomPage() {
     <Hero market="canada" interior title="Telecom sales and marketing remain part of Providence Canada." copy="From connectivity questions to structured outreach, Providence continues to support telecom customer conversations and campaigns as a secondary service." />
     <section className="content-section page-intro"><Reveal><SectionHeading eyebrow="Telecom services" title="Six practical ways we can help." copy="Our role is to help people and businesses navigate suitable telecom options and to support the sales work around them." /></Reveal><ServiceGrid market="canada" /></section>
     <section className="dark-section campaign-detail"><SectionHeading light eyebrow="Campaign support" title="Built around the actual sales need." copy="Providence can support individual inquiries, business consultations, or a structured campaign. Scope, audience, responsibilities, and outcomes are clarified before work begins." /><div className="campaign-points"><span>Telecom inquiry support</span><span>Outbound sales capacity</span><span>Customer acquisition activity</span><span>Campaign coordination</span></div></section>
-    <section className="telecom-contact"><div><RadioTower /><p className="section-kicker">Start a telecom conversation</p><h2>Tell us about the customer or campaign need.</h2></div><Link className="button button-dark" href="/canada/contact?interest=Internet%20or%20telecom%20inquiry">Contact Providence <ArrowUpRight /></Link></section>
+    <section className="telecom-contact"><div><RadioTower /><p className="section-kicker">Start a telecom conversation</p><h2>Tell us about the customer or campaign need.</h2></div><a className="button button-dark" href="/canada/contact?interest=Internet%20or%20telecom%20inquiry">Contact Providence <ArrowUpRight /></a></section>
   </MarketShell>;
 }
 
@@ -192,8 +191,8 @@ function GhanaServicesPage() {
   return <MarketShell market="ghana">
     <Hero market="ghana" interior title="Your TV box service, from order to support." copy="Purchase, installation, service plans, and continuing help are organized as one straightforward experience." />
     <section className="content-section page-intro"><Reveal><SectionHeading eyebrow="Providence Ghana services" title="Everything around one focused service." copy="Providence Ghana currently focuses only on the TV box business, with clear pricing and support around that offer." /></Reveal><ServiceGrid market="ghana" /></section>
-    <section className="ghana-offer-detail"><div><p className="section-kicker">One-time setup</p><h2>TV box sale & installation</h2><strong>$250</strong><p>Includes the TV box sale and professional installation. Providence confirms appointment details before the visit.</p><Link className="button button-gold" href="/ghana/contact?interest=Order%20a%20TV%20box">Order a TV box <ArrowUpRight /></Link></div><div className="detail-list"><article><Wrench /><h3>Installation</h3><p>Connection, setup, service activation, and a practical introduction to the box.</p></article><article><CircleHelp /><h3>Continuing help</h3><p>Support for plan questions, equipment assistance, and customer service after setup.</p></article></div></section>
-    <section className="comparison-section"><SectionHeading eyebrow="Service plans" title="Monthly flexibility or three-month value." /><div className="comparison-table"><div className="comparison-row heading"><span>Plan</span><span>Service period</span><span>Customer price</span><span></span></div><div className="comparison-row"><strong>Monthly</strong><span>1 month</span><span>$50</span><Link href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan">Choose plan <ArrowRight /></Link></div><div className="comparison-row"><strong>Three months</strong><span>3 months</span><span>$90</span><Link href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan">Choose plan <ArrowRight /></Link></div></div></section>
+    <section className="ghana-offer-detail"><div><p className="section-kicker">One-time setup</p><h2>TV box sale & installation</h2><strong>$250</strong><p>Includes the TV box sale and professional installation. Providence confirms appointment details before the visit.</p><a className="button button-gold" href="/ghana/contact?interest=Order%20a%20TV%20box">Order a TV box <ArrowUpRight /></a></div><div className="detail-list"><article><Wrench /><h3>Installation</h3><p>Connection, setup, service activation, and a practical introduction to the box.</p></article><article><CircleHelp /><h3>Continuing help</h3><p>Support for plan questions, equipment assistance, and customer service after setup.</p></article></div></section>
+    <section className="comparison-section"><SectionHeading eyebrow="Service plans" title="Monthly flexibility or three-month value." /><div className="comparison-table"><div className="comparison-row heading"><span>Plan</span><span>Service period</span><span>Customer price</span><span></span></div><div className="comparison-row"><strong>Monthly</strong><span>1 month</span><span>$50</span><a href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan">Choose plan <ArrowRight /></a></div><div className="comparison-row"><strong>Three months</strong><span>3 months</span><span>$90</span><a href="/ghana/contact?interest=Choose%20or%20renew%20a%20plan">Choose plan <ArrowRight /></a></div></div></section>
     <GhanaFinalCta />
   </MarketShell>;
 }
@@ -211,7 +210,7 @@ function AboutPage({ market }: { market: MarketName }) {
 function ContactPage({ market }: { market: MarketName }) {
   return <MarketShell market={market}>
     <Hero market={market} interior title={market === 'ghana' ? 'Order, install, renew, or get help.' : 'Tell us which Providence Canada conversation you need.'} copy={markets[market].contactIntro} />
-    <section className="contact-section"><div className="contact-context"><p className="section-kicker">Contact {markets[market].shortLabel}</p><h2>Tell us what brings you here.</h2><p>{markets[market].contactIntro}</p>{market === 'canada' && <div className="contact-path-links"><Link href="/canada/care-organizations">Need staff? Use the organization form <ArrowRight /></Link><Link href="/canada/healthcare-workers">Looking for work? Use the worker form <ArrowRight /></Link></div>}<div className="contact-reassurance"><ShieldCheck /><span><strong>Useful details only</strong>Your information is used to respond to this request.</span></div><div className="contact-reassurance"><Sparkles /><span><strong>Market-specific follow-up</strong>Your inquiry is routed as a {markets[market].name} request.</span></div>{market === 'ghana' && <div className="staff-callout"><small>Providence staff</small><p>Customer ordering is handled through this form. Staff access remains separate.</p><a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a></div>}</div><div className="form-panel"><LeadForm market={market} /></div></section>
+    <section className="contact-section"><div className="contact-context"><p className="section-kicker">Contact {markets[market].shortLabel}</p><h2>Tell us what brings you here.</h2><p>{markets[market].contactIntro}</p>{market === 'canada' && <div className="contact-path-links"><a href="/canada/care-organizations">Need staff? Use the organization form <ArrowRight /></a><a href="/canada/healthcare-workers">Looking for work? Use the worker form <ArrowRight /></a></div>}<div className="contact-reassurance"><ShieldCheck /><span><strong>Useful details only</strong>Your information is used to respond to this request.</span></div><div className="contact-reassurance"><Sparkles /><span><strong>Market-specific follow-up</strong>Your inquiry is routed as a {markets[market].name} request.</span></div>{market === 'ghana' && <div className="staff-callout"><small>Providence staff</small><p>Customer ordering is handled through this form. Staff access remains separate.</p><a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a></div>}</div><div className="form-panel"><LeadForm market={market} /></div></section>
   </MarketShell>;
 }
 

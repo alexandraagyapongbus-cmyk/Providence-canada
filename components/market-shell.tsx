@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
@@ -67,14 +66,14 @@ export function MarketShell({ market, children }: { market: MarketName; children
     <div className={`site market-${market}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <header className="site-header full-header">
-        <Link className="wordmark" href={`/${market}`} aria-label={`Providence ${markets[market].name} home`}>
+        <a className="wordmark" href={`/${market}`} aria-label={`Providence ${markets[market].name} home`}>
           <span className="wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} priority /></span><span>Providence</span>
-        </Link>
+        </a>
         <nav aria-label="Primary navigation" className={`desktop-nav desktop-nav-${market}`}>
           {currentNavItems.map(([label, path]) => {
             const href = `/${market}${path}`;
             const active = pathname === href;
-            return <Link key={label} href={href} aria-current={active ? 'page' : undefined}>{label}</Link>;
+            return <a key={label} href={href} aria-current={active ? 'page' : undefined}>{label}</a>;
           })}
         </nav>
         <div className="header-actions">
@@ -101,7 +100,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
         </div>
         <div className={`mobile-menu ${open ? 'open' : ''}`} aria-hidden={!open}>
           <nav aria-label="Mobile navigation">
-            {currentNavItems.map(([label, path]) => <Link key={label} href={`/${market}${path}`}>{label}</Link>)}
+            {currentNavItems.map(([label, path]) => <a key={label} href={`/${market}${path}`}>{label}</a>)}
             {market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
           </nav>
           <a className="mobile-market-switch" href={otherPath} onClick={() => rememberMarket(otherMarket)}>
@@ -114,11 +113,11 @@ export function MarketShell({ market, children }: { market: MarketName; children
       <main id="main-content">{children}</main>
       <footer className="site-footer">
         <div className="footer-brand">
-          <Link className="wordmark" href={`/${market}`}><span className="wordmark-logo footer-wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} /></span><span>Providence</span></Link>
+          <a className="wordmark" href={`/${market}`}><span className="wordmark-logo footer-wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} /></span><span>Providence</span></a>
           <p>Helpful service. Dependable communication. Practical technology.</p>
         </div>
         <div className="footer-links">
-          <div><strong>{markets[market].shortLabel}</strong>{currentNavItems.map(([label, path]) => <Link key={label} href={`/${market}${path}`}>{label}</Link>)}</div>
+          <div><strong>{markets[market].shortLabel}</strong>{currentNavItems.map(([label, path]) => <a key={label} href={`/${market}${path}`}>{label}</a>)}</div>
           <div><strong>Other market</strong><a href={marketUrl(otherMarket)}>Providence {markets[otherMarket].name} · {marketDescriptions[otherMarket]}</a>{market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login</a>}</div>
         </div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Providence</span><span>Canada · Ghana</span></div>
