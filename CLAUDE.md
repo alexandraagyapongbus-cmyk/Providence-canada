@@ -77,12 +77,14 @@ Primary audiences:
 - Care organizations: roles, headcount, locations, schedules, settings, and timing.
 - Healthcare workers: role, qualifications, Ontario location, availability, settings, and start timing.
 
-Current role groups:
+Current role groups (`healthcareRoles` in `lib/content.ts`):
 
 - Personal support workers (PSWs)
 - Registered practical nurses (RPNs)
 - Registered nurses (RNs)
-- Support workers and other relevant care-support professionals
+- Support workers
+- Developmental service workers (DSWs)
+- Healthcare admin & support roles
 
 Potential settings are grouped as:
 
@@ -120,12 +122,19 @@ Domain DNS and business email are managed outside this repository. Changing webs
 
 ## Visual system
 
-Preserve the established premium dark navy and gold identity, transparent Providence bird mark, square-edged editorial cards, restrained motion, and strong mobile layouts.
+Preserve the transparent Providence bird mark, square-edged (not rounded) editorial cards, and strong mobile layouts across both markets. Ghana keeps its original premium dark navy-and-gold identity and calmer motion unchanged.
 
-Canada healthcare imagery should feel professional and human. Ghana should retain its TV-service imagery and offer structure.
+Providence Canada intentionally uses a different, lighter palette and richer motion than Ghana, per explicit owner direction: a deep mid-blue (not near-black navy) as the primary dark tone, brighter blue as the main accent/CTA colour, and gold demoted to a selective accent rather than the primary action colour. This is implemented as a CSS custom-property override — `.market-canada { --navy: #0e4f8f; --navy-2: #135da6; --navy-3: #1b72c4; }` in `app/globals.css` — which re-themes every `var(--navy*)` consumer inside Canada pages (hero, dark sections, `ConnectionGraphic`, footer tiles) without touching Ghana, since Ghana never sits inside `.market-canada` and keeps the `:root` values. Canada's primary CTA class is `.button-primary` (solid `var(--blue)`); `.button-gold` remains Ghana's primary CTA colour and is only a secondary accent on Canada.
 
-The Canada healthcare image is `public/providence-canada-care.jpg`, sourced from Age Cymru on Unsplash:
-https://unsplash.com/photos/nurse-smiling-with-elderly-patient-in-room-dMhB7w99ju8
+Canada's homepage hero uses a looping background video (`components/hero-media.tsx`) of healthcare professionals in a clinical setting — never patients, and never staged/direct-to-camera stock imagery, per owner direction. The `HeroMedia` component always server-renders the poster JPG first and only swaps in the `<video>` client-side when the viewport is at least 768px wide, `prefers-reduced-motion` is not set, and the connection isn't in data-saver mode; the poster still displays underneath at all other times. Interior Canada pages use the poster image as a static background (no video), for performance.
+
+Canada motion (aurora hero backdrop, staggered headline/card reveals, button hover shimmer, the `ConnectionGraphic` hub visualization, header transparent-to-solid scroll transition) is scoped through the `.market-canada` selector in `app/globals.css` and the `market-canada`/`market-ghana` root class from `MarketShell`. All motion must respect `prefers-reduced-motion` and use only GPU-friendly `transform`/`opacity` animations — do not reintroduce layout-thrashing effects when extending this further.
+
+Canada media assets and their licences:
+- `public/providence-canada-hero.mp4` / `public/providence-canada-hero-poster.jpg` — "Healthcare Workers Talking on Hospital Corridor" by RDNE Stock project, Pexels License (free for commercial use, no attribution required): https://www.pexels.com/video/healthcare-workers-talking-on-hospital-corridor-6130553/
+- `public/providence-canada-team.jpg` — photo by Luis Melendez, Unsplash License (free for commercial use): https://unsplash.com/photos/Pd4lRfKo16U
+
+The elderly-patient photo previously used for the Canada hero (`providence-canada-care.jpg`) has been removed — it read as home/senior care rather than staffing and recruitment, per owner direction. Do not reintroduce patient-focused imagery on Canada's hero or homepage.
 
 Do not replace the Providence brand mark with the white-background source JPG in navigation. Use `public/providence-logo-mark.png` for dark surfaces.
 

@@ -2,9 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 
-type RevealVariant = 'up' | 'left' | 'right';
-
-export function Reveal({ children, className = '', delay = 0, variant = 'up' }: { children: ReactNode; className?: string; delay?: number; variant?: RevealVariant }) {
+export function InView({ children, className = '' }: { children: ReactNode; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -16,14 +14,10 @@ export function Reveal({ children, className = '', delay = 0, variant = 'up' }: 
         setVisible(true);
         observer.disconnect();
       }
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <div ref={ref} className={`reveal reveal-${variant} ${visible ? 'is-visible' : ''} ${className}`} style={{ '--reveal-delay': `${delay}ms` } as React.CSSProperties}>
-      {children}
-    </div>
-  );
+  return <div ref={ref} className={`${className} ${visible ? 'is-visible' : ''}`}>{children}</div>;
 }

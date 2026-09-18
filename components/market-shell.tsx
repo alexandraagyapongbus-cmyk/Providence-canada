@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { GHANA_CRM_URL, markets, marketUrl, type MarketName } from '@/lib/content';
 
@@ -10,8 +10,6 @@ const navItems = {
   canada: [
     ['Home', ''],
     ['Healthcare Staffing', '/healthcare-staffing'],
-    ['For Organizations', '/care-organizations'],
-    ['For Workers', '/healthcare-workers'],
     ['Telecom', '/telecom'],
     ['About', '/about'],
     ['Contact', '/contact'],
@@ -22,6 +20,19 @@ const navItems = {
     ['About', '/about'],
     ['Contact', '/contact'],
   ],
+} as const;
+
+const footerNavItems = {
+  canada: [
+    ['Home', ''],
+    ['Healthcare Staffing', '/healthcare-staffing'],
+    ['For Organizations', '/care-organizations'],
+    ['For Workers', '/healthcare-workers'],
+    ['Telecom', '/telecom'],
+    ['About', '/about'],
+    ['Contact', '/contact'],
+  ],
+  ghana: navItems.ghana,
 } as const;
 
 const marketDescriptions: Record<MarketName, string> = {
@@ -36,12 +47,14 @@ const marketFlags: Record<MarketName, string> = {
 
 export function MarketShell({ market, children }: { market: MarketName; children: ReactNode }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const otherMarket: MarketName = market === 'canada' ? 'ghana' : 'canada';
   const suffix = pathname.replace(/^\/(canada|ghana)/, '') || '';
   const sharedSuffix = ['/about', '/contact', '/services'].includes(suffix) ? suffix : '';
   const otherPath = marketUrl(otherMarket, sharedSuffix);
   const currentNavItems = navItems[market];
+  const switcherRef = useRef<HTMLDetailsElement>(null);
 
   function rememberMarket(nextMarket: MarketName) {
     try {
@@ -62,10 +75,37 @@ export function MarketShell({ market, children }: { market: MarketName; children
 
   useEffect(() => setOpen(false), [pathname]);
 
+  useEffect(() => {
+    if (market !== 'canada') return;
+    function onScroll() {
+      setScrolled(window.scrollY > 64);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [market]);
+
+  useEffect(() => {
+    const node = switcherRef.current;
+    if (!node) return;
+    function closeIfOutside(event: MouseEvent) {
+      if (node && !node.contains(event.target as Node)) node.open = false;
+    }
+    function closeOnEscape(event: KeyboardEvent) {
+      if (event.key === 'Escape') node!.open = false;
+    }
+    document.addEventListener('click', closeIfOutside);
+    document.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.removeEventListener('click', closeIfOutside);
+      document.removeEventListener('keydown', closeOnEscape);
+    };
+  }, []);
+
   return (
     <div className={`site market-${market}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <header className="site-header full-header">
+      <header className={`site-header full-header ${scrolled ? 'is-scrolled' : ''}`}>
         <a className="wordmark" href={`/${market}`} aria-label={`Providence ${markets[market].name} home`}>
           <span className="wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} priority /></span><span>Providence</span>
         </a>
@@ -78,7 +118,11 @@ export function MarketShell({ market, children }: { market: MarketName; children
         </nav>
         <div className="header-actions">
           {market === 'ghana' && <a className="crm-link" href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
-          <details className="market-switcher">
+          {market === 'canada' && <div className="header-pathway-actions">
+            <a className="header-action header-action-ghost" href="/canada/healthcare-workers">Find Work</a>
+            <a className="header-action header-action-solid" href="/canada/care-organizations">Find Staff</a>
+          </div>}
+          <details className="market-switcher" ref={switcherRef}>
             <summary aria-label={`Current market: ${markets[market].name}. Open market switcher.`}>
               <span aria-hidden="true">{marketFlags[market]}</span>
               <b>{markets[market].name}</b>
@@ -98,7 +142,11 @@ export function MarketShell({ market, children }: { market: MarketName; children
             {open ? <X /> : <Menu />}
           </button>
         </div>
-        <div className={`mobile-menu ${open ? 'open' : ''}`} aria-hidden={!open}>
+        <div className={`mobile-menu ${open ? 'open' : ''}`} aria-hidden={!open} inert={!open}>
+          {market === 'canada' && <div className="mobile-pathway-actions">
+            <a className="header-action header-action-ghost" href="/canada/healthcare-workers">Find Work</a>
+            <a className="header-action header-action-solid" href="/canada/care-organizations">Find Staff</a>
+          </div>}
           <nav aria-label="Mobile navigation">
             {currentNavItems.map(([label, path]) => <a key={label} href={`/${market}${path}`}>{label}</a>)}
             {market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
@@ -117,7 +165,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
           <p>Helpful service. Dependable communication. Practical technology.</p>
         </div>
         <div className="footer-links">
-          <div><strong>{markets[market].shortLabel}</strong>{currentNavItems.map(([label, path]) => <a key={label} href={`/${market}${path}`}>{label}</a>)}</div>
+          <div><strong>{markets[market].shortLabel}</strong>{footerNavItems[market].map(([label, path]) => <a key={label} href={`/${market}${path}`}>{label}</a>)}</div>
           <div><strong>Other market</strong><a href={marketUrl(otherMarket)}>Providence {markets[otherMarket].name} · {marketDescriptions[otherMarket]}</a>{market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login</a>}</div>
         </div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Providence</span><span>Canada · Ghana</span></div>

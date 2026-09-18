@@ -1,13 +1,23 @@
 import {
+  Accessibility,
+  Award,
   BarChart3,
   BriefcaseBusiness,
   Building2,
+  CalendarCheck,
+  ClipboardList,
+  Clock3,
+  FileCheck2,
+  Handshake,
   Headphones,
   HeartHandshake,
+  MapPin,
   Megaphone,
+  MessageCircle,
   PhoneCall,
   RadioTower,
   Router,
+  Search,
   Settings2,
   ShoppingBag,
   Sparkles,
@@ -35,8 +45,9 @@ export const markets = {
   canada: {
     name: 'Canada',
     shortLabel: 'Providence Canada',
-    eyebrow: 'Healthcare staffing & recruitment in Ontario',
-    heroTitle: 'The right care starts with the right connection.',
+    eyebrow: 'Healthcare staffing & recruitment · Ontario',
+    heroTitle: 'Healthcare careers. Healthcare talent. One connection.',
+    heroTagline: 'The right care starts with the right connection.',
     heroCopy: 'Providence Canada connects healthcare and care-support professionals with Ontario organizations seeking staff—through thoughtful recruiting, matching, placement, and staffing coordination.',
     primaryCta: 'Find staff',
     secondaryCta: 'Find work',
@@ -101,7 +112,9 @@ export const healthcareRoles = [
   { icon: HeartHandshake, title: 'Personal support workers', short: 'PSWs', text: 'Care and daily-living support across residential and community settings.' },
   { icon: Stethoscope, title: 'Registered practical nurses', short: 'RPNs', text: 'Practical nursing professionals for appropriate care environments and schedules.' },
   { icon: UserRoundCheck, title: 'Registered nurses', short: 'RNs', text: 'Registered nursing professionals for suitable clinical and care needs.' },
-  { icon: Users, title: 'Care support professionals', short: 'Support', text: 'Other healthcare and care-support roles considered according to each request.' },
+  { icon: Users, title: 'Support workers', short: 'Support', text: 'Daily-living and care-support roles across a range of settings.' },
+  { icon: Accessibility, title: 'Developmental service workers', short: 'DSWs', text: 'Professionals supporting people with developmental disabilities.' },
+  { icon: ClipboardList, title: 'Healthcare admin & support', short: 'Admin', text: 'Coordination, scheduling, and other support roles behind frontline care.' },
 ] as const;
 
 export const careSettings = [
@@ -110,10 +123,41 @@ export const careSettings = [
   { title: 'Home & community care', text: 'Organizations supporting people in their homes and communities.' },
 ] as const;
 
+export const careIndustries = [
+  { title: 'Long-term care & retirement', text: 'Residential homes providing ongoing care and daily support.' },
+  { title: 'Home & community care', text: 'Organizations supporting people where they live.' },
+  { title: 'Clinics & outpatient settings', text: 'Ambulatory and outpatient care environments.' },
+  { title: 'Hospitals & hospices', text: 'Clinical and comfort-care settings where appropriate opportunities arise.' },
+  { title: 'Health & community organizations', text: 'Other organizations delivering health or community-support services.' },
+] as const;
+
 export const staffingPrinciples = [
   { icon: Building2, title: 'Needs-led', text: 'Every conversation starts with the actual role, environment, schedule, and timing.' },
   { icon: HeartHandshake, title: 'Human matching', text: 'We look beyond a title to understand preferences and practical fit on both sides.' },
   { icon: UserRoundCheck, title: 'Clear next steps', text: 'Interest is coordinated carefully without promising a placement or staffing outcome.' },
+] as const;
+
+export const whyProvidence = [
+  { icon: HeartHandshake, title: 'Thoughtful matching', text: 'We look past the job title to understand fit on both sides of the conversation.' },
+  { icon: Clock3, title: 'Responsive recruitment', text: 'Inquiries are reviewed and followed up on promptly, not left to sit.' },
+  { icon: Building2, title: 'Understanding employer needs', text: 'We take time to understand a role, setting, and schedule before suggesting a fit.' },
+  { icon: UserRoundCheck, title: 'Candidate support', text: 'Healthcare professionals get clear communication throughout the process.' },
+  { icon: MapPin, title: 'Ontario-focused', text: 'Our attention is on Ontario care organizations and the professionals who work here.' },
+  { icon: Award, title: 'Quality-focused recruitment', text: 'We would rather coordinate the right conversation than rush a volume of them.' },
+] as const;
+
+export const candidateJourney = [
+  ['01', 'Discover', 'Explore the healthcare roles Providence is currently recruiting for.', Search],
+  ['02', 'Apply', 'Share your qualifications, experience, and availability with us.', FileCheck2],
+  ['03', 'Get matched', 'Providence reviews potential fit with organizations seeking your role.', Handshake],
+  ['04', 'Complete requirements', 'Provide the documentation or verification a specific opportunity requires.', ClipboardList],
+  ['05', 'Connect & start', 'Meet the organization and take the next step when it is the right fit.', CalendarCheck],
+] as const;
+
+export const recruitmentServices = [
+  { icon: Handshake, title: 'Permanent recruitment', text: 'Helping care organizations find, and healthcare professionals move into, permanent roles.' },
+  { icon: MessageCircle, title: 'Staffing coordination', text: 'Coordinating conversations between organizations and available professionals for flexible coverage needs.' },
+  { icon: BriefcaseBusiness, title: 'Employer consultation', text: 'Helping organizations think through role definitions, headcount, and timing before a search begins.' },
 ] as const;
 
 export const pageMeta: Record<MarketName, Partial<Record<SiteSection, { title: string; description: string }>>> = {

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import * as React from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -20,16 +21,23 @@ import {
   Users,
   Wrench,
 } from 'lucide-react';
+import { ConnectionGraphic } from '@/components/connection-graphic';
+import { HeroMedia } from '@/components/hero-media';
+import { InView } from '@/components/in-view';
 import { LeadForm } from '@/components/lead-form';
 import { MarketShell } from '@/components/market-shell';
 import { Reveal } from '@/components/reveal';
 import {
+  candidateJourney,
+  careIndustries,
   careSettings,
   GHANA_CRM_URL,
   healthcareRoles,
   markets,
   marketUrl,
+  recruitmentServices,
   storyValues,
+  whyProvidence,
   type MarketName,
   type SiteSection,
 } from '@/lib/content';
@@ -38,35 +46,62 @@ function SectionHeading({ eyebrow, title, copy, light = false }: { eyebrow: stri
   return <div className={`section-heading ${light ? 'light' : ''}`}><p className="section-kicker">{eyebrow}</p><h2>{title}</h2>{copy && <p>{copy}</p>}</div>;
 }
 
-function Hero({ market, interior = false, title, copy }: { market: MarketName; interior?: boolean; title?: string; copy?: string }) {
+function AnimatedWords({ text }: { text: string }) {
+  const words = text.split(' ');
+  return <>{words.map((word, index) => <React.Fragment key={index}>{index > 0 ? ' ' : ''}<span style={{ '--word-index': index } as React.CSSProperties}>{word}</span></React.Fragment>)}</>;
+}
+
+function Hero({ market, interior = false, title, copy, photo = true, eyebrow, eyebrowIcon: EyebrowIcon }: { market: MarketName; interior?: boolean; title?: string; copy?: string; photo?: boolean; eyebrow?: string; eyebrowIcon?: typeof Stethoscope }) {
   const content = markets[market];
   const isCanada = market === 'canada';
+  const headline = title || content.heroTitle;
+  const canadaAlt = 'Healthcare professionals conferring in a hospital corridor';
+  const showPhoto = isCanada ? photo : true;
+  const Icon = EyebrowIcon || (isCanada ? Stethoscope : Tv);
   return (
-    <section className={`market-hero ${interior ? 'interior-hero' : ''} ${isCanada ? 'healthcare-hero' : ''}`}>
-      <Image
-        className="market-hero-image"
-        src={isCanada ? '/providence-canada-care.jpg' : '/providence-hero.png'}
-        alt={isCanada ? 'A healthcare professional sharing a warm conversation with an older adult' : 'A family enjoying Providence Ghana TV services at home'}
-        fill
-        priority
-        sizes="100vw"
-      />
+    <section className={`market-hero ${interior ? 'interior-hero' : ''} ${isCanada ? 'healthcare-hero' : ''} ${!showPhoto ? 'no-photo-hero' : ''}`}>
+      {showPhoto && (isCanada && !interior ? (
+        <HeroMedia videoSrc="/providence-canada-hero.mp4" posterSrc="/providence-canada-hero-poster.jpg" alt={canadaAlt} />
+      ) : (
+        <Image
+          className="market-hero-image"
+          src={isCanada ? '/providence-canada-hero-poster.jpg' : '/providence-hero.png'}
+          alt={isCanada ? canadaAlt : 'A family enjoying Providence Ghana TV services at home'}
+          fill
+          priority
+          sizes="100vw"
+        />
+      ))}
       <div className="market-hero-overlay" />
+      {isCanada && <div className="hero-aurora" aria-hidden="true"><span /><span /></div>}
       <div className="market-hero-content">
-        <p className="kicker">{isCanada ? <Stethoscope /> : <Tv />}{content.eyebrow}</p>
-        <h1>{title || content.heroTitle}</h1>
+        <p className="kicker"><Icon />{eyebrow || content.eyebrow}</p>
+        <h1>{isCanada ? <AnimatedWords text={headline} /> : headline}</h1>
+        {isCanada && !interior && <p className="hero-tagline">{markets.canada.heroTagline}</p>}
         <p className="hero-copy">{copy || content.heroCopy}</p>
-        {!interior && <div className="hero-actions">
-          {isCanada ? <>
-            <a className="button button-gold" href="/canada/care-organizations">Find staff <ArrowUpRight /></a>
-            <a className="button button-glass" href="/canada/healthcare-workers">Find work <ArrowUpRight /></a>
-          </> : <>
+        {!interior && (isCanada ? (
+          <div className="hero-pathways">
+            <a className="hero-pathway hero-pathway-employer" href="/canada/care-organizations">
+              <span className="hero-pathway-label">Looking for staff?</span>
+              <strong>Find healthcare professionals</strong>
+              <span className="hero-pathway-detail">Tell us the role, setting, and schedule — we'll help you find the right fit.</span>
+              <span className="hero-pathway-cta">Find Staff <ArrowUpRight /></span>
+            </a>
+            <a className="hero-pathway hero-pathway-worker" href="/canada/healthcare-workers">
+              <span className="hero-pathway-label">Looking for work?</span>
+              <strong>Explore healthcare opportunities</strong>
+              <span className="hero-pathway-detail">Share your qualifications and availability — we'll consider suitable opportunities.</span>
+              <span className="hero-pathway-cta">Find Work <ArrowUpRight /></span>
+            </a>
+          </div>
+        ) : (
+          <div className="hero-actions">
             <a className="button button-gold" href="/ghana/contact?interest=Order%20a%20TV%20box">Order a TV box <ArrowUpRight /></a>
             <a className="button button-glass" href="/ghana/contact?interest=Request%20installation">Request installation</a>
-          </>}
-        </div>}
+          </div>
+        ))}
       </div>
-      {!interior && <div className="hero-market-note"><span>{isCanada ? 'Ontario' : '$250'}</span><p>{isCanada ? 'Healthcare staffing & recruitment' : 'TV box sale + installation'}</p></div>}
+      {!interior && !isCanada && <div className="hero-market-note"><span>$250</span><p>TV box sale + installation</p></div>}
     </section>
   );
 }
@@ -80,41 +115,127 @@ function ServiceGrid({ market, limit }: { market: MarketName; limit?: number }) 
 }
 
 function HealthcareRoleGrid() {
-  return <div className="healthcare-role-grid">{healthcareRoles.map((role) => {
+  return <div className="healthcare-role-grid">{healthcareRoles.map((role, index) => {
     const Icon = role.icon;
-    return <article key={role.title}><div><Icon /><span>{role.short}</span></div><h3>{role.title}</h3><p>{role.text}</p></article>;
+    return <Reveal key={role.title} delay={index * 60}><article><div><Icon /><span>{role.short}</span></div><h3>{role.title}</h3><p>{role.text}</p></article></Reveal>;
   })}</div>;
 }
 
 function CareSettingsGrid() {
-  return <div className="care-settings-grid">{careSettings.map((setting, index) => <article key={setting.title}><span>0{index + 1}</span><h3>{setting.title}</h3><p>{setting.text}</p></article>)}</div>;
+  return <div className="care-settings-grid">{careSettings.map((setting, index) => <Reveal key={setting.title} delay={index * 70} variant="left"><article><span>0{index + 1}</span><h3>{setting.title}</h3><p>{setting.text}</p></article></Reveal>)}</div>;
 }
 
 function StaffingProcess({ light = false }: { light?: boolean }) {
-  return <div className="process-grid">{markets.canada.process.map(([number, title, text]) => <article key={number} className={light ? 'on-light' : ''}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</div>;
+  return <InView className="process-grid">{markets.canada.process.map(([number, title, text]) => <article key={number} className={light ? 'on-light' : ''}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}</InView>;
 }
 
 function AudiencePaths({ compact = false }: { compact?: boolean }) {
   return <div className={`audience-paths ${compact ? 'compact' : ''}`}>
-    <article className="audience-card organization-card">
+    <Reveal variant="left"><article className="audience-card organization-card">
       <Building2 />
       <p className="section-kicker">For care organizations</p>
       <h3>Tell us what your team needs.</h3>
       <p>Share the role, location, schedule, timing, and context. Providence will review the request and coordinate a practical next conversation.</p>
       <a className="button button-dark" href="/canada/care-organizations">Find staff <ArrowUpRight /></a>
-    </article>
-    <article className="audience-card worker-card">
+    </article></Reveal>
+    <Reveal variant="right" delay={90}><article className="audience-card worker-card">
       <UserRoundCheck />
       <p className="section-kicker">For healthcare workers</p>
       <h3>Tell us where you can contribute.</h3>
       <p>Share your role, qualifications, location, availability, and preferred settings so Providence can consider suitable opportunities.</p>
       <a className="button button-gold" href="/canada/healthcare-workers">Find work <ArrowUpRight /></a>
-    </article>
+    </article></Reveal>
   </div>;
 }
 
+function WhoWeConnectSection() {
+  return <section className="canada-section canada-section-light">
+    <Reveal><SectionHeading eyebrow="Who we connect" title="Healthcare and care-support professionals, ready to work." copy="Current areas of interest include the role groups below. Other relevant healthcare and care-support professionals are welcome to inquire." /></Reveal>
+    <HealthcareRoleGrid />
+    <a className="text-link" href="/canada/healthcare-workers" style={{ marginTop: '2rem' }}>Explore healthcare opportunities <ArrowRight /></a>
+  </section>;
+}
+
+function ForOrganizationsSection() {
+  return <section className="canada-section canada-section-blue">
+    <div className="canada-split">
+      <div className="canada-split-copy">
+        <SectionHeading eyebrow="For healthcare organizations" title="Build your healthcare team with a partner who listens first." copy="Long-term care and retirement homes, home and community care organizations, clinics, and other health and community organizations bring Providence a role, a setting, and a timeline. We take the time to understand all three before suggesting a fit." />
+        <a className="button button-primary" href="/canada/care-organizations">Find staff <ArrowUpRight /></a>
+      </div>
+      <div className="canada-split-media">
+        <Image src="/providence-canada-team.jpg" alt="A team of healthcare professionals in scrubs and coats walking together down a hospital corridor" fill sizes="(max-width: 800px) 100vw, 40vw" />
+      </div>
+    </div>
+  </section>;
+}
+
+function ForProfessionalsSection() {
+  return <section className="canada-section canada-section-light">
+    <Reveal><SectionHeading eyebrow="For healthcare professionals" title="From discovering a fit to starting the work." copy="Providence coordinates the process so you always know what happens next." /></Reveal>
+    <div className="canada-journey">
+      {candidateJourney.map(([number, title, text, Icon]) => (
+        <article key={number}><Icon /><span>{number}</span><h3>{title}</h3><p>{text}</p></article>
+      ))}
+    </div>
+    <a className="button button-primary" href="/canada/healthcare-workers" style={{ marginTop: '2.5rem' }}>Find work <ArrowUpRight /></a>
+  </section>;
+}
+
+function WhyProvidenceSection() {
+  return <section className="canada-section canada-section-tint">
+    <Reveal><SectionHeading eyebrow="Why Providence" title="A recruitment partner that pays attention to detail." /></Reveal>
+    <div className="canada-differentiator-grid">
+      {whyProvidence.map((item, index) => { const Icon = item.icon; return <Reveal key={item.title} delay={index * 50}><article><Icon /><h3>{item.title}</h3><p>{item.text}</p></article></Reveal>; })}
+    </div>
+  </section>;
+}
+
+function RecruitmentServicesSection() {
+  return <section className="canada-section canada-section-blue">
+    <SectionHeading eyebrow="Recruitment & staffing services" title="Service built around how organizations actually hire." />
+    <div className="canada-services-grid">
+      {recruitmentServices.map((service) => { const Icon = service.icon; return <article key={service.title}><Icon /><h3>{service.title}</h3><p>{service.text}</p></article>; })}
+    </div>
+  </section>;
+}
+
+function IndustriesSection() {
+  return <section className="canada-section canada-section-light">
+    <SectionHeading eyebrow="Industries & settings we serve" title="A range of Ontario care environments." />
+    <div className="canada-industry-grid">
+      {careIndustries.map((industry) => <article key={industry.title}><h3>{industry.title}</h3><p>{industry.text}</p></article>)}
+    </div>
+  </section>;
+}
+
+function CareersBand() {
+  return <div className="canada-employer-band">
+    <div><h2>Looking for your next healthcare role?</h2><p>Share your qualifications and availability, and Providence will consider you for suitable Ontario opportunities as they arise.</p></div>
+    <a className="button button-primary" href="/canada/healthcare-workers">Explore opportunities <ArrowUpRight /></a>
+  </div>;
+}
+
+function EmployerCtaBand() {
+  return <div className="canada-employer-band canada-employer-band-alt">
+    <div><h2>Build your healthcare team.</h2><p>Tell Providence what your organization needs, and we'll help coordinate the right next conversation.</p></div>
+    <a className="button button-primary" href="/canada/care-organizations">Tell us what you need <ArrowUpRight /></a>
+  </div>;
+}
+
+function AboutTeaserSection() {
+  return <section className="canada-section canada-section-light">
+    <div className="canada-about-teaser">
+      <div>
+        <SectionHeading eyebrow="About Providence" title="One Providence, focused on the right connection." copy="Providence Canada listens carefully, communicates clearly, and coordinates the next step—for the organizations that need healthcare staff and the professionals ready to work." />
+      </div>
+      <a className="button button-dark" href="/canada/about">About Providence <ArrowRight /></a>
+    </div>
+  </section>;
+}
+
 function CanadaFinalCta() {
-  return <section className="final-cta"><div><p className="section-kicker">Start the right conversation</p><h2>Need staff—or ready to explore healthcare work?</h2></div><div className="final-cta-actions"><a className="button button-gold" href="/canada/care-organizations">Find staff <ArrowUpRight /></a><a className="button button-outline-light" href="/canada/healthcare-workers">Find work</a></div></section>;
+  return <section className="final-cta"><div><p className="section-kicker">Start the right conversation</p><h2>Need staff—or ready to explore healthcare work?</h2></div><div className="final-cta-actions"><a className="button button-primary" href="/canada/care-organizations">I'm looking for staff <ArrowUpRight /></a><a className="button button-outline-light" href="/canada/healthcare-workers">I'm looking for work</a></div></section>;
 }
 
 function GhanaFinalCta() {
@@ -124,12 +245,20 @@ function GhanaFinalCta() {
 function CanadaHome() {
   return <MarketShell market="canada">
     <Hero market="canada" />
-    <section className="signal-strip healthcare-signal"><span>Providence Canada</span><strong>Healthcare staffing first</strong><strong>Organizations + workers</strong><strong>Ontario focus</strong><strong>Telecom services remain active</strong></section>
-    <section className="content-section audience-section"><Reveal><SectionHeading eyebrow="Two sides. One clear path." title="Staffing support for organizations and healthcare workers." copy="Providence Canada brings both sides of the staffing conversation together without making assumptions about fit, availability, or outcomes." /></Reveal><AudiencePaths /></section>
-    <section className="roles-section"><Reveal><SectionHeading eyebrow="Professionals we connect with" title="Healthcare and care-support roles." copy="Current areas of interest include the role groups below. Other relevant care-support professionals are welcome to inquire." /></Reveal><HealthcareRoleGrid /></section>
-    <section className="dark-section"><Reveal><SectionHeading light eyebrow="How the process works" title="Recruiting, matching, and coordination built around real needs." copy="The process begins with information from both sides and moves forward only where there may be an appropriate next step." /></Reveal><StaffingProcess /></section>
-    <section className="settings-section"><div className="settings-copy"><p className="section-kicker">Where support may be needed</p><h2>Care settings across Ontario.</h2><p>Providence welcomes conversations from a range of care organizations. These examples describe potential settings—not existing contracts or guaranteed openings.</p></div><CareSettingsGrid /></section>
+    <WhoWeConnectSection />
+    <ForOrganizationsSection />
+    <ForProfessionalsSection />
+    <section className="canada-section canada-section-blue" style={{ paddingBottom: 0 }}>
+      <SectionHeading light eyebrow="How Providence works" title="The connection between healthcare talent and healthcare organizations." copy="Providence sits between both sides of the staffing conversation and helps coordinate the connection." />
+    </section>
+    <ConnectionGraphic />
+    <WhyProvidenceSection />
+    <RecruitmentServicesSection />
+    <IndustriesSection />
+    <CareersBand />
+    <EmployerCtaBand />
     <section className="telecom-secondary"><div><RadioTower /><p className="section-kicker">Also from Providence Canada</p><h2>Telecom sales & marketing.</h2><p>Our established telecom work remains active as a focused secondary service for customer guidance, telesales, acquisition, and campaign coordination.</p></div><a className="button button-dark" href="/canada/telecom">Explore telecom services <ArrowRight /></a></section>
+    <AboutTeaserSection />
     <CanadaFinalCta />
   </MarketShell>;
 }
@@ -153,6 +282,7 @@ function HealthcareStaffingPage() {
   return <MarketShell market="canada">
     <Hero market="canada" interior title="Healthcare staffing starts with understanding both sides." copy="Providence Canada supports recruiting, matching, placement, and staffing coordination for care organizations and healthcare professionals across Ontario." />
     <section className="content-section page-intro"><Reveal><SectionHeading eyebrow="Healthcare staffing" title="A human connection between workforce needs and career interests." copy="Organizations can describe the staff they need. Workers can share what they bring and where they want to contribute. Providence helps identify and coordinate suitable next steps." /></Reveal><AudiencePaths compact /></section>
+    <ConnectionGraphic />
     <section className="roles-section"><SectionHeading eyebrow="Role groups" title="Clear enough to navigate. Flexible enough to listen." /><HealthcareRoleGrid /></section>
     <section className="settings-section"><div className="settings-copy"><p className="section-kicker">Potential client settings</p><h2>Different care environments. Different staffing realities.</h2><p>Providence considers each setting, schedule, and role on its own terms. The categories below are examples of organizations we welcome hearing from.</p></div><CareSettingsGrid /></section>
     <section className="dark-section"><SectionHeading light eyebrow="Our coordination approach" title="Three practical stages, with no unsupported promises." /><StaffingProcess /></section>
@@ -180,7 +310,7 @@ function HealthcareWorkersPage() {
 
 function TelecomPage() {
   return <MarketShell market="canada">
-    <Hero market="canada" interior title="Telecom sales and marketing remain part of Providence Canada." copy="From connectivity questions to structured outreach, Providence continues to support telecom customer conversations and campaigns as a secondary service." />
+    <Hero market="canada" interior photo={false} eyebrow="Telecom sales & marketing · Ontario" eyebrowIcon={RadioTower} title="Telecom sales and marketing remain part of Providence Canada." copy="From connectivity questions to structured outreach, Providence continues to support telecom customer conversations and campaigns as a secondary service." />
     <section className="content-section page-intro"><Reveal><SectionHeading eyebrow="Telecom services" title="Six practical ways we can help." copy="Our role is to help people and businesses navigate suitable telecom options and to support the sales work around them." /></Reveal><ServiceGrid market="canada" /></section>
     <section className="dark-section campaign-detail"><SectionHeading light eyebrow="Campaign support" title="Built around the actual sales need." copy="Providence can support individual inquiries, business consultations, or a structured campaign. Scope, audience, responsibilities, and outcomes are clarified before work begins." /><div className="campaign-points"><span>Telecom inquiry support</span><span>Outbound sales capacity</span><span>Customer acquisition activity</span><span>Campaign coordination</span></div></section>
     <section className="telecom-contact"><div><RadioTower /><p className="section-kicker">Start a telecom conversation</p><h2>Tell us about the customer or campaign need.</h2></div><a className="button button-dark" href="/canada/contact?interest=Internet%20or%20telecom%20inquiry">Contact Providence <ArrowUpRight /></a></section>
