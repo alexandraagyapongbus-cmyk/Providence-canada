@@ -191,7 +191,7 @@ function AboutTeaserSection() {
   return <section className="canada-section canada-section-light">
     <div className="canada-about-teaser">
       <div>
-        <SectionHeading eyebrow="About Providence" title="Connection, service, and choice — with a growing second division." copy="Providence Canada helps residential and business customers find internet, TV, and phone service from the providers we work with, and is developing healthcare staffing and recruitment as an expanding second division." />
+        <SectionHeading eyebrow="About Providence" title="Connection, service, and choice — with a growing second division." copy="Providence Canada connects residential and business customers with internet, TV, and phone solutions, and is developing healthcare staffing and recruitment as an expanding second division." />
       </div>
       <a className="button button-dark" href="/canada/about">About Providence <ArrowRight /></a>
     </div>
@@ -241,10 +241,10 @@ function ResidentialBusinessSplitSection() {
   </section>;
 }
 
-function ShopByProviderSection() {
+function SolutionsTeaserSection() {
   return <section className="canada-employer-band">
-    <div><h2>Shop by provider</h2><p>Explore services available through the provider network Providence is building, in one place instead of several telecom websites.</p></div>
-    <a className="button button-primary" href="/canada/providers">View Providers <ArrowUpRight /></a>
+    <div><h2>One place for everything you need.</h2><p>Internet, TV, phone, and connectivity — see the full range of solutions Providence can help with, for home or business.</p></div>
+    <a className="button button-primary" href="/canada/solutions">Explore Solutions <ArrowUpRight /></a>
   </section>;
 }
 
@@ -261,7 +261,7 @@ function HowProvidenceWorksSection() {
 
 function WhyBuyThroughProvidenceSection() {
   return <section className="canada-section canada-section-tint">
-    <Reveal><SectionHeading eyebrow="Why buy through Providence" title="Why not just go directly to the provider?" /></Reveal>
+    <Reveal><SectionHeading eyebrow="Why Providence" title="Why customers choose Providence." /></Reveal>
     <div className="canada-differentiator-grid">
       {whyBuyThroughProvidence.map((item, index) => { const Icon = item.icon; return <Reveal key={item.title} delay={index * 50}><article><Icon /><h3>{item.title}</h3><p>{item.text}</p></article></Reveal>; })}
     </div>
@@ -316,7 +316,7 @@ function CanadaHome() {
     <Hero market="canada" />
     <WhatAreYouLookingForSection />
     <ResidentialBusinessSplitSection />
-    <ShopByProviderSection />
+    <SolutionsTeaserSection />
     <HowProvidenceWorksSection />
     <WhyBuyThroughProvidenceSection />
     <HealthcareSecondaryDivisionSection />
@@ -430,7 +430,7 @@ function ResidentialPage() {
     { anchor: 'bundles', icon: residentialServices[3].icon, title: 'Bundles — combine services, simplify your bill', text: 'Internet + TV, Internet + Phone, or Internet + TV + Phone — compare bundle pricing against buying services separately.' },
   ];
   return <MarketShell market="canada">
-    <Hero market="canada" interior title="Telecom that fits your home." copy="Explore internet, TV, phone, and bundle options available through the providers Providence works with." />
+    <Hero market="canada" interior title="Telecom that fits your home." copy="Explore internet, TV, phone, and bundle options — all through Providence." />
     <section className="canada-section canada-section-light">
       <div className="canada-compare-list">
         {details.map((d) => { const Icon = d.icon; return <article key={d.anchor} id={d.anchor}><Icon /><div><h3>{d.title}</h3><p>{d.text}</p></div></article>; })}
@@ -471,20 +471,26 @@ function BusinessPage() {
   </MarketShell>;
 }
 
-function ProvidersPage() {
+function SolutionsPage() {
+  const solutions = [
+    { icon: residentialServices[0].icon, title: 'Internet', text: 'Reliable internet for your home or business, matched to how you actually use it.', href: '/canada/residential#internet' },
+    { icon: residentialServices[1].icon, title: 'TV', text: 'Channels, packages, and equipment for how you watch, at home or in customer-facing spaces.', href: '/canada/residential#tv' },
+    { icon: residentialServices[2].icon, title: 'Phone', text: 'Home and business phone service, with the features that fit how you communicate.', href: '/canada/residential#phone' },
+    { icon: businessServices[3].icon, title: 'Connectivity', text: 'Network and connectivity solutions sized for one location or several.', href: '/canada/business#connectivity' },
+    { icon: residentialServices[3].icon, title: 'Bundles', text: 'Combine services for a simpler bill, at home or as a custom business package.', href: '/canada/residential#bundles' },
+  ];
   return <MarketShell market="canada">
-    <Hero market="canada" interior title="A growing network of telecom providers." copy="Providence is building a network of telecommunications providers so residential and business customers have real choice in one place." />
-    <section className="grounded-note"><ShieldCheck /><div><p className="section-kicker">Being built</p><h2>Specific provider partnerships are not yet confirmed.</h2><p>Providence does not currently list named provider partners on this page. As specific provider relationships are confirmed, they will be added here — along with the products each provider makes available through Providence.</p></div></section>
+    <Hero market="canada" interior title="Solutions for however you stay connected." copy="Internet, TV, phone, and connectivity — explore what Providence can help you with, for home or business." />
     <section className="canada-section canada-section-light">
-      <SectionHeading eyebrow="The kinds of providers we're building toward" title="Categories Providence intends to bring together." copy="Rather than list specific companies before those relationships exist, here is the kind of network Providence is working toward." />
-      <div className="canada-industry-grid">
-        <article><h3>Internet & TV providers</h3><p>Residential connectivity and entertainment services.</p></article>
-        <article><h3>Business connectivity providers</h3><p>Internet, network, and connectivity services for organizations.</p></article>
-        <article><h3>Phone & mobility providers</h3><p>Home phone, business phone, and mobility options.</p></article>
+      <div className="canada-compare-list">
+        {solutions.map((s) => { const Icon = s.icon; return <a key={s.title} href={s.href} className="canada-compare-link"><Icon /><div><h3>{s.title}</h3><p>{s.text}</p></div></a>; })}
       </div>
     </section>
+    <section className="canada-section canada-section-tint">
+      <SectionHeading eyebrow="How service is delivered" title="Providence handles the details." copy="Providence works with underlying telecommunications providers to deliver these services. That relationship is disclosed where relevant to a specific offer, contract, or billing detail — Providence remains your point of contact throughout." />
+    </section>
     <section className="canada-employer-band">
-      <div><h2>Looking for a specific provider?</h2><p>Contact Providence and we'll let you know the current options available to you.</p></div>
+      <div><h2>Not sure where to start?</h2><p>Tell Providence what you need and we'll point you in the right direction.</p></div>
       <a className="button button-primary" href="/canada/contact?interest=General%20inquiry">Contact Providence <ArrowUpRight /></a>
     </section>
   </MarketShell>;
@@ -492,7 +498,7 @@ function ProvidersPage() {
 
 function WhyProvidencePage() {
   return <MarketShell market="canada">
-    <Hero market="canada" interior title="Why Providence instead of going directly to the provider?" copy="A straightforward answer to a fair question." />
+    <Hero market="canada" interior title="Why Providence?" copy="A straightforward answer to a fair question." />
     <section className="canada-section canada-section-light">
       <Reveal><SectionHeading eyebrow="Why Providence" title="One conversation. Multiple options." copy="You do not need to understand Mbps, fibre technology, bundles, or equipment specs. Providence helps you compare what is actually available and explains it in plain terms." /></Reveal>
       <div className="canada-differentiator-grid">
@@ -519,7 +525,7 @@ function GhanaServicesPage() {
 function AboutPage({ market }: { market: MarketName }) {
   return <MarketShell market={market}>
     <Hero market={market} interior title="One Providence. Two focused markets." copy="Providence operates across Canada and Ghana with distinct local services and one shared commitment to helpful, dependable communication." />
-    <section className="about-story"><Reveal className="about-copy"><p className="section-kicker">Who we are</p><h2>Connection, service, and choice — built around what people need.</h2><p>In Canada, Providence helps residential and business customers find internet, TV, phone, and bundle options from the telecommunications providers we work with — one conversation instead of several telecom websites. Healthcare staffing and recruitment is a developing second division, connecting care organizations with healthcare professionals as it grows.</p><p>In Ghana, Providence continues to focus on its TV box offer, installation, service plans, and customer support. The services differ, but the standard is the same: listen carefully, communicate clearly, and organize the next step.</p></Reveal><div className="market-story-grid"><a href={market === 'canada' ? '/canada' : marketUrl('canada')}><RadioTower /><small>Canada</small><strong>Telecom services & healthcare staffing</strong><ArrowUpRight /></a><a href={market === 'ghana' ? '/ghana' : marketUrl('ghana')}><Tv /><small>Ghana</small><strong>TV box sales, setup & support</strong><ArrowUpRight /></a></div></section>
+    <section className="about-story"><Reveal className="about-copy"><p className="section-kicker">Who we are</p><h2>Connection, service, and choice — built around what people need.</h2><p>In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions — one conversation with Providence, with real people to help along the way. Healthcare staffing and recruitment is a developing second division, connecting care organizations with healthcare professionals as it grows.</p><p>In Ghana, Providence continues to focus on its TV box offer, installation, service plans, and customer support. The services differ, but the standard is the same: listen carefully, communicate clearly, and organize the next step.</p></Reveal><div className="market-story-grid"><a href={market === 'canada' ? '/canada' : marketUrl('canada')}><RadioTower /><small>Canada</small><strong>Telecom services & healthcare staffing</strong><ArrowUpRight /></a><a href={market === 'ghana' ? '/ghana' : marketUrl('ghana')}><Tv /><small>Ghana</small><strong>TV box sales, setup & support</strong><ArrowUpRight /></a></div></section>
     <section className="values-section"><SectionHeading eyebrow="What connects our work" title="A shared service standard." /><div className="value-grid">{storyValues.map((value) => { const Icon = value.icon; return <article key={value.title}><Icon /><h3>{value.title}</h3><p>{value.text}</p></article>; })}</div></section>
     <section className="truth-section"><Globe2 /><div><p className="section-kicker">Grounded, not overstated</p><h2>We say what Providence does—and leave unsupported claims out.</h2><p>This website does not claim confirmed provider partnerships, carrier authorization, staffing contracts, current job openings, guaranteed placements, licence status, invented customer numbers, or sales results. Verified details can be added as the business develops.</p></div></section>
     {market === 'canada' && <section className="canada-employer-band canada-employer-band-alt"><div><h2>Interested in partnering with Providence?</h2><p>Providence also performs telesales and customer-acquisition work directly for telecom companies.</p></div><a className="button button-dark" href="/canada/telecom">Partner With Providence <ArrowRight /></a></section>}
@@ -547,7 +553,7 @@ export function MarketPage({ market, section }: { market: MarketName; section: S
   if (market === 'canada') {
     if (section === 'residential') return <ResidentialPage />;
     if (section === 'business') return <BusinessPage />;
-    if (section === 'providers') return <ProvidersPage />;
+    if (section === 'solutions') return <SolutionsPage />;
     if (section === 'why-providence') return <WhyProvidencePage />;
     if (section === 'healthcare-staffing' || section === 'services') return <HealthcareStaffingPage />;
     if (section === 'care-organizations') return <CareOrganizationsPage />;

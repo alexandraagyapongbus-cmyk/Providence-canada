@@ -777,10 +777,12 @@ img { max-width: 100%; }
 .audience-card.worker-card .canada-audience-list { color: rgba(255,255,255,.68); }
 
 .canada-compare-list { border-top: 1px solid var(--line); }
-.canada-compare-list article { display: grid; grid-template-columns: 40px 1fr; gap: .3rem 1.2rem; padding: 1.9rem 0; border-bottom: 1px solid var(--line); }
+.canada-compare-list article, .canada-compare-list .canada-compare-link { display: grid; grid-template-columns: 40px 1fr; gap: .3rem 1.2rem; padding: 1.9rem 0; border-bottom: 1px solid var(--line); }
 .canada-compare-list svg { grid-row: span 2; width: 24px; color: var(--blue); }
 .canada-compare-list h3 { margin: 0; font: 590 1.1rem/1.3 var(--font-display),sans-serif; }
 .canada-compare-list p { margin: 0; color: var(--muted-copy); font-size: .88rem; line-height: 1.65; }
+.canada-compare-link { color: inherit; transition: background .2s ease, padding-left .2s ease; }
+.canada-compare-link:hover { background: #f6f9fc; padding-left: .6rem; margin-left: -.6rem; }
 
 @media (max-width: 1050px) {
   .canada-lookup-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
