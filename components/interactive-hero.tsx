@@ -100,21 +100,27 @@ export function InteractiveHero() {
 
   useEffect(() => {
     const wrap = wrapRef.current;
-    if (!wrap || reducedMotion) return;
+    const stage = stageRef.current;
+    if (!wrap || !stage || reducedMotion) return;
     let raf = 0;
     function onScroll() {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         const rect = wrap!.getBoundingClientRect();
-        const total = wrap!.offsetHeight - window.innerHeight;
+        // Use the sticky element's own (content-driven) height rather than assuming
+        // it always matches the viewport — on short viewports the hero can grow
+        // taller than 100svh to fit its content instead of clipping it.
+        const total = wrap!.offsetHeight - stage!.offsetHeight;
         const progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
         wrap!.style.setProperty('--hero-progress', progress.toFixed(3));
       });
     }
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     return () => {
       window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
       cancelAnimationFrame(raf);
     };
   }, [reducedMotion]);

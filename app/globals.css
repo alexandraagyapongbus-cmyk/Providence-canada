@@ -649,8 +649,8 @@ img { max-width: 100%; }
 /* Interactive homepage hero: mode toggle, cursor-parallax, scroll-pin, connection-motif hotspots */
 .hero-pin-wrap { position: relative; height: 148vh; }
 .hero-pin-wrap.no-pin { height: auto; }
-.interactive-hero { position: sticky; top: 0; height: 100svh; }
-.no-pin .interactive-hero { position: relative; height: auto; }
+.interactive-hero { position: sticky; top: 0; min-height: 100svh; }
+.no-pin .interactive-hero { position: relative; min-height: 100svh; }
 
 .interactive-hero .market-hero-image,
 .interactive-hero .hero-video {
