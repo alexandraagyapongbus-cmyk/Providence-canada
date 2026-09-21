@@ -36,6 +36,7 @@ import {
   markets,
   marketUrl,
   recruitmentServices,
+  telecomCustomerSegments,
   storyValues,
   whyProvidence,
   type MarketName,
@@ -310,10 +311,41 @@ function HealthcareWorkersPage() {
 
 function TelecomPage() {
   return <MarketShell market="canada">
-    <Hero market="canada" interior photo={false} eyebrow="Telecom sales & marketing · Ontario" eyebrowIcon={RadioTower} title="Telecom sales and marketing remain part of Providence Canada." copy="From connectivity questions to structured outreach, Providence continues to support telecom customer conversations and campaigns as a secondary service." />
-    <section className="content-section page-intro"><Reveal><SectionHeading eyebrow="Telecom services" title="Six practical ways we can help." copy="Our role is to help people and businesses navigate suitable telecom options and to support the sales work around them." /></Reveal><ServiceGrid market="canada" /></section>
-    <section className="dark-section campaign-detail"><SectionHeading light eyebrow="Campaign support" title="Built around the actual sales need." copy="Providence can support individual inquiries, business consultations, or a structured campaign. Scope, audience, responsibilities, and outcomes are clarified before work begins." /><div className="campaign-points"><span>Telecom inquiry support</span><span>Outbound sales capacity</span><span>Customer acquisition activity</span><span>Campaign coordination</span></div></section>
-    <section className="telecom-contact"><div><RadioTower /><p className="section-kicker">Start a telecom conversation</p><h2>Tell us about the customer or campaign need.</h2></div><a className="button button-dark" href="/canada/contact?interest=Internet%20or%20telecom%20inquiry">Contact Providence <ArrowUpRight /></a></section>
+    <Hero market="canada" interior photo={false} eyebrow="Telecom sales & marketing · Ontario" eyebrowIcon={RadioTower} title="We help telecom companies sell, and help customers find service." copy="Providence performs telesales, customer acquisition, and campaign work directly for telecom partners, and helps residential and business customers think through their connectivity options." />
+
+    <section className="content-section page-intro"><Reveal><SectionHeading eyebrow="For telecom companies & business partners" title="Sales and customer-acquisition work, performed directly." copy="Providence's own team does the outreach, representation, and campaign work — we do not supply or place sales staff on behalf of another organization." /></Reveal><ServiceGrid market="canada" />
+      <div className="telecom-audience-actions">
+        <a className="button button-primary" href="/canada/contact?interest=Partner%20with%20Providence%20%28telecom%20company%29">Partner with Providence <ArrowUpRight /></a>
+        <a className="button button-outline-dark" href="/canada/contact?interest=Partner%20with%20Providence%20%28telecom%20company%29">Discuss a sales campaign</a>
+      </div>
+    </section>
+
+    <section className="grounded-note"><ShieldCheck /><div><p className="section-kicker">A clear distinction</p><h2>We sell and reach customers. We do not supply sales employees.</h2><p>Providence performs telesales, representation, and customer-acquisition work directly for telecom partners. We do not recruit, place, or supply sales workers or staff to another company — that is a different service, and not one Providence offers today.</p></div></section>
+
+    <section className="canada-section canada-section-light" id="telecom-customers">
+      <SectionHeading eyebrow="For telecom customers" title="Residential and business connectivity, coming into focus." copy="Providence is building toward offering telecom products directly to customers. Nothing below reflects pricing, carriers, or confirmed availability — only the kinds of needs we intend to help with once those relationships are in place." />
+      <div className="telecom-customer-split">
+        {telecomCustomerSegments.map((segment) => { const Icon = segment.icon; return <article key={segment.title}><Icon /><h3>{segment.title}</h3><p>{segment.text}</p><small>Products and availability to be confirmed.</small></article>; })}
+      </div>
+    </section>
+
+    <section className="telecom-final-cta">
+      <article>
+        <p>I represent a telecom company</p>
+        <h3>Partner With Providence</h3>
+        <a className="text-link" href="/canada/contact?interest=Partner%20with%20Providence%20%28telecom%20company%29">Partner with Providence <ArrowUpRight /></a>
+      </article>
+      <article>
+        <p>I'm looking for telecom services</p>
+        <h3>Explore Solutions</h3>
+        <a className="text-link" href="#telecom-customers">Explore solutions <ArrowRight /></a>
+      </article>
+      <article>
+        <p>I'm looking for healthcare services</p>
+        <h3>Explore Healthcare</h3>
+        <a className="text-link" href="/canada">Explore healthcare <ArrowRight /></a>
+      </article>
+    </section>
   </MarketShell>;
 }
 

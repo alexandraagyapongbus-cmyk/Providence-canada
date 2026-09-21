@@ -70,6 +70,15 @@ Do not claim any of the following without verified business evidence supplied by
 
 Care settings are examples of potential clients, not claims of existing contracts. Worker forms are expressions of interest, not applications to named openings.
 
+### Telecom: services performed, not staff supplied
+
+Providence Canada's telecom line is Providence performing sales/telesales/customer-acquisition work directly for a telecom company (Audience 1: business partners), plus a not-yet-active pathway for telecom customers (Audience 2: residential/business) that must stay activation-ready but empty of unconfirmed claims. Do not describe or imply the reverse — Providence supplying, recruiting, or placing telecom sales workers/staff for another company. In practice this means:
+
+- Never use language like "extra sales capacity," "sales partnerships" (in the staffing sense), "join our sales team," or any "Careers"-style framing for telecom roles.
+- Telecom capability copy (`markets.canada.services` in `lib/content.ts`, the Telecom page) must always read as Providence itself performing the work (representation, telesales, campaign execution, lead generation, business development) — never as Providence supplying bodies/headcount to a partner's team.
+- Do not include "Careers" in primary navigation, and do not build a telecom recruitment funnel.
+- Do not publish telecom products, pricing, carrier logos, promotions, or authorized-provider claims (`telecomCustomerSegments` in `lib/content.ts`) unless the owner has confirmed the underlying relationship or product exists. The UI should stay structured so these can be activated later without a rebuild.
+
 ## Canada content model
 
 Primary audiences:

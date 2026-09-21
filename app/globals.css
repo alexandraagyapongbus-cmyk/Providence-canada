@@ -162,6 +162,8 @@ img { max-width: 100%; }
 .button-dark:hover { background: var(--navy-3); }
 .button-outline-light { border-color: rgba(255,255,255,.3); color: white; }
 .button-outline-light:hover { background: rgba(255,255,255,.1); }
+.button-outline-dark { border-color: var(--line); color: var(--ink); }
+.button-outline-dark:hover { background: #eef3f8; }
 .text-link { display: inline-flex; align-items: center; gap: .5rem; width: fit-content; font-size: .87rem; font-weight: 800; border-bottom: 1px solid currentColor; padding-bottom: .22rem; }
 .text-link svg { width: 16px; }
 .hero-market-note { position: absolute; right: clamp(1.25rem,5vw,6rem); bottom: 4.2rem; max-width: 220px; padding-left: 1.1rem; border-left: 2px solid var(--gold); }
@@ -177,7 +179,7 @@ img { max-width: 100%; }
 .content-section, .page-intro, .comparison-section, .journey-section, .values-section { padding: clamp(5.2rem,9vw,9rem) clamp(1.25rem,6.5vw,7.5rem); }
 .section-heading { max-width: 780px; margin-bottom: 3.25rem; }
 .section-heading .section-kicker, .section-kicker { color: var(--blue); }
-.section-heading h2, .partnership-copy h2, .support-section h2, .about-copy h2, .contact-context h2, .truth-section h2, .final-cta h2, .ghana-offer-detail h2, .audience-card h3, .settings-copy h2, .inquiry-overview h2, .grounded-note h2, .telecom-secondary h2, .telecom-contact h2 { margin: 0; font: 530 clamp(2.5rem,5.2vw,5.2rem)/1 var(--font-display),sans-serif; letter-spacing: -.058em; text-wrap: balance; }
+.section-heading h2, .partnership-copy h2, .support-section h2, .about-copy h2, .contact-context h2, .truth-section h2, .final-cta h2, .ghana-offer-detail h2, .audience-card h3, .settings-copy h2, .inquiry-overview h2, .grounded-note h2, .telecom-secondary h2 { margin: 0; font: 530 clamp(2.5rem,5.2vw,5.2rem)/1 var(--font-display),sans-serif; letter-spacing: -.058em; text-wrap: balance; }
 .section-heading > p:last-child { max-width: 660px; margin: 1.2rem 0 0; color: var(--muted-copy); font-size: 1rem; line-height: 1.75; }
 .section-heading.light h2, .section-heading.light > p:last-child { color: white; }
 .section-heading.light > p:last-child { color: rgba(255,255,255,.64); }
@@ -255,9 +257,6 @@ img { max-width: 100%; }
 .comparison-row strong { font: 600 1.04rem/1 var(--font-display),sans-serif; }
 .comparison-row a { display: inline-flex; align-items: center; gap: .4rem; color: var(--blue); font-size: .82rem; font-weight: 800; }
 .comparison-row svg { width: 15px; }
-.campaign-detail { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(3rem,8vw,8rem); align-items: end; }
-.campaign-points { display: grid; border-top: 1px solid rgba(255,255,255,.18); }
-.campaign-points span { padding: 1.25rem 0; border-bottom: 1px solid rgba(255,255,255,.18); color: rgba(255,255,255,.76); font-size: .9rem; }
 
 .audience-section { background: linear-gradient(145deg,#eef5fc 0%,#f8fafc 48%,#f4ead1 120%); }
 .audience-paths { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
@@ -290,12 +289,10 @@ img { max-width: 100%; }
 .care-settings-grid h3 { margin: 0; font: 590 1.05rem/1.25 var(--font-display),sans-serif; }
 .care-settings-grid p { margin: 0; color: var(--muted-copy); font-size: .84rem; line-height: 1.6; }
 
-.telecom-secondary, .telecom-contact { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; padding: clamp(4.3rem,7vw,7rem) clamp(1.25rem,6.5vw,7.5rem); border-top: 1px solid var(--line); background: white; }
-.telecom-secondary > div > svg, .telecom-contact > div > svg { width: 30px; height: 30px; margin-bottom: 2rem; color: var(--blue); }
-.telecom-secondary h2, .telecom-contact h2 { font-size: clamp(2.3rem,4vw,4.4rem); }
+.telecom-secondary { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: end; padding: clamp(4.3rem,7vw,7rem) clamp(1.25rem,6.5vw,7.5rem); border-top: 1px solid var(--line); background: white; }
+.telecom-secondary > div > svg { width: 30px; height: 30px; margin-bottom: 2rem; color: var(--blue); }
+.telecom-secondary h2 { font-size: clamp(2.3rem,4vw,4.4rem); }
 .telecom-secondary > div > p:last-child { max-width: 750px; margin: 1.2rem 0 0; color: var(--muted-copy); line-height: 1.75; }
-.telecom-contact { background: var(--gold); }
-.telecom-contact .section-kicker { color: #5b4206; }
 
 .final-cta-actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: flex-end; }
 .grounded-note { display: grid; grid-template-columns: auto minmax(0,860px); gap: 2rem; justify-content: center; padding: clamp(4rem,7vw,7rem) clamp(1.25rem,6.5vw,7.5rem); color: var(--navy); background: var(--gold); }
@@ -463,10 +460,10 @@ img { max-width: 100%; }
   .process-grid { grid-template-columns: 1fr; }
   .process-grid article, .process-grid article + article { min-height: auto; padding: 1.7rem 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.15); }
   .process-grid h3 { margin-top: 1.8rem; }
-  .partnership-section, .ghana-offer-detail, .campaign-detail, .about-story, .contact-section, .settings-section, .inquiry-overview, .telecom-secondary, .telecom-contact { grid-template-columns: 1fr; }
+  .partnership-section, .ghana-offer-detail, .about-story, .contact-section, .settings-section, .inquiry-overview, .telecom-secondary { grid-template-columns: 1fr; }
   .audience-paths { grid-template-columns: 1fr; }
   .healthcare-role-grid { grid-template-columns: 1fr 1fr; }
-  .telecom-secondary, .telecom-contact { align-items: start; }
+  .telecom-secondary { align-items: start; }
   .final-cta-actions { justify-content: flex-start; }
   .offer-band { grid-template-columns: 1fr; }
   .offer-band > div, .offer-band > div:last-child { border-right: 0; border-bottom: 1px solid rgba(255,255,255,.12); }
@@ -724,6 +721,27 @@ img { max-width: 100%; }
 .canada-about-teaser p { max-width: 640px; margin: 1rem 0 0; color: var(--muted-copy); line-height: 1.8; }
 
 .market-canada .final-cta { background: linear-gradient(115deg,var(--navy),var(--navy-3)); }
+
+.telecom-audience-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.5rem; }
+.telecom-customer-split { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); margin-top: 1rem; }
+.telecom-customer-split article { min-height: 190px; padding: 1.9rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.7); }
+.telecom-customer-split svg { width: 26px; color: var(--blue); }
+.telecom-customer-split h3 { margin: 1.5rem 0 .6rem; font: 600 1.1rem/1.25 var(--font-display),sans-serif; }
+.telecom-customer-split p { margin: 0 0 1rem; color: var(--muted-copy); font-size: .88rem; line-height: 1.65; }
+.telecom-customer-split small { display: block; color: #8a97a7; font-size: .72rem; font-style: italic; }
+
+.telecom-final-cta { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 1px; background: rgba(255,255,255,.15); }
+.telecom-final-cta article { display: flex; flex-direction: column; align-items: flex-start; gap: .9rem; padding: clamp(2rem,4vw,2.75rem) clamp(1.5rem,3vw,2.25rem); background: var(--navy-2); }
+.telecom-final-cta p { margin: 0; color: rgba(255,255,255,.6); font-size: .68rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+.telecom-final-cta h3 { margin: 0; color: white; font: 560 1.4rem/1.2 var(--font-display),sans-serif; letter-spacing: -.01em; }
+.telecom-final-cta .text-link { color: white; }
+.telecom-final-cta article:nth-child(1) .text-link { color: var(--gold-light); }
+.telecom-final-cta article:nth-child(2) .text-link { color: #8fd0ff; }
+
+@media (max-width: 800px) {
+  .telecom-customer-split { grid-template-columns: 1fr; }
+  .telecom-final-cta { grid-template-columns: 1fr; }
+}
 
 @media (max-width: 1050px) {
   .canada-differentiator-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
