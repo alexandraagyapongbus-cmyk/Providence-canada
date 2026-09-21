@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import * as React from 'react';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -22,8 +21,11 @@ import {
   Users,
   Wrench,
 } from 'lucide-react';
+import { AnimatedWords } from '@/components/animated-words';
+import { AudienceSplitSection, type AudiencePanel } from '@/components/audience-split';
+import { ConnectExperienceSection, type ConnectItem } from '@/components/connect-experience';
 import { ConnectionGraphic } from '@/components/connection-graphic';
-import { HeroMedia } from '@/components/hero-media';
+import { InteractiveHero } from '@/components/interactive-hero';
 import { InView } from '@/components/in-view';
 import { LeadForm } from '@/components/lead-form';
 import { MarketShell } from '@/components/market-shell';
@@ -53,11 +55,6 @@ function SectionHeading({ eyebrow, title, copy, light = false }: { eyebrow: stri
   return <div className={`section-heading ${light ? 'light' : ''}`}><p className="section-kicker">{eyebrow}</p><h2>{title}</h2>{copy && <p>{copy}</p>}</div>;
 }
 
-function AnimatedWords({ text }: { text: string }) {
-  const words = text.split(' ');
-  return <>{words.map((word, index) => <React.Fragment key={index}>{index > 0 ? ' ' : ''}<span style={{ '--word-index': index } as React.CSSProperties}>{word}</span></React.Fragment>)}</>;
-}
-
 function Hero({ market, interior = false, title, copy, photo = true, eyebrow, eyebrowIcon: EyebrowIcon, image, imageAlt }: { market: MarketName; interior?: boolean; title?: string; copy?: string; photo?: boolean; eyebrow?: string; eyebrowIcon?: typeof Stethoscope; image?: string; imageAlt?: string }) {
   const content = markets[market];
   const isCanada = market === 'canada';
@@ -69,9 +66,7 @@ function Hero({ market, interior = false, title, copy, photo = true, eyebrow, ey
   const Icon = EyebrowIcon || (isCanada ? RadioTower : Tv);
   return (
     <section className={`market-hero ${interior ? 'interior-hero' : ''} ${isCanada ? 'healthcare-hero' : ''} ${!showPhoto ? 'no-photo-hero' : ''}`}>
-      {showPhoto && (isCanada && !interior ? (
-        <HeroMedia videoSrc="/providence-canada-telecom-hero.mp4" posterSrc={canadaImage} alt={canadaAlt} />
-      ) : (
+      {showPhoto && (
         <Image
           className="market-hero-image"
           src={isCanada ? canadaImage : '/providence-hero.png'}
@@ -80,35 +75,19 @@ function Hero({ market, interior = false, title, copy, photo = true, eyebrow, ey
           priority
           sizes="100vw"
         />
-      ))}
+      )}
       <div className="market-hero-overlay" />
       {isCanada && <div className="hero-aurora" aria-hidden="true"><span /><span /></div>}
       <div className="market-hero-content">
         <p className="kicker"><Icon />{eyebrow || content.eyebrow}</p>
         <h1>{isCanada ? <AnimatedWords text={headline} /> : headline}</h1>
-        {isCanada && !interior && <p className="hero-tagline">{markets.canada.heroTagline}</p>}
         <p className="hero-copy">{copy || content.heroCopy}</p>
-        {!interior && (isCanada ? (
-          <div className="hero-pathways">
-            <a className="hero-pathway hero-pathway-employer" href="/canada/residential">
-              <span className="hero-pathway-label">Shopping for your home?</span>
-              <strong>For my home</strong>
-              <span className="hero-pathway-detail">Compare internet, TV, phone, and bundle options for your household.</span>
-              <span className="hero-pathway-cta">For My Home <ArrowUpRight /></span>
-            </a>
-            <a className="hero-pathway hero-pathway-worker" href="/canada/business">
-              <span className="hero-pathway-label">Shopping for your business?</span>
-              <strong>For my business</strong>
-              <span className="hero-pathway-detail">Explore business internet, phone, connectivity, and package options.</span>
-              <span className="hero-pathway-cta">For My Business <ArrowUpRight /></span>
-            </a>
-          </div>
-        ) : (
+        {!interior && !isCanada && (
           <div className="hero-actions">
             <a className="button button-gold" href="/ghana/contact?interest=Order%20a%20TV%20box">Order a TV box <ArrowUpRight /></a>
             <a className="button button-glass" href="/ghana/contact?interest=Request%20installation">Request installation</a>
           </div>
-        ))}
+        )}
       </div>
       {!interior && !isCanada && <div className="hero-market-note"><span>$250</span><p>TV box sale + installation</p></div>}
     </section>
@@ -203,41 +182,44 @@ function CanadaFinalCta() {
 }
 
 function WhatAreYouLookingForSection() {
-  const tiles = [
-    { icon: residentialServices[0].icon, title: 'Internet', href: '/canada/residential#internet' },
-    { icon: residentialServices[1].icon, title: 'TV', href: '/canada/residential#tv' },
-    { icon: residentialServices[2].icon, title: 'Home Phone', href: '/canada/residential#phone' },
-    { icon: residentialServices[3].icon, title: 'Bundles', href: '/canada/residential#bundles' },
-    { icon: businessServices[0].icon, title: 'Business Internet', href: '/canada/business#internet' },
-    { icon: businessServices[1].icon, title: 'Business Phone', href: '/canada/business#phone' },
+  const [InternetIcon, TvIcon, PhoneIcon, BundlesIcon] = residentialServices.map((s) => s.icon);
+  const ConnectivityIcon = businessServices[3].icon;
+  const items: ConnectItem[] = [
+    { key: 'internet', label: 'Internet', icon: <InternetIcon />, description: residentialServices[0].text, ctas: [{ label: 'Explore residential internet', href: '/canada/residential#internet' }, { label: 'Explore business internet', href: '/canada/business#internet' }] },
+    { key: 'tv', label: 'TV', icon: <TvIcon />, description: residentialServices[1].text, ctas: [{ label: 'Explore TV', href: '/canada/residential#tv' }] },
+    { key: 'phone', label: 'Phone', icon: <PhoneIcon />, description: residentialServices[2].text, ctas: [{ label: 'Explore home phone', href: '/canada/residential#phone' }, { label: 'Explore business phone', href: '/canada/business#phone' }] },
+    { key: 'bundles', label: 'Home Bundles', icon: <BundlesIcon />, description: residentialServices[3].text, ctas: [{ label: 'Explore bundles', href: '/canada/residential#bundles' }] },
+    { key: 'business', label: 'Business Solutions', icon: <ConnectivityIcon />, description: 'Connectivity, phone, and packages built around how your business operates.', ctas: [{ label: 'Explore business solutions', href: '/canada/business' }] },
   ];
-  return <section className="canada-section canada-section-light">
-    <Reveal><SectionHeading eyebrow="What are you looking for?" title="Pick a service to get started." /></Reveal>
-    <div className="canada-lookup-grid">
-      {tiles.map((tile) => { const Icon = tile.icon; return <a key={tile.title} href={tile.href} className="canada-lookup-tile"><Icon /><span>{tile.title}</span></a>; })}
-    </div>
-  </section>;
+  return <Reveal><ConnectExperienceSection items={items} /></Reveal>;
 }
 
 function ResidentialBusinessSplitSection() {
+  const panels: [AudiencePanel, AudiencePanel] = [
+    {
+      key: 'home',
+      kicker: 'For your home',
+      title: 'Internet, TV, phone, and bundles.',
+      media: { src: '/providence-canada-home-hero-poster.jpg', alt: 'A family relaxing on a sofa at home, using a laptop and a phone' },
+      services: residentialServices.map((s) => { const Icon = s.icon; return { title: s.title, icon: <Icon /> }; }),
+      ctaLabel: 'For My Home',
+      ctaHref: '/canada/residential',
+      accent: 'blue',
+    },
+    {
+      key: 'business',
+      kicker: 'For your business',
+      title: 'Connectivity built around your operations.',
+      media: { src: '/providence-canada-telecom-hero-poster.jpg', alt: 'A business team collaborating around a table in a modern office' },
+      services: businessServices.map((s) => { const Icon = s.icon; return { title: s.title, icon: <Icon /> }; }),
+      ctaLabel: 'For My Business',
+      ctaHref: '/canada/business',
+      accent: 'gold',
+    },
+  ];
   return <section className="canada-section canada-section-blue">
     <Reveal><SectionHeading light eyebrow="Residential & business" title="Whichever you're shopping for, Providence can help." /></Reveal>
-    <div className="audience-paths">
-      <Reveal variant="left"><article className="audience-card organization-card">
-        <Home />
-        <p className="section-kicker">For your home</p>
-        <h3>Internet, TV, phone, and bundles.</h3>
-        <ul className="canada-audience-list">{residentialServices.map((s) => <li key={s.title}>{s.title}</li>)}</ul>
-        <a className="button button-primary" href="/canada/residential">For My Home <ArrowUpRight /></a>
-      </article></Reveal>
-      <Reveal variant="right" delay={90}><article className="audience-card worker-card">
-        <BriefcaseBusiness />
-        <p className="section-kicker">For your business</p>
-        <h3>Connectivity built around your operations.</h3>
-        <ul className="canada-audience-list">{businessServices.map((s) => <li key={s.title}>{s.title}</li>)}</ul>
-        <a className="button button-gold" href="/canada/business">For My Business <ArrowUpRight /></a>
-      </article></Reveal>
-    </div>
+    <AudienceSplitSection panels={panels} />
   </section>;
 }
 
@@ -313,7 +295,7 @@ function GhanaFinalCta() {
 
 function CanadaHome() {
   return <MarketShell market="canada">
-    <Hero market="canada" />
+    <InteractiveHero />
     <WhatAreYouLookingForSection />
     <ResidentialBusinessSplitSection />
     <SolutionsTeaserSection />
