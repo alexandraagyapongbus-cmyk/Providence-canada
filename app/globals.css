@@ -647,21 +647,21 @@ img { max-width: 100%; }
 }
 
 /* Interactive homepage hero: mode toggle, cursor-parallax, scroll-pin, connection-motif hotspots */
-.hero-pin-wrap { position: relative; height: 148vh; }
+.hero-pin-wrap { position: relative; height: 200vh; }
 .hero-pin-wrap.no-pin { height: auto; }
 .interactive-hero { position: sticky; top: 0; min-height: 100svh; }
 .no-pin .interactive-hero { position: relative; min-height: 100svh; }
 
 .interactive-hero .market-hero-image,
 .interactive-hero .hero-video {
-  transform: scale(calc(1 - var(--hero-progress, 0) * .05)) translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
-  border-radius: calc(var(--hero-progress, 0) * 26px);
+  transform: scale(calc(1 - var(--hero-fade, 0) * .05)) translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
+  border-radius: calc(var(--hero-fade, 0) * 26px);
   transition: border-radius .1s linear;
 }
 .interactive-hero .hero-aurora { transform: translate3d(calc(var(--parallax-x, 0px) * -1.4), calc(var(--parallax-y, 0px) * -1.4), 0); }
 .interactive-hero .market-hero-content {
-  transform: translate3d(calc(var(--parallax-x, 0px) * .3), calc(var(--hero-progress, 0) * -34px), 0);
-  opacity: calc(1 - var(--hero-progress, 0) * 1.15);
+  transform: translate3d(calc(var(--parallax-x, 0px) * .3), calc(var(--hero-fade, 0) * -34px), 0);
+  opacity: calc(1 - var(--hero-fade, 0));
 }
 
 .hero-mode-toggle { display: inline-flex; gap: .2rem; margin-bottom: 1.3rem; padding: .3rem; border: 1px solid rgba(255,255,255,.24); background: rgba(8,36,68,.4); backdrop-filter: blur(14px); }

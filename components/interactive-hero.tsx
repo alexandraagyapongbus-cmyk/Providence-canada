@@ -112,7 +112,12 @@ export function InteractiveHero() {
         // taller than 100svh to fit its content instead of clipping it.
         const total = wrap!.offsetHeight - stage!.offsetHeight;
         const progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-        wrap!.style.setProperty('--hero-progress', progress.toFixed(3));
+        // Hold the headline fully visible through most of the scroll and only
+        // fade/settle the video over the final stretch, so a single scroll
+        // gesture doesn't wipe the text out almost immediately.
+        const FADE_START = 0.6;
+        const fade = Math.min(1, Math.max(0, (progress - FADE_START) / (1 - FADE_START)));
+        wrap!.style.setProperty('--hero-fade', fade.toFixed(3));
       });
     }
     onScroll();
