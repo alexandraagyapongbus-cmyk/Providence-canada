@@ -6,37 +6,62 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import { GHANA_CRM_URL, markets, marketUrl, type MarketName } from '@/lib/content';
 
-const navItems = {
+type NavLink = { label: string; path: string };
+type NavDropdown = { label: string; items: NavLink[] };
+type NavEntry = NavLink | NavDropdown;
+
+function isDropdown(entry: NavEntry): entry is NavDropdown {
+  return 'items' in entry;
+}
+
+const navItems: Record<MarketName, NavEntry[]> = {
   canada: [
-    ['Home', ''],
-    ['Healthcare Staffing', '/healthcare-staffing'],
-    ['Telecom', '/telecom'],
-    ['About', '/about'],
-    ['Contact', '/contact'],
+    { label: 'Home', path: '' },
+    { label: 'Telecommunications', items: [
+      { label: 'Overview', path: '/telecom#overview' },
+      { label: 'Telesales', path: '/telecom#capabilities' },
+      { label: 'Customer Acquisition', path: '/telecom#capabilities' },
+      { label: 'Residential', path: '/telecom#residential' },
+      { label: 'Business', path: '/telecom#business' },
+      { label: 'Sales Campaigns', path: '/telecom#sales-campaigns' },
+    ] },
+    { label: 'Business Solutions', items: [
+      { label: 'Sales', path: '/telecom#capabilities' },
+      { label: 'Telesales', path: '/telecom#capabilities' },
+      { label: 'Customer Acquisition', path: '/telecom#capabilities' },
+      { label: 'Lead Generation', path: '/telecom#capabilities' },
+      { label: 'Business Development', path: '/telecom#capabilities' },
+      { label: 'Customer Outreach', path: '/telecom#capabilities' },
+    ] },
+    { label: 'Healthcare', path: '/healthcare-staffing' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
   ],
   ghana: [
-    ['Home', ''],
-    ['TV Services', '/services'],
-    ['About', '/about'],
-    ['Contact', '/contact'],
+    { label: 'Home', path: '' },
+    { label: 'TV Services', path: '/services' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
   ],
-} as const;
+};
 
-const footerNavItems = {
+const footerNavItems: Record<MarketName, NavLink[]> = {
   canada: [
-    ['Home', ''],
-    ['Healthcare Staffing', '/healthcare-staffing'],
-    ['For Organizations', '/care-organizations'],
-    ['For Workers', '/healthcare-workers'],
-    ['Telecom', '/telecom'],
-    ['About', '/about'],
-    ['Contact', '/contact'],
+    { label: 'Home', path: '' },
+    { label: 'Telecommunications overview', path: '/telecom#overview' },
+    { label: 'Residential services', path: '/telecom#residential' },
+    { label: 'Business services', path: '/telecom#business' },
+    { label: 'Healthcare staffing', path: '/healthcare-staffing' },
+    { label: 'For care organizations', path: '/care-organizations' },
+    { label: 'For healthcare workers', path: '/healthcare-workers' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
   ],
-  ghana: navItems.ghana,
-} as const;
+  ghana: navItems.ghana as NavLink[],
+};
 
 const marketDescriptions: Record<MarketName, string> = {
-  canada: 'Healthcare Staffing & Telecom',
+  canada: 'Telecom Sales & Healthcare Staffing',
   ghana: 'TV Services',
 };
 
@@ -48,13 +73,14 @@ const marketFlags: Record<MarketName, string> = {
 export function MarketShell({ market, children }: { market: MarketName; children: ReactNode }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [expandedMobileGroups, setExpandedMobileGroups] = useState<Set<string>>(new Set());
   const pathname = usePathname();
   const otherMarket: MarketName = market === 'canada' ? 'ghana' : 'canada';
   const suffix = pathname.replace(/^\/(canada|ghana)/, '') || '';
   const sharedSuffix = ['/about', '/contact', '/services'].includes(suffix) ? suffix : '';
   const otherPath = marketUrl(otherMarket, sharedSuffix);
   const currentNavItems = navItems[market];
-  const switcherRef = useRef<HTMLDetailsElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
 
   function rememberMarket(nextMarket: MarketName) {
     try {
@@ -86,13 +112,18 @@ export function MarketShell({ market, children }: { market: MarketName; children
   }, [market]);
 
   useEffect(() => {
-    const node = switcherRef.current;
+    const node = headerRef.current;
     if (!node) return;
+    function closeAllExcept(target: Node | null) {
+      node!.querySelectorAll('details[open]').forEach((details) => {
+        if (!target || !details.contains(target)) (details as HTMLDetailsElement).open = false;
+      });
+    }
     function closeIfOutside(event: MouseEvent) {
-      if (node && !node.contains(event.target as Node)) node.open = false;
+      closeAllExcept(node!.contains(event.target as Node) ? (event.target as Node) : null);
     }
     function closeOnEscape(event: KeyboardEvent) {
-      if (event.key === 'Escape') node!.open = false;
+      if (event.key === 'Escape') closeAllExcept(null);
     }
     document.addEventListener('click', closeIfOutside);
     document.addEventListener('keydown', closeOnEscape);
@@ -102,27 +133,46 @@ export function MarketShell({ market, children }: { market: MarketName; children
     };
   }, []);
 
+  function toggleMobileGroup(label: string) {
+    setExpandedMobileGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(label)) next.delete(label);
+      else next.add(label);
+      return next;
+    });
+  }
+
   return (
     <div className={`site market-${market}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <header className={`site-header full-header ${scrolled ? 'is-scrolled' : ''}`}>
+      <header className={`site-header full-header ${scrolled ? 'is-scrolled' : ''}`} ref={headerRef}>
         <a className="wordmark" href={`/${market}`} aria-label={`Providence ${markets[market].name} home`}>
           <span className="wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} priority /></span><span>Providence</span>
         </a>
         <nav aria-label="Primary navigation" className={`desktop-nav desktop-nav-${market}`}>
-          {currentNavItems.map(([label, path]) => {
-            const href = `/${market}${path}`;
+          {currentNavItems.map((entry) => {
+            if (isDropdown(entry)) {
+              const groupActive = entry.items.some((item) => pathname === `/${market}${item.path.split('#')[0]}`);
+              return (
+                <details className="nav-dropdown" key={entry.label}>
+                  <summary aria-current={groupActive ? 'page' : undefined}>{entry.label}<ChevronDown aria-hidden="true" /></summary>
+                  <div className="nav-dropdown-menu">
+                    {entry.items.map((item) => <a key={item.label} href={`/${market}${item.path}`}>{item.label}</a>)}
+                  </div>
+                </details>
+              );
+            }
+            const href = `/${market}${entry.path}`;
             const active = pathname === href;
-            return <a key={label} href={href} aria-current={active ? 'page' : undefined}>{label}</a>;
+            return <a key={entry.label} href={href} aria-current={active ? 'page' : undefined}>{entry.label}</a>;
           })}
         </nav>
         <div className="header-actions">
           {market === 'ghana' && <a className="crm-link" href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
           {market === 'canada' && <div className="header-pathway-actions">
-            <a className="header-action header-action-ghost" href="/canada/healthcare-workers">Find Work</a>
-            <a className="header-action header-action-solid" href="/canada/care-organizations">Find Staff</a>
+            <a className="header-action header-action-solid" href="/canada/contact?interest=Telecommunications%20partnership%20%2F%20sales%20campaign">Partner With Us</a>
           </div>}
-          <details className="market-switcher" ref={switcherRef}>
+          <details className="market-switcher">
             <summary aria-label={`Current market: ${markets[market].name}. Open market switcher.`}>
               <span aria-hidden="true">{marketFlags[market]}</span>
               <b>{markets[market].name}</b>
@@ -144,11 +194,26 @@ export function MarketShell({ market, children }: { market: MarketName; children
         </div>
         <div className={`mobile-menu ${open ? 'open' : ''}`} aria-hidden={!open} inert={!open}>
           {market === 'canada' && <div className="mobile-pathway-actions">
-            <a className="header-action header-action-ghost" href="/canada/healthcare-workers">Find Work</a>
-            <a className="header-action header-action-solid" href="/canada/care-organizations">Find Staff</a>
+            <a className="header-action header-action-solid" href="/canada/contact?interest=Telecommunications%20partnership%20%2F%20sales%20campaign">Partner With Us</a>
           </div>}
           <nav aria-label="Mobile navigation">
-            {currentNavItems.map(([label, path]) => <a key={label} href={`/${market}${path}`}>{label}</a>)}
+            {currentNavItems.map((entry) => {
+              if (isDropdown(entry)) {
+                const isExpanded = expandedMobileGroups.has(entry.label);
+                return (
+                  <div className="mobile-nav-group" key={entry.label}>
+                    <button type="button" className="mobile-nav-group-toggle" aria-expanded={isExpanded} onClick={() => toggleMobileGroup(entry.label)}>
+                      {entry.label}
+                      <ChevronDown aria-hidden="true" className={isExpanded ? 'rotated' : ''} />
+                    </button>
+                    <div className={`mobile-nav-group-items ${isExpanded ? 'open' : ''}`}>
+                      {entry.items.map((item) => <a key={item.label} href={`/${market}${item.path}`}>{item.label}</a>)}
+                    </div>
+                  </div>
+                );
+              }
+              return <a key={entry.label} href={`/${market}${entry.path}`}>{entry.label}</a>;
+            })}
             {market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
           </nav>
           <a className="mobile-market-switch" href={otherPath} onClick={() => rememberMarket(otherMarket)}>
@@ -165,7 +230,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
           <p>Helpful service. Dependable communication. Practical technology.</p>
         </div>
         <div className="footer-links">
-          <div><strong>{markets[market].shortLabel}</strong>{footerNavItems[market].map(([label, path]) => <a key={label} href={`/${market}${path}`}>{label}</a>)}</div>
+          <div><strong>{markets[market].shortLabel}</strong>{footerNavItems[market].map((item) => <a key={item.label} href={`/${market}${item.path}`}>{item.label}</a>)}</div>
           <div><strong>Other market</strong><a href={marketUrl(otherMarket)}>Providence {markets[otherMarket].name} · {marketDescriptions[otherMarket]}</a>{market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login</a>}</div>
         </div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Providence</span><span>Canada · Ghana</span></div>

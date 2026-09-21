@@ -28,6 +28,7 @@ import {
   UserRoundCheck,
   Users,
   Wrench,
+  Zap,
 } from 'lucide-react';
 
 export type MarketName = 'canada' | 'ghana';
@@ -47,19 +48,20 @@ export const markets = {
   canada: {
     name: 'Canada',
     shortLabel: 'Providence Canada',
-    eyebrow: 'Healthcare staffing & recruitment · Ontario',
-    heroTitle: 'Healthcare careers. Healthcare talent. One connection.',
-    heroTagline: 'The right care starts with the right connection.',
-    heroCopy: 'Providence Canada connects healthcare and care-support professionals with Ontario organizations seeking staff—through thoughtful recruiting, matching, placement, and staffing coordination.',
-    primaryCta: 'Find staff',
-    secondaryCta: 'Find work',
-    contactIntro: 'Tell us whether you need healthcare staff, want to explore work opportunities, or have a telecom inquiry. We will route your request to the right Providence Canada conversation.',
+    eyebrow: 'Telecommunications sales & customer acquisition · Ontario',
+    heroTitle: 'Telecom sales. Customer acquisition. One partner.',
+    heroTagline: 'Connecting telecom services with the people and businesses that need them.',
+    heroCopy: 'Providence Canada helps telecommunications companies reach customers, grow their market presence, and take products and services to market — through professional sales, telesales, and customer-acquisition work performed directly by our team.',
+    primaryCta: 'Partner with us',
+    secondaryCta: 'Explore telecommunications',
+    contactIntro: 'Tell us whether you represent a telecom company, are looking for telecom services, or have a healthcare inquiry. We will route your request to the right Providence Canada conversation.',
     contactOptions: [
+      'Telecommunications partnership / sales campaign',
+      'Business telecom services',
+      'Residential telecom services',
       'Find staff for a care organization',
       'Explore healthcare work opportunities',
       'Healthcare staffing question',
-      'Partner with Providence (telecom company)',
-      'Telecom services inquiry (residential or business)',
       'General inquiry',
     ],
     services: [
@@ -167,16 +169,33 @@ export const telecomCustomerSegments = [
   { icon: Building, title: 'Business', text: 'Business internet, network solutions, and connectivity for organizations, where Providence is an authorized provider.' },
 ] as const;
 
+export const salesCampaignProcess = [
+  ['01', 'Understand', 'We learn the product, the target customer, and the campaign goals before anything else.', Search],
+  ['02', 'Plan', 'We define the sales approach, messaging, targeting, and customer journey.', ClipboardList],
+  ['03', 'Reach', 'We engage prospective customers through the appropriate sales channels.', Megaphone],
+  ['04', 'Connect', 'We understand customer needs and connect qualified customers with the right offering.', Handshake],
+  ['05', 'Grow', 'We use campaign performance and learnings to improve targeting and execution over time.', TrendingUp],
+] as const;
+
+export const telecomWhyProvidence = [
+  { icon: MessageCircle, title: 'Human customer conversations', text: 'Real conversations with prospective customers, not scripted noise.' },
+  { icon: Settings2, title: 'Flexible campaign execution', text: 'Campaigns shaped around a partner’s product, timeline, and goals.' },
+  { icon: Building, title: 'Residential + business focus', text: 'Providence works across both consumer and business customer segments.' },
+  { icon: Award, title: 'Professional representation', text: 'Every customer conversation represents a partner’s brand carefully.' },
+  { icon: UserRoundCheck, title: 'Customer-focused selling', text: 'We sell by understanding the customer’s actual need, not by pressure.' },
+  { icon: Zap, title: 'Sales-oriented execution', text: 'Built to move from strategy into real outbound activity quickly.' },
+] as const;
+
 export const pageMeta: Record<MarketName, Partial<Record<SiteSection, { title: string; description: string }>>> = {
   canada: {
-    home: { title: 'Providence Canada | Healthcare Staffing & Recruitment', description: 'Providence Canada connects healthcare workers with Ontario care organizations seeking staff, while continuing to offer telecom sales and marketing support.' },
-    'healthcare-staffing': { title: 'Healthcare Staffing | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations.' },
+    home: { title: 'Providence Canada | Telecommunications Sales & Customer Acquisition', description: 'Providence Canada helps telecommunications companies reach residential and business customers through telesales, customer acquisition, and campaign execution. Healthcare staffing and recruitment is a developing second division.' },
+    'healthcare-staffing': { title: 'Healthcare Staffing (Developing Division) | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations — a developing second division of Providence Canada.' },
     'care-organizations': { title: 'Find Healthcare Staff | Providence Canada', description: 'Tell Providence Canada about your healthcare staffing needs, roles, locations, schedules, and timing.' },
     'healthcare-workers': { title: 'Find Healthcare Work | Providence Canada', description: 'Healthcare and care-support professionals can share qualifications, availability, and work interests with Providence Canada.' },
-    telecom: { title: 'Telecom Sales & Marketing | Providence Canada', description: 'Explore Providence Canada telecom guidance, telesales, customer acquisition, marketing, and campaign coordination.' },
-    services: { title: 'Healthcare Staffing | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations.' },
-    about: { title: 'About Providence Canada', description: 'Learn about Providence Canada healthcare staffing, recruitment, and secondary telecom services.' },
-    contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about healthcare staffing, healthcare work interests, or telecom services.' },
+    telecom: { title: 'Telecommunications Sales & Customer Acquisition | Providence Canada', description: 'Providence Canada performs telesales, sales representation, lead generation, campaign execution, and business development directly for telecom partners.' },
+    services: { title: 'Healthcare Staffing (Developing Division) | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations.' },
+    about: { title: 'About Providence Canada', description: 'Providence Canada is a telecommunications sales and customer-acquisition company, with healthcare staffing and recruitment as a developing second division.' },
+    contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about a telecom partnership, residential or business telecom service, or a healthcare inquiry.' },
   },
   ghana: {
     home: { title: 'Providence Ghana | TV Box Sales, Installation & Support', description: 'Order a Providence TV box, arrange installation, choose a service plan, or get customer support in Ghana.' },

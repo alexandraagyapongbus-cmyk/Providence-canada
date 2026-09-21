@@ -1,6 +1,20 @@
 import { InView } from '@/components/in-view';
 
-export function ConnectionGraphic() {
+export function ConnectionGraphic({
+  ariaLabel = 'Providence connects care organizations with healthcare workers through recruiting, matching, and coordination',
+  leftLabel = 'Care organizations',
+  leftSub = 'Roles · settings · schedules',
+  rightLabel = 'Healthcare workers',
+  rightSub = 'Qualifications · availability',
+  caption = 'Recruiting, matching, and staffing coordination — organized around real needs on both sides.',
+}: {
+  ariaLabel?: string;
+  leftLabel?: string;
+  leftSub?: string;
+  rightLabel?: string;
+  rightSub?: string;
+  caption?: string;
+}) {
   return (
     <InView className="connection-graphic">
       <div className="connection-graphic-inner">
@@ -24,12 +38,12 @@ export function ConnectionGraphic() {
           <circle className="cg-node-ring" cx="850" cy="90" r="34" />
           <circle className="cg-node-dot" cx="850" cy="90" r="5" />
         </svg>
-        <div className="connection-graphic-labels" role="img" aria-label="Providence connects care organizations with healthcare workers through recruiting, matching, and coordination">
-          <div><strong>Care organizations</strong><span>Roles · settings · schedules</span></div>
+        <div className="connection-graphic-labels" role="img" aria-label={ariaLabel}>
+          <div><strong>{leftLabel}</strong><span>{leftSub}</span></div>
           <div className="connection-graphic-hub-label"><strong>Providence</strong></div>
-          <div><strong>Healthcare workers</strong><span>Qualifications · availability</span></div>
+          <div><strong>{rightLabel}</strong><span>{rightSub}</span></div>
         </div>
-        <p className="connection-graphic-caption">Recruiting, matching, and staffing coordination — organized around real needs on both sides.</p>
+        <p className="connection-graphic-caption">{caption}</p>
       </div>
     </InView>
   );
