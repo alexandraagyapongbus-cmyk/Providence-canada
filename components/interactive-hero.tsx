@@ -42,7 +42,6 @@ export function InteractiveHero() {
   const [mode, setMode] = useState<Mode>('home');
   const [showVideo, setShowVideo] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const wrapRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -98,43 +97,11 @@ export function InteractiveHero() {
     };
   }, [reducedMotion]);
 
-  useEffect(() => {
-    const wrap = wrapRef.current;
-    const stage = stageRef.current;
-    if (!wrap || !stage || reducedMotion) return;
-    let raf = 0;
-    function onScroll() {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const rect = wrap!.getBoundingClientRect();
-        // Use the sticky element's own (content-driven) height rather than assuming
-        // it always matches the viewport — on short viewports the hero can grow
-        // taller than 100svh to fit its content instead of clipping it.
-        const total = wrap!.offsetHeight - stage!.offsetHeight;
-        const progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-        // Keep the copy fully visible for the complete pinned section. Only the
-        // background media settles over the final stretch; the text disappears
-        // naturally when the section itself scrolls out of view.
-        const SETTLE_START = 0.6;
-        const settle = Math.min(1, Math.max(0, (progress - SETTLE_START) / (1 - SETTLE_START)));
-        wrap!.style.setProperty('--hero-settle', settle.toFixed(3));
-      });
-    }
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      cancelAnimationFrame(raf);
-    };
-  }, [reducedMotion]);
-
   const media = MEDIA[mode];
   const content = markets.canada;
 
   return (
-    <div className={`hero-pin-wrap ${reducedMotion ? 'no-pin' : ''}`} ref={wrapRef}>
+    <div className={`hero-pin-wrap ${reducedMotion ? 'no-pin' : ''}`}>
       <section className="market-hero healthcare-hero interactive-hero" ref={stageRef}>
         <Image className="market-hero-image" src={media.poster} alt={media.alt} fill priority sizes="100vw" />
         {showVideo && (

@@ -654,9 +654,7 @@ img { max-width: 100%; }
 
 .interactive-hero .market-hero-image,
 .interactive-hero .hero-video {
-  transform: scale(calc(1 - var(--hero-settle, 0) * .05)) translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
-  border-radius: calc(var(--hero-settle, 0) * 26px);
-  transition: border-radius .1s linear;
+  transform: scale(1.03) translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0);
 }
 .interactive-hero .hero-aurora { transform: translate3d(calc(var(--parallax-x, 0px) * -1.4), calc(var(--parallax-y, 0px) * -1.4), 0); }
 .interactive-hero .market-hero-content {
