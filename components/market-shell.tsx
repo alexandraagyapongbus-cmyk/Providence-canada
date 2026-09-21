@@ -17,22 +17,21 @@ function isDropdown(entry: NavEntry): entry is NavDropdown {
 const navItems: Record<MarketName, NavEntry[]> = {
   canada: [
     { label: 'Home', path: '' },
-    { label: 'Telecommunications', items: [
-      { label: 'Overview', path: '/telecom#overview' },
-      { label: 'Telesales', path: '/telecom#capabilities' },
-      { label: 'Customer Acquisition', path: '/telecom#capabilities' },
-      { label: 'Residential', path: '/telecom#residential' },
-      { label: 'Business', path: '/telecom#business' },
-      { label: 'Sales Campaigns', path: '/telecom#sales-campaigns' },
+    { label: 'Residential', items: [
+      { label: 'Internet', path: '/residential#internet' },
+      { label: 'TV', path: '/residential#tv' },
+      { label: 'Home Phone', path: '/residential#phone' },
+      { label: 'Bundles', path: '/residential#bundles' },
     ] },
-    { label: 'Business Solutions', items: [
-      { label: 'Sales', path: '/telecom#capabilities' },
-      { label: 'Telesales', path: '/telecom#capabilities' },
-      { label: 'Customer Acquisition', path: '/telecom#capabilities' },
-      { label: 'Lead Generation', path: '/telecom#capabilities' },
-      { label: 'Business Development', path: '/telecom#capabilities' },
-      { label: 'Customer Outreach', path: '/telecom#capabilities' },
+    { label: 'Business', items: [
+      { label: 'Business Internet', path: '/business#internet' },
+      { label: 'Business Phone', path: '/business#phone' },
+      { label: 'TV', path: '/business#tv' },
+      { label: 'Connectivity', path: '/business#connectivity' },
+      { label: 'Business Packages', path: '/business#packages' },
     ] },
+    { label: 'Providers', path: '/providers' },
+    { label: 'Why Providence', path: '/why-providence' },
     { label: 'Healthcare', path: '/healthcare-staffing' },
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
@@ -48,9 +47,11 @@ const navItems: Record<MarketName, NavEntry[]> = {
 const footerNavItems: Record<MarketName, NavLink[]> = {
   canada: [
     { label: 'Home', path: '' },
-    { label: 'Telecommunications overview', path: '/telecom#overview' },
-    { label: 'Residential services', path: '/telecom#residential' },
-    { label: 'Business services', path: '/telecom#business' },
+    { label: 'Residential services', path: '/residential' },
+    { label: 'Business services', path: '/business' },
+    { label: 'Our providers', path: '/providers' },
+    { label: 'Why Providence', path: '/why-providence' },
+    { label: 'Partner With Providence', path: '/telecom' },
     { label: 'Healthcare staffing', path: '/healthcare-staffing' },
     { label: 'For care organizations', path: '/care-organizations' },
     { label: 'For healthcare workers', path: '/healthcare-workers' },
@@ -61,7 +62,7 @@ const footerNavItems: Record<MarketName, NavLink[]> = {
 };
 
 const marketDescriptions: Record<MarketName, string> = {
-  canada: 'Telecom Sales & Healthcare Staffing',
+  canada: 'Telecom & Healthcare Staffing',
   ghana: 'TV Services',
 };
 
@@ -170,7 +171,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
         <div className="header-actions">
           {market === 'ghana' && <a className="crm-link" href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
           {market === 'canada' && <div className="header-pathway-actions">
-            <a className="header-action header-action-solid" href="/canada/contact?interest=Telecommunications%20partnership%20%2F%20sales%20campaign">Partner With Us</a>
+            <a className="header-action header-action-solid" href="/canada/contact">Get a Quote</a>
           </div>}
           <details className="market-switcher">
             <summary aria-label={`Current market: ${markets[market].name}. Open market switcher.`}>
@@ -194,7 +195,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
         </div>
         <div className={`mobile-menu ${open ? 'open' : ''}`} aria-hidden={!open} inert={!open}>
           {market === 'canada' && <div className="mobile-pathway-actions">
-            <a className="header-action header-action-solid" href="/canada/contact?interest=Telecommunications%20partnership%20%2F%20sales%20campaign">Partner With Us</a>
+            <a className="header-action header-action-solid" href="/canada/contact">Get a Quote</a>
           </div>}
           <nav aria-label="Mobile navigation">
             {currentNavItems.map((entry) => {

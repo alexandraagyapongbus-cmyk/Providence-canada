@@ -5,7 +5,9 @@ import {
   BriefcaseBusiness,
   Building,
   Building2,
+  Cable,
   CalendarCheck,
+  CheckCircle2,
   ClipboardList,
   Clock3,
   FileCheck2,
@@ -13,9 +15,12 @@ import {
   Headphones,
   HeartHandshake,
   Home,
+  Layers,
   MapPin,
+  MapPinned,
   Megaphone,
   MessageCircle,
+  Package,
   PhoneCall,
   RadioTower,
   Search,
@@ -23,16 +28,19 @@ import {
   ShoppingBag,
   Sparkles,
   Stethoscope,
+  Store,
   TrendingUp,
   Tv,
   UserRoundCheck,
   Users,
+  UtensilsCrossed,
+  Wifi,
   Wrench,
   Zap,
 } from 'lucide-react';
 
 export type MarketName = 'canada' | 'ghana';
-export type SiteSection = 'home' | 'healthcare-staffing' | 'care-organizations' | 'healthcare-workers' | 'telecom' | 'services' | 'about' | 'contact';
+export type SiteSection = 'home' | 'residential' | 'business' | 'providers' | 'why-providence' | 'healthcare-staffing' | 'care-organizations' | 'healthcare-workers' | 'telecom' | 'services' | 'about' | 'contact';
 
 export const GHANA_CRM_URL = 'https://providence-ghana-crm.agyapongalexandra.chatgpt.site';
 export const MARKET_ORIGINS: Record<MarketName, string> = {
@@ -48,17 +56,17 @@ export const markets = {
   canada: {
     name: 'Canada',
     shortLabel: 'Providence Canada',
-    eyebrow: 'Telecommunications sales & customer acquisition · Ontario',
-    heroTitle: 'Telecom sales. Customer acquisition. One partner.',
-    heroTagline: 'Connecting telecom services with the people and businesses that need them.',
-    heroCopy: 'Providence Canada helps telecommunications companies reach customers, grow their market presence, and take products and services to market — through professional sales, telesales, and customer-acquisition work performed directly by our team.',
-    primaryCta: 'Partner with us',
-    secondaryCta: 'Explore telecommunications',
-    contactIntro: 'Tell us whether you represent a telecom company, are looking for telecom services, or have a healthcare inquiry. We will route your request to the right Providence Canada conversation.',
+    eyebrow: 'Internet, TV & telecom solutions · Ontario',
+    heroTitle: 'Internet, TV, and telecom — sorted for home and business.',
+    heroTagline: 'Compare available services from leading telecommunications providers, and let Providence help you find the right fit.',
+    heroCopy: 'Providence Canada helps residential and business customers explore internet, TV, phone, and bundle options from the telecommunications providers we work with — with a person to talk to along the way.',
+    primaryCta: 'For my home',
+    secondaryCta: 'For my business',
+    contactIntro: 'Tell us whether you need home services, business services, are a telecom provider, or have a healthcare inquiry. We will route your request to the right Providence Canada conversation.',
     contactOptions: [
-      'Telecommunications partnership / sales campaign',
+      'Home telecom services',
       'Business telecom services',
-      'Residential telecom services',
+      'Telecom provider / partnership inquiry',
       'Find staff for a care organization',
       'Explore healthcare work opportunities',
       'Healthcare staffing question',
@@ -164,6 +172,46 @@ export const recruitmentServices = [
   { icon: BriefcaseBusiness, title: 'Employer consultation', text: 'Helping organizations think through role definitions, headcount, and timing before a search begins.' },
 ] as const;
 
+export const residentialServices = [
+  { icon: Wifi, title: 'Internet', text: 'Compare speed, usage, technology, and pricing options for your home.', anchor: 'internet' },
+  { icon: Tv, title: 'TV', text: 'Channel packages, premium options, and equipment to fit how you watch.', anchor: 'tv' },
+  { icon: PhoneCall, title: 'Home Phone', text: 'Calling features, voicemail, and long-distance options where available.', anchor: 'phone' },
+  { icon: Layers, title: 'Bundles', text: 'Combine internet, TV, and phone for a single, simpler monthly bill.', anchor: 'bundles' },
+] as const;
+
+export const businessServices = [
+  { icon: Wifi, title: 'Business Internet', text: 'Speed and reliability sized to your team, applications, and locations.', anchor: 'internet' },
+  { icon: PhoneCall, title: 'Business Phone', text: 'Business lines, calling features, and options for growing teams.', anchor: 'phone' },
+  { icon: Tv, title: 'TV', text: 'TV service for waiting rooms, common areas, and customer-facing spaces.', anchor: 'tv' },
+  { icon: Cable, title: 'Connectivity', text: 'Network and connectivity options for single and multi-location businesses.', anchor: 'connectivity' },
+  { icon: Package, title: 'Business Packages', text: 'Combined service packages built around what your business actually needs.', anchor: 'packages' },
+] as const;
+
+export const businessUseCases = [
+  { icon: Building2, title: 'Office', text: 'Reliable connectivity for day-to-day business operations.' },
+  { icon: Store, title: 'Retail', text: 'Point-of-sale, guest Wi-Fi, and dependable connectivity for storefronts.' },
+  { icon: UtensilsCrossed, title: 'Restaurant', text: 'Connectivity for orders, payments, and guest experience.' },
+  { icon: Stethoscope, title: 'Healthcare facility', text: 'Dependable connectivity for clinics and care settings.' },
+  { icon: BriefcaseBusiness, title: 'Professional services', text: 'Connectivity built around calls, video, and cloud applications.' },
+  { icon: MapPinned, title: 'Multi-location business', text: 'Consistent service and support across more than one address.' },
+] as const;
+
+export const howProvidenceWorksSteps = [
+  ['01', 'Tell us what you need', 'Home or business, location, services, and priorities.', MessageCircle],
+  ['02', 'We check available options', 'Providence identifies applicable services and packages from the providers we work with.', Search],
+  ['03', 'Compare your options', 'See the relevant internet, TV, phone, or bundle choices side by side.', ClipboardList],
+  ['04', 'Choose your service', 'Providence assists with the order once you have decided.', CheckCircle2],
+  ['05', 'Get connected', 'Installation and activation proceed according to the applicable provider process.', Zap],
+] as const;
+
+export const whyBuyThroughProvidence = [
+  { icon: Layers, title: 'Multiple providers in one place', text: 'One conversation instead of visiting several telecom websites.' },
+  { icon: MessageCircle, title: 'Human assistance', text: 'Talk to someone who can explain the options in plain terms.' },
+  { icon: Building, title: 'Residential + business expertise', text: 'Providence supports both home and business customers.' },
+  { icon: UserRoundCheck, title: 'Help choosing the right package', text: 'We help you compare options rather than guess.' },
+  { icon: Handshake, title: 'One point of contact', text: 'A single Providence contact through selection and setup.' },
+] as const;
+
 export const telecomCustomerSegments = [
   { icon: Home, title: 'Residential', text: 'Internet, phone, mobility, and other connectivity options for home customers, where Providence is an authorized provider.' },
   { icon: Building, title: 'Business', text: 'Business internet, network solutions, and connectivity for organizations, where Providence is an authorized provider.' },
@@ -188,14 +236,18 @@ export const telecomWhyProvidence = [
 
 export const pageMeta: Record<MarketName, Partial<Record<SiteSection, { title: string; description: string }>>> = {
   canada: {
-    home: { title: 'Providence Canada | Telecommunications Sales & Customer Acquisition', description: 'Providence Canada helps telecommunications companies reach residential and business customers through telesales, customer acquisition, and campaign execution. Healthcare staffing and recruitment is a developing second division.' },
+    home: { title: 'Providence Canada | Internet, TV & Telecom for Home and Business', description: 'Compare internet, TV, phone, and bundle options from the telecommunications providers Providence Canada works with, for residential and business customers across Ontario.' },
+    residential: { title: 'Residential Internet, TV & Phone | Providence Canada', description: 'Explore internet, TV, home phone, and bundle options for your household.' },
+    business: { title: 'Business Internet, Phone & Connectivity | Providence Canada', description: 'Explore business internet, phone, TV, connectivity, and package options for your organization.' },
+    providers: { title: 'Our Provider Network | Providence Canada', description: 'The kinds of telecommunications providers Providence Canada works with to bring you service options.' },
+    'why-providence': { title: 'Why Providence | Providence Canada', description: 'Why buy your telecom service through Providence Canada instead of going directly to a provider.' },
     'healthcare-staffing': { title: 'Healthcare Staffing (Developing Division) | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations — a developing second division of Providence Canada.' },
     'care-organizations': { title: 'Find Healthcare Staff | Providence Canada', description: 'Tell Providence Canada about your healthcare staffing needs, roles, locations, schedules, and timing.' },
     'healthcare-workers': { title: 'Find Healthcare Work | Providence Canada', description: 'Healthcare and care-support professionals can share qualifications, availability, and work interests with Providence Canada.' },
-    telecom: { title: 'Telecommunications Sales & Customer Acquisition | Providence Canada', description: 'Providence Canada performs telesales, sales representation, lead generation, campaign execution, and business development directly for telecom partners.' },
+    telecom: { title: 'Partner With Providence | Telecom Sales & Customer Acquisition', description: 'Providence Canada performs telesales, sales representation, lead generation, campaign execution, and business development directly for telecom partners.' },
     services: { title: 'Healthcare Staffing (Developing Division) | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations.' },
-    about: { title: 'About Providence Canada', description: 'Providence Canada is a telecommunications sales and customer-acquisition company, with healthcare staffing and recruitment as a developing second division.' },
-    contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about a telecom partnership, residential or business telecom service, or a healthcare inquiry.' },
+    about: { title: 'About Providence Canada', description: 'Providence Canada helps residential and business customers find telecom services from the providers we work with, with healthcare staffing and recruitment as a developing second division.' },
+    contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about home or business telecom service, a provider partnership, or a healthcare inquiry.' },
   },
   ghana: {
     home: { title: 'Providence Ghana | TV Box Sales, Installation & Support', description: 'Order a Providence TV box, arrange installation, choose a service plan, or get customer support in Ghana.' },

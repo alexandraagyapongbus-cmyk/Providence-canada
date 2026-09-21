@@ -20,7 +20,7 @@ type LeadPayload = {
 };
 
 const allowedInterests = {
-  canada: ['Telecommunications partnership / sales campaign', 'Business telecom services', 'Residential telecom services', 'Find staff for a care organization', 'Explore healthcare work opportunities', 'Healthcare staffing question', 'General inquiry'],
+  canada: ['Home telecom services', 'Business telecom services', 'Telecom provider / partnership inquiry', 'Find staff for a care organization', 'Explore healthcare work opportunities', 'Healthcare staffing question', 'General inquiry'],
   ghana: ['Order a TV box', 'Request installation', 'Choose or renew a plan', 'Equipment support', 'General inquiry'],
 };
 

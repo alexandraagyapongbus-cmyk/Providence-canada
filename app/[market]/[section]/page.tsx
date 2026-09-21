@@ -4,7 +4,7 @@ import { MarketPage } from '@/components/market-pages';
 import { isMarket, pageMeta, type MarketName, type SiteSection } from '@/lib/content';
 
 const sections: Record<MarketName, SiteSection[]> = {
-  canada: ['healthcare-staffing', 'care-organizations', 'healthcare-workers', 'telecom', 'services', 'about', 'contact'],
+  canada: ['residential', 'business', 'providers', 'why-providence', 'healthcare-staffing', 'care-organizations', 'healthcare-workers', 'telecom', 'services', 'about', 'contact'],
   ghana: ['services', 'about', 'contact'],
 };
 
