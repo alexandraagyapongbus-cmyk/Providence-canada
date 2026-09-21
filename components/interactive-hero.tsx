@@ -112,12 +112,12 @@ export function InteractiveHero() {
         // taller than 100svh to fit its content instead of clipping it.
         const total = wrap!.offsetHeight - stage!.offsetHeight;
         const progress = total > 0 ? Math.min(1, Math.max(0, -rect.top / total)) : 0;
-        // Hold the headline fully visible through most of the scroll and only
-        // fade/settle the video over the final stretch, so a single scroll
-        // gesture doesn't wipe the text out almost immediately.
-        const FADE_START = 0.6;
-        const fade = Math.min(1, Math.max(0, (progress - FADE_START) / (1 - FADE_START)));
-        wrap!.style.setProperty('--hero-fade', fade.toFixed(3));
+        // Keep the copy fully visible for the complete pinned section. Only the
+        // background media settles over the final stretch; the text disappears
+        // naturally when the section itself scrolls out of view.
+        const SETTLE_START = 0.6;
+        const settle = Math.min(1, Math.max(0, (progress - SETTLE_START) / (1 - SETTLE_START)));
+        wrap!.style.setProperty('--hero-settle', settle.toFixed(3));
       });
     }
     onScroll();
