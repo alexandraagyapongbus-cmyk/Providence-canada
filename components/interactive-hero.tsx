@@ -17,9 +17,9 @@ const MEDIA = {
 // Positioned in the hero's open right-hand side, clear of the headline/copy column (which
 // occupies roughly the left 56% of the frame) so dots never sit on top of body text.
 const HOTSPOTS: Hotspot[] = [
-  { label: 'Home Phone', text: 'Stay connected with a home phone line.', href: '/canada/residential#phone', top: 26, left: 68 },
-  { label: 'Home Bundles', text: 'Combine services for a simpler bill.', href: '/canada/residential#bundles', top: 52, left: 81 },
-  { label: 'Home Internet', text: 'Fast, reliable internet for your household.', href: '/canada/residential#internet', top: 80, left: 66 },
+  { label: 'Home Phone', text: 'Stay connected with a home phone line.', href: '/canada/residential/home-phone', top: 26, left: 68 },
+  { label: 'Home Bundles', text: 'Combine services for a simpler bill.', href: '/canada/residential/bundles', top: 52, left: 81 },
+  { label: 'Home Internet', text: 'Fast, reliable internet for your household.', href: '/canada/residential/internet', top: 80, left: 66 },
 ];
 
 export function InteractiveHero() {

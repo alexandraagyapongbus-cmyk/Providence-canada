@@ -185,10 +185,10 @@ function WhatAreYouLookingForSection() {
   const [InternetIcon, TvIcon, PhoneIcon, BundlesIcon] = residentialServices.map((s) => s.icon);
   const ConnectivityIcon = businessServices[3].icon;
   const items: ConnectItem[] = [
-    { key: 'internet', label: 'Internet', icon: <InternetIcon />, description: residentialServices[0].text, ctas: [{ label: 'Explore residential internet', href: '/canada/residential#internet' }, { label: 'Explore business internet', href: '/canada/business#internet' }] },
-    { key: 'tv', label: 'TV', icon: <TvIcon />, description: residentialServices[1].text, ctas: [{ label: 'Explore TV', href: '/canada/residential#tv' }] },
-    { key: 'phone', label: 'Phone', icon: <PhoneIcon />, description: residentialServices[2].text, ctas: [{ label: 'Explore home phone', href: '/canada/residential#phone' }, { label: 'Explore business phone', href: '/canada/business#phone' }] },
-    { key: 'bundles', label: 'Home Bundles', icon: <BundlesIcon />, description: residentialServices[3].text, ctas: [{ label: 'Explore bundles', href: '/canada/residential#bundles' }] },
+    { key: 'internet', label: 'Internet', icon: <InternetIcon />, description: residentialServices[0].text, ctas: [{ label: 'Explore residential internet', href: '/canada/residential/internet' }, { label: 'Explore business internet', href: '/canada/business/internet' }] },
+    { key: 'tv', label: 'TV', icon: <TvIcon />, description: residentialServices[1].text, ctas: [{ label: 'Explore TV', href: '/canada/residential/tv' }] },
+    { key: 'phone', label: 'Phone', icon: <PhoneIcon />, description: residentialServices[2].text, ctas: [{ label: 'Explore home phone', href: '/canada/residential/home-phone' }, { label: 'Explore business phone', href: '/canada/business/phone' }] },
+    { key: 'bundles', label: 'Home Bundles', icon: <BundlesIcon />, description: residentialServices[3].text, ctas: [{ label: 'Explore bundles', href: '/canada/residential/bundles' }] },
     { key: 'business', label: 'Business Solutions', icon: <ConnectivityIcon />, description: 'Connectivity, phone, and packages built around how your business operates.', ctas: [{ label: 'Explore business solutions', href: '/canada/business' }] },
   ];
   return <Reveal className="hero-followup"><ConnectExperienceSection items={items} /></Reveal>;
@@ -404,62 +404,198 @@ function TelecomPage() {
   </MarketShell>;
 }
 
-function ResidentialPage() {
-  const details = [
-    { anchor: 'internet', icon: residentialServices[0].icon, title: 'Internet — speed, usage, technology, and price', text: 'Compare download and upload speed, unlimited or capped usage, the connection technology available at your address, contract term, installation, and which provider serves your area.' },
-    { anchor: 'tv', icon: residentialServices[1].icon, title: 'TV — channels, packages, and equipment', text: 'Compare package size, channel lineups, premium and sports options, streaming integration, and the equipment included.' },
-    { anchor: 'phone', icon: residentialServices[2].icon, title: 'Home Phone — calling features', text: 'Compare calling areas, voicemail, caller ID, and long-distance options, which vary by provider and plan.' },
-    { anchor: 'bundles', icon: residentialServices[3].icon, title: 'Bundles — combine services, simplify your bill', text: 'Internet + TV, Internet + Phone, or Internet + TV + Phone — compare bundle pricing against buying services separately.' },
-  ];
+type TelecomAudience = 'residential' | 'business';
+
+const residentialOverview = [
+  { slug: 'internet', icon: residentialServices[0].icon, title: 'Home Internet', text: 'Choose around the number of people and devices in your home, what you do online, and what is available at your address.', image: '/service-images/residential-internet.png', alt: 'A family using connected devices together at home' },
+  { slug: 'tv', icon: residentialServices[1].icon, title: 'TV', text: 'Start with what you actually watch—live channels, news, sports, family programming, or streaming—and then compare equipment and packages.', image: '/service-images/residential-tv.png', alt: 'A multigenerational family enjoying television together' },
+  { slug: 'home-phone', icon: residentialServices[2].icon, title: 'Home Phone', text: 'Explore a dependable home line, calling features, voicemail, number transfer, and long-distance choices where available.', image: '/service-images/residential-phone.png', alt: 'A woman speaking on a home telephone' },
+  { slug: 'bundles', icon: residentialServices[3].icon, title: 'Home Bundles', text: 'Bring internet, TV, and home phone into one conversation and compare the complete cost—not just the introductory price.', image: '/service-images/residential-bundles.png', alt: 'A couple reviewing home service options on a laptop' },
+];
+
+const businessOverview = [
+  { slug: 'internet', icon: businessServices[0].icon, title: 'Business Internet', text: 'Match connectivity to your team size, cloud tools, video calls, payments, guest Wi-Fi, and operating hours.', image: '/service-images/business-connectivity.png', alt: 'A business team collaborating with connected technology' },
+  { slug: 'phone', icon: businessServices[1].icon, title: 'Business Phone', text: 'Plan how calls should reach your team, including lines, extensions, forwarding, voicemail, and call handling.', image: '/service-images/business-connectivity.png', alt: 'A team working together in a connected office' },
+  { slug: 'tv', icon: businessServices[2].icon, title: 'Business TV', text: 'Consider the viewing environment, content, screen locations, and account requirements for shared or customer-facing spaces.', image: '/service-images/business-customer-space.png', alt: 'A customer-facing business with television and point-of-sale service' },
+  { slug: 'connectivity', icon: businessServices[3].icon, title: 'Business Connectivity', text: 'Think beyond one connection: offices, locations, Wi-Fi coverage, network dependencies, and room to grow.', image: '/service-images/business-connectivity.png', alt: 'A connected office team during a video meeting' },
+  { slug: 'packages', icon: businessServices[4].icon, title: 'Business Packages', text: 'Combine the services your operation needs and review installation, equipment, billing, and support as one solution.', image: '/service-images/business-customer-space.png', alt: 'A modern business using connected customer service systems' },
+];
+
+function TelecomOverviewPage({ audience }: { audience: TelecomAudience }) {
+  const residential = audience === 'residential';
+  const services = residential ? residentialOverview : businessOverview;
   return <MarketShell market="canada">
-    <Hero market="canada" interior title="Telecom that fits your home." copy="Explore internet, TV, phone, and bundle options — all through Providence." />
-    <section className="canada-section canada-section-light">
-      <div className="canada-compare-list">
-        {details.map((d) => { const Icon = d.icon; return <article key={d.anchor} id={d.anchor}><Icon /><div><h3>{d.title}</h3><p>{d.text}</p></div></article>; })}
+    <Hero
+      market="canada"
+      interior
+      title={residential ? 'Find the right services for your home.' : 'Build the right connection for your business.'}
+      copy={residential ? 'Explore each service in detail, learn what matters before you compare, and tell Providence how your household actually uses technology.' : 'Start with how your organization works. Providence will help you translate users, locations, calls, customer spaces, and critical systems into the services worth comparing.'}
+      image={residential ? '/service-images/residential-internet.png' : '/service-images/business-connectivity.png'}
+      imageAlt={residential ? 'A family using internet-connected devices at home' : 'A Canadian business team using connected workplace technology'}
+    />
+    <section className="canada-section canada-section-light service-overview-section">
+      <Reveal><SectionHeading eyebrow={residential ? 'Residential services' : 'Business services'} title="Choose a service to understand your options." copy="Each guide explains who the service is for, what to compare, which questions help narrow the choices, and what Providence needs to check availability." /></Reveal>
+      <div className="service-journey-grid">
+        {services.map((service, index) => { const Icon = service.icon; return <Reveal key={service.slug} delay={index * 45}><a className="service-journey-card" href={`/canada/${audience}/${service.slug}`}><div className="service-card-media"><Image src={service.image} alt={service.alt} fill sizes="(max-width: 800px) 100vw, 50vw" /></div><div className="service-card-copy"><span><Icon />{residential ? 'For your home' : 'For your business'}</span><h3>{service.title}</h3><p>{service.text}</p><strong>Explore {service.title} <ArrowRight /></strong></div></a></Reveal>; })}
       </div>
     </section>
+    <section className="canada-section canada-section-blue decision-guide">
+      <Reveal><SectionHeading light eyebrow="Start with your situation" title={residential ? 'What are you trying to make easier at home?' : 'What needs to work reliably every day?'} copy={residential ? 'Choose the statement closest to your household. It will take you to the most useful starting point.' : 'Choose the operational need that matters most. You can combine services later.'} /></Reveal>
+      <div className="decision-guide-grid">
+        {(residential ? [
+          ['Several people are online at once', 'Internet', '/canada/residential/internet'],
+          ['Live TV, sports, news, or family viewing matters', 'TV', '/canada/residential/tv'],
+          ['We want a dedicated home line', 'Home Phone', '/canada/residential/home-phone'],
+          ['We want to compare services together', 'Bundles', '/canada/residential/bundles'],
+        ] : [
+          ['Our work depends on cloud tools, payments, or video calls', 'Business Internet', '/canada/business/internet'],
+          ['We need calls to reach the right person', 'Business Phone', '/canada/business/phone'],
+          ['We have screens in a waiting or customer space', 'Business TV', '/canada/business/tv'],
+          ['We have coverage, network, or multiple-location needs', 'Connectivity', '/canada/business/connectivity'],
+          ['We need several services coordinated together', 'Business Packages', '/canada/business/packages'],
+        ]).map(([need, answer, href]) => <a href={href} key={answer}><small>{need}</small><strong>{answer}</strong><ArrowUpRight /></a>)}
+      </div>
+    </section>
+    {!residential && <section className="canada-section canada-section-tint">
+      <Reveal><SectionHeading eyebrow="Business context matters" title="The same service can look different in every operation." copy="Providence starts with how your organization functions, then checks what service options are available at the location or locations you provide." /></Reveal>
+      <div className="canada-industry-grid three-col">{businessUseCases.map((u) => { const Icon = u.icon; return <article key={u.title}><Icon /><h3>{u.title}</h3><p>{u.text}</p></article>; })}</div>
+    </section>}
     <section className="canada-employer-band">
-      <div><h2>Not sure what you need?</h2><p>Tell us about your household and we'll help you explore the available options.</p></div>
-      <a className="button button-primary" href="/canada/contact?interest=Home%20telecom%20services">Check Availability <ArrowUpRight /></a>
+      <div><h2>{residential ? 'Still not sure where to begin?' : 'Ready to describe your setup?'}</h2><p>{residential ? 'Tell us about your household, address, priorities, and current services. Providence can help narrow the next questions.' : 'Tell us your locations, team size, current services, critical tools, and the problems you want to solve.'}</p></div>
+      <a className="button button-primary" href={`/canada/contact?interest=${residential ? 'Home%20telecom%20services' : 'Business%20telecom%20services'}`}>{residential ? 'Ask Providence' : 'Get a Business Quote'} <ArrowUpRight /></a>
     </section>
   </MarketShell>;
 }
 
-function BusinessPage() {
-  const details = [
-    { anchor: 'internet', icon: businessServices[0].icon, title: 'Business Internet — speed and reliability', text: 'Compare speed, reliability, and upload/download needs for your number of users, cloud applications, video calls, point-of-sale systems, and guest Wi-Fi.' },
-    { anchor: 'phone', icon: businessServices[1].icon, title: 'Business Phone — lines and features', text: 'Compare business lines, VoIP, call forwarding, auto attendant, voicemail, and extensions, depending on what your provider offers.' },
-    { anchor: 'tv', icon: businessServices[2].icon, title: 'TV — for customer-facing spaces', text: 'TV service for waiting rooms, common areas, and other customer-facing spaces.' },
-    { anchor: 'connectivity', icon: businessServices[3].icon, title: 'Connectivity — single and multi-location', text: 'Network and connectivity options sized for one location or several.' },
-    { anchor: 'packages', icon: businessServices[4].icon, title: 'Business Packages — combined and custom', text: 'Combined service packages built around what your business actually needs, rather than a one-size-fits-all plan.' },
-  ];
+function ResidentialPage() { return <TelecomOverviewPage audience="residential" />; }
+function BusinessPage() { return <TelecomOverviewPage audience="business" />; }
+
+const telecomServiceDetails = {
+  residential: {
+    internet: {
+      icon: residentialServices[0].icon, title: 'Home Internet', eyebrow: 'Residential · Internet', image: '/service-images/residential-internet.png', alt: 'A family using several internet-connected devices at home',
+      intro: 'The right internet option begins with your address and how your household uses the connection—not with the biggest number on a plan.',
+      fit: [['Everyday connection', 'Browsing, email, schoolwork, and a smaller number of connected devices.'], ['Busy household', 'Several people streaming, working, studying, or joining video calls at the same time.'], ['Performance-focused', 'Gaming, frequent large downloads, content creation, or work that depends on upload performance.']],
+      compare: [['Availability at your address', 'The connection technologies and providers available can differ from one street or building to another.'], ['Download and upload needs', 'Streaming and downloads rely heavily on download speed; video calls, cloud backups, and sending large files also depend on upload performance.'], ['Usage and equipment', 'Ask whether usage is unlimited, what modem or router is supplied, and whether your home may need additional Wi-Fi coverage.'], ['Full cost and terms', 'Review installation, equipment, promotional periods, regular pricing, term commitments, and cancellation conditions before deciding.']],
+      questions: ['How many people and devices are usually online?', 'Do you work or study from home?', 'Do you stream, game, or upload large files?', 'Where does Wi-Fi need to reach in your home?'],
+      cta: 'Check home internet options', interest: 'Residential internet', related: [['TV', '/canada/residential/tv'], ['Home Bundles', '/canada/residential/bundles']],
+    },
+    tv: {
+      icon: residentialServices[1].icon, title: 'TV', eyebrow: 'Residential · TV', image: '/service-images/residential-tv.png', alt: 'A family enjoying television together in their living room',
+      intro: 'A useful TV package should reflect what your household watches, how you prefer to watch it, and which equipment you actually need.',
+      fit: [['Live essentials', 'Local programming, news, and a focused selection of live channels.'], ['Sports and specialty', 'Households that care about specific leagues, languages, premium channels, or specialty programming.'], ['Flexible viewing', 'Families that want live television alongside on-demand or streaming access on more than one screen.']],
+      compare: [['The channels that matter', 'Build your must-have list first. A larger channel count is not automatically a better fit.'], ['Live, on-demand, and streaming', 'Clarify how live channels, recordings, apps, and on-demand viewing work together.'], ['Screens and equipment', 'Consider how many televisions you use and whether each one requires a box, app, or other equipment.'], ['Package cost and changes', 'Review add-ons, equipment charges, promotional periods, and how easily the package can change later.']],
+      questions: ['Which channels or programs are must-haves?', 'Do sports, news, specialty, or international channels matter?', 'How many televisions will use the service?', 'Do you want recording or on-demand features?'],
+      cta: 'Explore TV options', interest: 'Residential TV', related: [['Home Internet', '/canada/residential/internet'], ['Home Bundles', '/canada/residential/bundles']],
+    },
+    'home-phone': {
+      icon: residentialServices[2].icon, title: 'Home Phone', eyebrow: 'Residential · Home Phone', image: '/service-images/residential-phone.png', alt: 'A woman speaking on a cordless home telephone',
+      intro: 'A dedicated home line can keep household calling simple. The details—number transfer, features, calling areas, and how the service operates—are what matter.',
+      fit: [['Everyday household line', 'A shared number for family calls, appointments, schools, services, and household contacts.'], ['Feature-conscious calling', 'Households that value caller ID, voicemail, call waiting, or other available calling features.'], ['Frequent or long-distance calling', 'People who need to understand local calling areas and domestic or international options before choosing.']],
+      compare: [['Keep or change your number', 'Ask whether an existing telephone number can be transferred and avoid cancelling the current line before transfer instructions are confirmed.'], ['Calling features', 'Confirm which features are included and which cost extra; availability varies by provider and plan.'], ['Long-distance details', 'Review rates, included destinations, calling limits, and any add-ons that match who you call.'], ['How the line operates', 'Ask how the service connects, what equipment it uses, and what happens during an internet or power interruption.']],
+      questions: ['Do you want to keep an existing number?', 'Which calling features do you use?', 'Do you make long-distance or international calls?', 'Is the line used for household, accessibility, or emergency-related needs?'],
+      cta: 'Discuss home phone service', interest: 'Home phone', related: [['Home Internet', '/canada/residential/internet'], ['Home Bundles', '/canada/residential/bundles']],
+    },
+    bundles: {
+      icon: residentialServices[3].icon, title: 'Home Bundles', eyebrow: 'Residential · Bundles', image: '/service-images/residential-bundles.png', alt: 'A couple comparing home service options on a laptop',
+      intro: 'A bundle is useful when the combination fits—not simply because several services appear on one offer. Compare the complete setup and the cost after any promotion.',
+      fit: [['Internet + TV', 'For households that want connected viewing and live or packaged television.'], ['Internet + Home Phone', 'For households that want online service and a dedicated shared calling line.'], ['Internet + TV + Phone', 'For households that prefer to coordinate all three services through one conversation.']],
+      compare: [['The services you will use', 'Remove features or services that do not solve a real household need before comparing totals.'], ['Bundle versus separate pricing', 'Compare the complete monthly cost, equipment, installation, and the price after introductory periods.'], ['Terms and flexibility', 'Understand commitment periods and what happens to pricing if one service is changed or removed.'], ['Installation and account details', 'Ask whether services are installed together, what equipment is required, and how billing and support are handled.']],
+      questions: ['Which services do you already have?', 'What works well—and what needs to improve?', 'Which channels, calling features, or internet activities matter?', 'Are you comfortable with a term, or is flexibility more important?'],
+      cta: 'Compare a home bundle', interest: 'Home bundle', related: [['Home Internet', '/canada/residential/internet'], ['TV', '/canada/residential/tv']],
+    },
+  },
+  business: {
+    internet: {
+      icon: businessServices[0].icon, title: 'Business Internet', eyebrow: 'Business · Internet', image: '/service-images/business-connectivity.png', alt: 'A business team using connected technology in a modern office',
+      intro: 'Business internet should be planned around the work that stops when the connection slows or fails—not around speed alone.',
+      fit: [['Connected office', 'Email, cloud software, file sharing, video meetings, and day-to-day team collaboration.'], ['Customer transactions', 'Point-of-sale, online ordering, bookings, guest Wi-Fi, or other customer-facing systems.'], ['Demanding operations', 'Larger teams, frequent uploads, multiple simultaneous calls, or systems that depend on consistent performance.']],
+      compare: [['Users and simultaneous activity', 'Count staff, devices, guests, video meetings, payments, cloud systems, and busy periods.'], ['Upload as well as download', 'Cloud backups, shared files, cameras, and video calls may make upload performance especially important.'], ['Continuity needs', 'Consider support expectations, backup options, and the operational impact of an outage.'], ['Location, installation, and terms', 'Service type, installation timing, equipment, commitments, and pricing depend on the address and provider.']],
+      questions: ['How many staff and devices connect during busy periods?', 'Which systems cannot operate without internet?', 'Do customers or guests use your Wi-Fi?', 'Do you upload large files or rely on video calls?'],
+      cta: 'Discuss business internet', interest: 'Business internet', related: [['Connectivity', '/canada/business/connectivity'], ['Business Packages', '/canada/business/packages']],
+    },
+    phone: {
+      icon: businessServices[1].icon, title: 'Business Phone', eyebrow: 'Business · Phone', image: '/service-images/business-connectivity.png', alt: 'A connected team working together in a Canadian office',
+      intro: 'Start with the customer calling experience and how your team handles calls. The right setup follows from that workflow.',
+      fit: [['Direct business line', 'A clear company number and core calling features for a small operation.'], ['Team call handling', 'Extensions, forwarding, voicemail, or routing that helps calls reach the right person.'], ['Growing or distributed team', 'A more flexible calling setup for several staff, departments, locations, or remote work.']],
+      compare: [['Call flow', 'Map what should happen when someone calls, when no one answers, and outside business hours.'], ['Numbers and extensions', 'Confirm how many lines, numbers, users, or extensions are required and whether existing numbers can transfer.'], ['Features and devices', 'Ask which calling features, desk phones, apps, headsets, or other equipment are included or supported.'], ['Reliability and support', 'Understand connectivity dependencies, installation, ongoing support, and the effect of power or internet interruptions.']],
+      questions: ['How many people answer or place calls?', 'Do calls need menus, extensions, queues, or forwarding?', 'Do you want to keep existing numbers?', 'Will staff take calls away from the main location?'],
+      cta: 'Plan business phone service', interest: 'Business phone', related: [['Business Internet', '/canada/business/internet'], ['Business Packages', '/canada/business/packages']],
+    },
+    tv: {
+      icon: businessServices[2].icon, title: 'Business TV', eyebrow: 'Business · TV', image: '/service-images/business-customer-space.png', alt: 'A modern customer-facing business with a television in a shared area',
+      intro: 'TV in a business should support the environment—whether that means news in a waiting area, sports in hospitality, or programming in a common space.',
+      fit: [['Waiting and reception areas', 'Programming that helps create a comfortable experience while customers or visitors wait.'], ['Hospitality and shared spaces', 'Content selected for dining, lounge, fitness, staff, or other communal environments.'], ['Multiple screens or zones', 'Businesses that need to think through where screens are located and whether different spaces need different content.']],
+      compare: [['Business use and content', 'Describe the setting, audience, operating hours, and must-have channels before comparing packages.'], ['Commercial account requirements', 'Business viewing can have different terms from residential service; confirm the applicable service and permissions.'], ['Screens and equipment', 'Count televisions, identify their locations, and ask what equipment or wiring each screen requires.'], ['Installation and ongoing changes', 'Plan installation around operations and clarify how channel, equipment, or location changes are handled.']],
+      questions: ['What type of space will show television?', 'How many screens and viewing areas are involved?', 'Which content is important to customers or staff?', 'Are there different needs in different areas?'],
+      cta: 'Discuss business TV', interest: 'Business TV', related: [['Business Internet', '/canada/business/internet'], ['Business Packages', '/canada/business/packages']],
+    },
+    connectivity: {
+      icon: businessServices[3].icon, title: 'Business Connectivity', eyebrow: 'Business · Connectivity', image: '/service-images/business-connectivity.png', alt: 'A business team collaborating through connected workplace systems',
+      intro: 'Connectivity planning brings the whole operating picture together: locations, coverage, devices, critical systems, and how the organization may grow.',
+      fit: [['One location with coverage challenges', 'A business that needs reliable connectivity throughout offices, work areas, or customer spaces.'], ['Several sites', 'Organizations that want to review service needs consistently across multiple addresses.'], ['Operations with critical dependencies', 'Businesses whose cloud tools, payments, communications, or connected systems need careful planning.']],
+      compare: [['The complete environment', 'Document locations, floor areas, users, devices, guest access, and systems that connect.'], ['Coverage and capacity', 'A fast connection does not automatically solve weak indoor coverage or congestion in busy areas.'], ['Resilience', 'Consider what a disruption would affect and whether backup or alternate connectivity should be discussed.'], ['Growth and support', 'Plan for new users, devices, locations, and the level of help your team expects after activation.']],
+      questions: ['How many locations need service?', 'Where are current weak spots or disruptions?', 'Which systems are operationally critical?', 'What may change over the next year?'],
+      cta: 'Review connectivity needs', interest: 'Business connectivity', related: [['Business Internet', '/canada/business/internet'], ['Business Packages', '/canada/business/packages']],
+    },
+    packages: {
+      icon: businessServices[4].icon, title: 'Business Packages', eyebrow: 'Business · Packages', image: '/service-images/business-customer-space.png', alt: 'A modern business using phone, television, and point-of-sale technology',
+      intro: 'A useful business package coordinates the services your operation genuinely needs and makes the costs, installation, equipment, and responsibilities clear.',
+      fit: [['Internet + Phone', 'For organizations that want core connectivity and calling planned together.'], ['Internet + TV', 'For customer-facing businesses that need online systems and shared-screen programming.'], ['Multi-service or multi-location', 'For operations that need several services or addresses considered as one project.']],
+      compare: [['Operational fit', 'Start with essential workflows and customer needs, then include only services that support them.'], ['Complete cost', 'Review recurring charges, equipment, installation, promotions, regular pricing, and optional features.'], ['Implementation', 'Clarify timing, site access, wiring, number transfers, equipment delivery, and how disruption will be minimized.'], ['Account and support structure', 'Understand billing, contacts, support paths, and what happens when the business changes a service or location.']],
+      questions: ['Which services and locations are in scope?', 'What do you use today and what is not working?', 'Are there deadlines, moves, or opening dates?', 'Who will coordinate installation and account decisions?'],
+      cta: 'Build a business package', interest: 'Business package', related: [['Business Internet', '/canada/business/internet'], ['Business Phone', '/canada/business/phone']],
+    },
+  },
+} as const;
+
+export type TelecomServiceSlug = keyof typeof telecomServiceDetails.residential | keyof typeof telecomServiceDetails.business;
+
+export function isTelecomService(audience: string, service: string): audience is TelecomAudience {
+  return (audience === 'residential' || audience === 'business') && service in telecomServiceDetails[audience];
+}
+
+export function getTelecomServiceMeta(audience: TelecomAudience, service: string) {
+  if (!isTelecomService(audience, service)) return null;
+  const detail = telecomServiceDetails[audience][service as keyof typeof telecomServiceDetails[typeof audience]];
+  return { title: `${detail.title} | Providence Canada`, description: detail.intro };
+}
+
+export function TelecomServicePage({ audience, service }: { audience: TelecomAudience; service: string }) {
+  if (!isTelecomService(audience, service)) return null;
+  const detail = telecomServiceDetails[audience][service as keyof typeof telecomServiceDetails[typeof audience]];
+  const Icon = detail.icon;
   return <MarketShell market="canada">
-    <Hero market="canada" interior title="Connectivity built around your business." copy="Tell Providence what your business needs, and we'll help you compare business internet, phone, TV, and connectivity options." />
-    <section className="canada-section canada-section-light">
-      <div className="canada-compare-list">
-        {details.map((d) => { const Icon = d.icon; return <article key={d.anchor} id={d.anchor}><Icon /><div><h3>{d.title}</h3><p>{d.text}</p></div></article>; })}
-      </div>
+    <Hero market="canada" interior eyebrow={detail.eyebrow} eyebrowIcon={Icon} title={detail.title} copy={detail.intro} image={detail.image} imageAlt={detail.alt} />
+    <section className="canada-section canada-section-light service-fit-section">
+      <Reveal><SectionHeading eyebrow="Find your starting point" title={`Which ${detail.title.toLowerCase()} situation sounds closest?`} copy="These are guidance profiles, not fixed plans. Your address, provider availability, and the details you share determine which actual options can be considered." /></Reveal>
+      <div className="service-fit-grid">{detail.fit.map(([title, text], index) => <Reveal key={title} delay={index * 60}><article><span>0{index + 1}</span><h3>{title}</h3><p>{text}</p></article></Reveal>)}</div>
     </section>
-    <section className="canada-section canada-section-tint">
-      <Reveal><SectionHeading eyebrow="What kind of business do you run?" title="Tell us your business type — we'll guide you from there." /></Reveal>
-      <div className="canada-industry-grid three-col">
-        {businessUseCases.map((u) => { const Icon = u.icon; return <article key={u.title}><Icon /><h3>{u.title}</h3><p>{u.text}</p></article>; })}
-      </div>
+    <section className="canada-section canada-section-tint service-compare-section">
+      <div className="service-detail-split"><Reveal><div className="service-detail-intro"><p className="section-kicker">What to compare</p><h2>Look beyond the headline offer.</h2><p>Providence helps organize the details so you can understand the practical fit before you decide.</p></div></Reveal><div className="service-comparison-stack">{detail.compare.map(([title, text]) => <article key={title}><Check /><div><h3>{title}</h3><p>{text}</p></div></article>)}</div></div>
+    </section>
+    <section className="canada-section canada-section-blue service-questions-section">
+      <div className="service-detail-split"><Reveal><div className="service-detail-intro"><p className="section-kicker">Before Providence checks options</p><h2>Four questions that make the conversation useful.</h2><p>You do not need technical answers. A clear picture of how the service will be used is the best place to begin.</p></div></Reveal><ol>{detail.questions.map((question, index) => <li key={question}><span>0{index + 1}</span><p>{question}</p></li>)}</ol></div>
+    </section>
+    <section className="canada-section canada-section-light service-next-step">
+      <Reveal><SectionHeading eyebrow="What happens next" title="From needs to a clear next step." /></Reveal>
+      <div className="service-process-grid"><article><span>01</span><h3>Tell us about the setup</h3><p>Share the address or locations, current services, priorities, and any timing considerations.</p></article><article><span>02</span><h3>Providence checks the fit</h3><p>We use those details to focus the conversation on relevant service options and the questions that still need answers.</p></article><article><span>03</span><h3>Review before you decide</h3><p>Compare availability, features, equipment, installation, pricing, and terms for the specific offer presented.</p></article></div>
     </section>
     <section className="canada-employer-band">
-      <div><h2>Ready for a business quote?</h2><p>Tell us your company, location, current provider, and the services you need — Providence will follow up with options.</p></div>
-      <a className="button button-primary" href="/canada/contact?interest=Business%20telecom%20services">Get a Business Quote <ArrowUpRight /></a>
+      <div><h2>{detail.cta}</h2><p>Tell Providence what you need. Availability, plans, pricing, and provider details are confirmed for the specific address and request.</p></div>
+      <a className="button button-primary" href={`/canada/contact?interest=${encodeURIComponent(detail.interest)}`}>Start the conversation <ArrowUpRight /></a>
     </section>
+    <section className="related-service-band"><p>Also explore</p>{detail.related.map(([label, href]) => <a href={href} key={label}>{label}<ArrowRight /></a>)}<a href={`/canada/${audience}`}>All {audience} services<ArrowRight /></a></section>
   </MarketShell>;
 }
 
 function SolutionsPage() {
   const solutions = [
-    { icon: residentialServices[0].icon, title: 'Internet', text: 'Reliable internet for your home or business, matched to how you actually use it.', href: '/canada/residential#internet' },
-    { icon: residentialServices[1].icon, title: 'TV', text: 'Channels, packages, and equipment for how you watch, at home or in customer-facing spaces.', href: '/canada/residential#tv' },
-    { icon: residentialServices[2].icon, title: 'Phone', text: 'Home and business phone service, with the features that fit how you communicate.', href: '/canada/residential#phone' },
-    { icon: businessServices[3].icon, title: 'Connectivity', text: 'Network and connectivity solutions sized for one location or several.', href: '/canada/business#connectivity' },
-    { icon: residentialServices[3].icon, title: 'Bundles', text: 'Combine services for a simpler bill, at home or as a custom business package.', href: '/canada/residential#bundles' },
+    { icon: residentialServices[0].icon, title: 'Internet', text: 'Reliable internet for your home or business, matched to how you actually use it.', href: '/canada/residential/internet' },
+    { icon: residentialServices[1].icon, title: 'TV', text: 'Channels, packages, and equipment for how you watch, at home or in customer-facing spaces.', href: '/canada/residential/tv' },
+    { icon: residentialServices[2].icon, title: 'Phone', text: 'Home and business phone service, with the features that fit how you communicate.', href: '/canada/residential/home-phone' },
+    { icon: businessServices[3].icon, title: 'Connectivity', text: 'Network and connectivity solutions sized for one location or several.', href: '/canada/business/connectivity' },
+    { icon: residentialServices[3].icon, title: 'Bundles', text: 'Combine services for a simpler bill, at home or as a custom business package.', href: '/canada/residential/bundles' },
   ];
   return <MarketShell market="canada">
     <Hero market="canada" interior title="Solutions for however you stay connected." copy="Internet, TV, phone, and connectivity — explore what Providence can help you with, for home or business." />
