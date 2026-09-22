@@ -693,11 +693,6 @@ img { max-width: 100%; }
 .connect-experience .section-heading h2 { max-width: 1040px; font-size: clamp(2.7rem,4.2vw,3.8rem); line-height: 1.01; }
 .connect-experience .section-kicker { margin-bottom: .85rem; }
 
-.hero-mode-toggle { display: inline-flex; gap: .2rem; margin-bottom: 1.3rem; padding: .3rem; border: 1px solid rgba(255,255,255,.24); background: rgba(8,36,68,.4); backdrop-filter: blur(14px); }
-.hero-mode-toggle button { padding: .5rem 1.1rem; border: none; background: transparent; color: rgba(255,255,255,.72); font: 700 .78rem/1 var(--font-display),sans-serif; letter-spacing: .01em; cursor: pointer; transition: background .25s ease, color .25s ease; }
-.hero-mode-toggle button.is-active { background: var(--gold); color: var(--navy); }
-.hero-mode-toggle button:not(.is-active):hover { color: white; }
-
 .hero-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; margin-top: 2.5rem; }
 .hero-cta-button { position: relative; overflow: hidden; padding-right: 2.9rem; }
 .hero-cta-button svg { transition: transform .3s cubic-bezier(.2,.8,.2,1); }
@@ -738,7 +733,6 @@ img { max-width: 100%; }
   .interactive-hero .market-hero-image, .interactive-hero .hero-video { transform: none; border-radius: 0; }
   .interactive-hero .market-hero-content { transform: none; opacity: 1; }
   .hero-hotspots { display: none; }
-  .hero-mode-toggle { margin-bottom: 1rem; }
   .hero-cta-row { margin-top: 2rem; }
   .hero-signal-horizon { height: 120px; }
   .hero-signal-orbit-gold { bottom: -110px; width: 135vw; height: 190px; }
