@@ -439,23 +439,6 @@ function TelecomOverviewPage({ audience }: { audience: TelecomAudience }) {
         {services.map((service, index) => { const Icon = service.icon; return <Reveal key={service.slug} delay={index * 45}><a className="service-journey-card" href={`/canada/${audience}/${service.slug}`}><div className="service-card-media"><Image src={service.image} alt={service.alt} fill sizes="(max-width: 800px) 100vw, 50vw" /></div><div className="service-card-copy"><span><Icon />{residential ? 'For your home' : 'For your business'}</span><h3>{service.title}</h3><p>{service.text}</p><strong>Explore {service.title} <ArrowRight /></strong></div></a></Reveal>; })}
       </div>
     </section>
-    <section className="canada-section canada-section-blue decision-guide">
-      <Reveal><SectionHeading light eyebrow="Start with your situation" title={residential ? 'What are you trying to make easier at home?' : 'What needs to work reliably every day?'} copy={residential ? 'Choose the statement closest to your household. It will take you to the most useful starting point.' : 'Choose the operational need that matters most. You can combine services later.'} /></Reveal>
-      <div className="decision-guide-grid">
-        {(residential ? [
-          ['Several people are online at once', 'Internet', '/canada/residential/internet'],
-          ['Live TV, sports, news, or family viewing matters', 'TV', '/canada/residential/tv'],
-          ['We want a dedicated home line', 'Home Phone', '/canada/residential/home-phone'],
-          ['We want to compare services together', 'Bundles', '/canada/residential/bundles'],
-        ] : [
-          ['Our work depends on cloud tools, payments, or video calls', 'Business Internet', '/canada/business/internet'],
-          ['We need calls to reach the right person', 'Business Phone', '/canada/business/phone'],
-          ['We have screens in a waiting or customer space', 'Business TV', '/canada/business/tv'],
-          ['We have coverage, network, or multiple-location needs', 'Connectivity', '/canada/business/connectivity'],
-          ['We need several services coordinated together', 'Business Packages', '/canada/business/packages'],
-        ]).map(([need, answer, href]) => <a href={href} key={answer}><small>{need}</small><strong>{answer}</strong><ArrowUpRight /></a>)}
-      </div>
-    </section>
     {!residential && <section className="canada-section canada-section-tint">
       <Reveal><SectionHeading eyebrow="Business context matters" title="The same service can look different in every operation." copy="Providence starts with how your organization functions, then checks what service options are available at the location or locations you provide." /></Reveal>
       <div className="canada-industry-grid three-col">{businessUseCases.map((u) => { const Icon = u.icon; return <article key={u.title}><Icon /><h3>{u.title}</h3><p>{u.text}</p></article>; })}</div>
