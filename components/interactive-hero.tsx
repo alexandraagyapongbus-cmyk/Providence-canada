@@ -147,6 +147,11 @@ export function InteractiveHero() {
           </div>
         </div>
       </section>
+      <div className="hero-signal-horizon" aria-hidden="true">
+        <span className="hero-signal-orbit hero-signal-orbit-gold" />
+        <span className="hero-signal-orbit hero-signal-orbit-blue" />
+        <span className="hero-signal-node" />
+      </div>
     </div>
   );
 }

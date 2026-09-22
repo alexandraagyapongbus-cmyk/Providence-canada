@@ -647,7 +647,7 @@ img { max-width: 100%; }
 }
 
 /* Interactive homepage hero: mode toggle, cursor-parallax, scroll-pin, connection-motif hotspots */
-.hero-pin-wrap { position: relative; height: 200vh; }
+.hero-pin-wrap { position: relative; height: 200vh; background: var(--navy); isolation: isolate; }
 .hero-pin-wrap.no-pin { height: auto; }
 .interactive-hero { position: sticky; top: 0; min-height: 100svh; }
 .no-pin .interactive-hero { position: relative; min-height: 100svh; }
@@ -660,6 +660,33 @@ img { max-width: 100%; }
 .interactive-hero .market-hero-content {
   transform: translate3d(calc(var(--parallax-x, 0px) * .3), 0, 0);
   opacity: 1;
+}
+
+/* A branded signal horizon softens the handoff from the cinematic hero to
+   the first editorial section without turning the video into a separate card. */
+.hero-signal-horizon {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: clamp(150px,16vw,220px);
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(180deg,rgba(7,31,61,0) 0%,rgba(10,58,105,.28) 30%,rgba(28,112,188,.2) 62%,#f7f9fc 100%);
+}
+.hero-signal-orbit { position: absolute; left: 50%; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; transform: translateX(-50%) rotate(-3deg); }
+.hero-signal-orbit-gold { bottom: -165px; width: min(1240px,92vw); height: 300px; border-color: rgba(229,184,75,.42); box-shadow: 0 -18px 70px rgba(229,184,75,.08); }
+.hero-signal-orbit-blue { bottom: -116px; width: min(980px,76vw); height: 230px; border-color: rgba(118,194,255,.36); transform: translateX(-46%) rotate(2deg); }
+.hero-signal-node { position: absolute; right: 21%; bottom: 42px; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 7px rgba(229,184,75,.15),0 0 34px rgba(229,184,75,.48); }
+
+.hero-followup { position: relative; z-index: 6; margin-top: clamp(-6rem,-7vw,-4.5rem); }
+.hero-followup .connect-experience {
+  margin-inline: clamp(.9rem,3vw,3rem);
+  padding-top: clamp(4.75rem,7vw,7rem);
+  border-radius: clamp(2rem,4vw,3.75rem) clamp(2rem,4vw,3.75rem) 0 0;
+  background: linear-gradient(180deg,#fff 0%,#fff 84%,#fdfefe 100%);
+  box-shadow: 0 -24px 80px rgba(4,28,57,.16);
 }
 
 .hero-mode-toggle { display: inline-flex; gap: .2rem; margin-bottom: 1.3rem; padding: .3rem; border: 1px solid rgba(255,255,255,.24); background: rgba(8,36,68,.4); backdrop-filter: blur(14px); }
@@ -709,6 +736,12 @@ img { max-width: 100%; }
   .hero-hotspots { display: none; }
   .hero-mode-toggle { margin-bottom: 1rem; }
   .hero-cta-row { margin-top: 2rem; }
+  .hero-signal-horizon { height: 120px; }
+  .hero-signal-orbit-gold { bottom: -110px; width: 135vw; height: 190px; }
+  .hero-signal-orbit-blue { bottom: -82px; width: 108vw; height: 150px; }
+  .hero-signal-node { right: 17%; bottom: 28px; }
+  .hero-followup { margin-top: -2.75rem; }
+  .hero-followup .connect-experience { margin-inline: .65rem; padding-top: 4rem; border-radius: 2rem 2rem 0 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

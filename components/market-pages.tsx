@@ -191,7 +191,7 @@ function WhatAreYouLookingForSection() {
     { key: 'bundles', label: 'Home Bundles', icon: <BundlesIcon />, description: residentialServices[3].text, ctas: [{ label: 'Explore bundles', href: '/canada/residential#bundles' }] },
     { key: 'business', label: 'Business Solutions', icon: <ConnectivityIcon />, description: 'Connectivity, phone, and packages built around how your business operates.', ctas: [{ label: 'Explore business solutions', href: '/canada/business' }] },
   ];
-  return <Reveal><ConnectExperienceSection items={items} /></Reveal>;
+  return <Reveal className="hero-followup"><ConnectExperienceSection items={items} /></Reveal>;
 }
 
 function ResidentialBusinessSplitSection() {
