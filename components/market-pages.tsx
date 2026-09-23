@@ -573,26 +573,55 @@ export function TelecomServicePage({ audience, service }: { audience: TelecomAud
 }
 
 function SolutionsPage() {
-  const solutions = [
-    { icon: residentialServices[0].icon, title: 'Internet', text: 'Reliable internet for your home or business, matched to how you actually use it.', href: '/canada/residential/internet' },
-    { icon: residentialServices[1].icon, title: 'TV', text: 'Channels, packages, and equipment for how you watch, at home or in customer-facing spaces.', href: '/canada/residential/tv' },
-    { icon: residentialServices[2].icon, title: 'Phone', text: 'Home and business phone service, with the features that fit how you communicate.', href: '/canada/residential/home-phone' },
-    { icon: businessServices[3].icon, title: 'Connectivity', text: 'Network and connectivity solutions sized for one location or several.', href: '/canada/business/connectivity' },
-    { icon: residentialServices[3].icon, title: 'Bundles', text: 'Combine services for a simpler bill, at home or as a custom business package.', href: '/canada/residential/bundles' },
+  const problems = [
+    { icon: RadioTower, title: 'Your speed still falls short', text: 'You have changed plans or equipment, but calls, streaming, uploads, or everyday work still feel slow.' },
+    { icon: MapPin, title: 'Some rooms have little or no Wi-Fi', text: 'The connection works near the router but drops or weakens elsewhere in the home, office, or property.' },
+    { icon: Building2, title: 'The building is difficult to cover', text: 'Multiple floors, thick walls, long corridors, separate units, or a large footprint make consistent coverage difficult.' },
+    { icon: Wrench, title: 'The service is unstable', text: 'Devices disconnect, video calls freeze, or performance changes significantly throughout the day.' },
+    { icon: CircleHelp, title: 'You have already tried the usual fixes', text: 'Restarting equipment, moving the router, changing plans, or calling the provider has not solved the underlying problem.' },
+    { icon: Globe2, title: 'Your setup has more than one location', text: 'A business, multi-unit property, or growing operation needs a more coordinated view of connectivity.' },
   ];
   return <MarketShell market="canada">
-    <Hero market="canada" interior title="Solutions for however you stay connected." copy="Internet, TV, phone, and connectivity — explore what Providence can help you with, for home or business." />
+    <Hero market="canada" interior eyebrow="Connection problems · Home & business" eyebrowIcon={Wrench} title="When the usual connection is not working." copy="Slow internet after repeated upgrades? Wi-Fi dead zones? A building that never seems to get reliable coverage? Providence helps you describe the real problem, separate service issues from in-building Wi-Fi issues, and explore a more suitable next step." image="/service-images/business-connectivity.png" imageAlt="A team using connected technology throughout a modern building" />
     <section className="canada-section canada-section-light">
-      <div className="canada-compare-list">
-        {solutions.map((s) => { const Icon = s.icon; return <a key={s.title} href={s.href} className="canada-compare-link"><Icon /><div><h3>{s.title}</h3><p>{s.text}</p></div></a>; })}
+      <Reveal><SectionHeading eyebrow="Does this sound familiar?" title="The problem may be bigger than choosing another plan." copy="If conventional provider support has not resolved the issue, Providence starts with the property, the equipment, and how the connection is actually being used." /></Reveal>
+      <div className="canada-differentiator-grid solution-problem-grid">
+        {problems.map((problem, index) => { const Icon = problem.icon; return <Reveal key={problem.title} delay={index * 45}><article><Icon /><h3>{problem.title}</h3><p>{problem.text}</p></article></Reveal>; })}
       </div>
     </section>
     <section className="canada-section canada-section-tint">
-      <SectionHeading eyebrow="How service is delivered" title="Providence handles the details." copy="Providence works with underlying telecommunications providers to deliver these services. That relationship is disclosed where relevant to a specific offer, contract, or billing detail — Providence remains your point of contact throughout." />
+      <div className="canada-split solution-explainer">
+        <Reveal><div className="canada-split-copy"><p className="section-kicker">An important distinction</p><h2>Internet to the building and Wi-Fi inside it are not the same problem.</h2><p>A provider may deliver service to the address while devices still struggle inside the space. Router location, building materials, layout, distance, interference, the number of users, and the equipment in use can all affect the experience.</p><p>Providence begins by understanding where the problem appears and what has already been tried. That helps avoid treating every issue as though a faster plan will automatically fix it.</p></div></Reveal>
+        <div className="solution-layers" aria-label="Four layers Providence considers when reviewing a connection problem">
+          <article><span>01</span><div><strong>Service to the property</strong><small>What reaches the address and which options are available there.</small></div></article>
+          <article><span>02</span><div><strong>Equipment and placement</strong><small>How the modem, router, access points, and connected devices are arranged.</small></div></article>
+          <article><span>03</span><div><strong>Building and coverage</strong><small>Size, floors, walls, distance, interference, and hard-to-reach areas.</small></div></article>
+          <article><span>04</span><div><strong>Real-world demand</strong><small>Users, devices, calls, streaming, cloud tools, payments, and busy periods.</small></div></article>
+        </div>
+      </div>
     </section>
-    <section className="canada-employer-band">
-      <div><h2>Not sure where to start?</h2><p>Tell Providence what you need and we'll point you in the right direction.</p></div>
-      <a className="button button-primary" href="/canada/contact?interest=General%20inquiry">Contact Providence <ArrowUpRight /></a>
+    <section className="canada-section canada-section-blue solution-process-section">
+      <Reveal><SectionHeading light eyebrow="How Providence approaches it" title="Start with the problem—not another generic recommendation." copy="We organize the information needed to understand the situation, identify realistic avenues to explore, and help coordinate the next conversation." /></Reveal>
+      <div className="solution-process-grid">
+        <article><span>01</span><h3>Describe the symptoms</h3><p>Tell us what fails, where it fails, when it happens, and which activities are affected.</p></article>
+        <article><span>02</span><h3>Map the environment</h3><p>We gather the address, building layout, service, equipment, users, devices, and fixes already attempted.</p></article>
+        <article><span>03</span><h3>Separate the likely issues</h3><p>We distinguish questions about provider service, capacity, equipment, indoor coverage, or a more complex business setup.</p></article>
+        <article><span>04</span><h3>Explore the next step</h3><p>Depending on availability and the situation, that may involve another service option, better coverage planning, or specialist assessment.</p></article>
+      </div>
+    </section>
+    <section className="canada-section canada-section-light">
+      <Reveal><SectionHeading eyebrow="What to have ready" title="A few details make the assessment more useful." copy="You do not need technical expertise. Photos, a simple floor-plan sketch, recent speed-test results, and a list of problem areas can help explain what is happening." /></Reveal>
+      <div className="solution-prep-grid">
+        <article><Home /><h3>The property</h3><p>Address, building type, approximate size, floors, units, and the rooms or areas with weak coverage.</p></article>
+        <article><RadioTower /><h3>The current service</h3><p>Provider, plan if known, equipment, router location, and whether wired connections also have problems.</p></article>
+        <article><Users /><h3>The demand</h3><p>Number of users and devices, critical activities, busy periods, and what acceptable performance would look like.</p></article>
+        <article><Wrench /><h3>What you have tried</h3><p>Provider visits, plan changes, replacement equipment, extenders, relocation, or other attempted fixes.</p></article>
+      </div>
+    </section>
+    <section className="grounded-note solution-grounded-note"><ShieldCheck /><div><p className="section-kicker">Clear expectations</p><h2>The right answer depends on the address and the cause.</h2><p>Providence does not promise that every property can be fixed with a particular provider, plan, or device. Recommendations depend on service availability and the information gathered. Some situations may require an on-site or specialist assessment before a solution can be confirmed.</p></div></section>
+    <section className="telecom-final-cta two-up">
+      <article><p>Home connection problem</p><h3>Tell us where your home service is struggling.</h3><a className="text-link" href="/canada/contact?interest=Home%20connection%20problem">Get connection help <ArrowRight /></a></article>
+      <article><p>Business or building problem</p><h3>Describe the location, operations, and coverage issue.</h3><a className="text-link" href="/canada/contact?interest=Business%20or%20building%20connectivity%20problem">Discuss the site <ArrowRight /></a></article>
     </section>
   </MarketShell>;
 }
