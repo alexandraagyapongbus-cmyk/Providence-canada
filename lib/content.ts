@@ -39,7 +39,7 @@ import {
 } from 'lucide-react';
 
 export type MarketName = 'canada' | 'ghana';
-export type SiteSection = 'home' | 'residential' | 'business' | 'solutions' | 'why-providence' | 'healthcare-staffing' | 'care-organizations' | 'healthcare-workers' | 'telecom' | 'services' | 'about' | 'contact';
+export type SiteSection = 'home' | 'residential' | 'business' | 'solutions' | 'why-providence' | 'healthcare-staffing' | 'care-organizations' | 'healthcare-workers' | 'telecom' | 'services' | 'about' | 'contact' | 'what-we-do' | 'methodology' | 'development-programs' | 'industries' | 'projects-impact' | 'insights' | 'partnerships' | 'providence-tv' | 'leadership' | 'governance';
 
 export const GHANA_CRM_URL = 'https://providence-ghana-crm.agyapongalexandra.chatgpt.site';
 export const MARKET_ORIGINS: Record<MarketName, string> = {
@@ -88,18 +88,18 @@ export const markets = {
   ghana: {
     name: 'Ghana',
     shortLabel: 'Providence Ghana',
-    eyebrow: 'TV box sales, setup & support',
-    heroTitle: 'More to watch. Less to work out.',
-    heroCopy: 'One TV box, professional installation, and straightforward service options—set up for easy entertainment at home.',
-    primaryCta: 'Order a TV box',
-    secondaryCta: 'Request installation',
-    contactIntro: 'Order, arrange installation, renew your plan, or ask for help with your equipment. Choose the reason that fits and we will follow up.',
+    eyebrow: 'Business advisory & enterprise development · Africa',
+    heroTitle: 'Building stronger businesses. Growing African economies.',
+    heroCopy: 'Providence Ghana works with businesses, institutions, and development partners to turn evidence into strategy, implementation, and measurable enterprise growth.',
+    primaryCta: 'Explore our work',
+    secondaryCta: 'Partner with Providence',
+    contactIntro: 'Choose the conversation that best fits your organization so Providence can route your inquiry appropriately.',
     contactOptions: [
-      'Order a TV box',
-      'Request installation',
-      'Choose or renew a plan',
-      'Equipment support',
+      'Business advisory',
+      'Development / institutional partnership',
+      'Research / collaboration',
       'General inquiry',
+      'Providence TV',
     ],
     services: [
       { icon: ShoppingBag, title: 'TV box purchase', text: 'A Providence TV box prepared for home entertainment and ready for professional setup.' },
@@ -244,10 +244,20 @@ export const pageMeta: Record<MarketName, Partial<Record<SiteSection, { title: s
     contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about home or business telecom service, a telecom partnership, or a healthcare inquiry.' },
   },
   ghana: {
-    home: { title: 'Providence Ghana | TV Box Sales, Installation & Support', description: 'Order a Providence TV box, arrange installation, choose a service plan, or get customer support in Ghana.' },
-    services: { title: 'Ghana TV Box Services | Providence', description: 'TV box purchase, installation, monthly and three-month plans, and equipment support from Providence Ghana.' },
-    about: { title: 'About Providence Ghana', description: 'Learn how Providence Ghana provides straightforward TV box setup, service, and continuing customer support.' },
-    contact: { title: 'Order or Contact Providence Ghana', description: 'Order a TV box, request installation, renew a plan, or ask Providence Ghana for equipment support.' },
+    home: { title: 'Providence Ghana | Business Advisory & Enterprise Development in Africa', description: 'Providence Ghana partners with businesses and institutions to strengthen enterprises through research, strategy, implementation, and measurable learning.' },
+    about: { title: 'About Providence Ghana | African Enterprise Development', description: 'Learn how Providence Ghana combines Ghanaian operating depth with market-specific research and implementation across Africa.' },
+    'what-we-do': { title: 'What We Do | Providence Ghana', description: 'Explore Providence Ghana services in strategy, finance, operations, market access, digital transformation, and enterprise development.' },
+    methodology: { title: 'Enterprise Growth Methodology | Providence Ghana', description: 'See how Providence researches, diagnoses, co-designs, implements, measures, learns, and adapts alongside enterprises.' },
+    'development-programs': { title: 'Enterprise Development Programs | Providence Ghana', description: 'Program design, enterprise assessment, technical assistance, implementation support, monitoring, evaluation, learning, and reporting.' },
+    industries: { title: 'Industries & Areas of Focus | Providence Ghana', description: 'A scalable view of the sectors and enterprise contexts Providence Ghana is prepared to study and support.' },
+    'projects-impact': { title: 'Projects & Impact | Providence Ghana', description: 'Providence Ghana project and impact architecture, with verified evidence added as engagements are documented.' },
+    insights: { title: 'Insights & Research | Providence Ghana', description: 'Research and field-informed perspectives on enterprise growth, African markets, operations, finance, and implementation.' },
+    partnerships: { title: 'Institutional Partnerships | Providence Ghana', description: 'Explore collaboration models for development organizations, governments, funders, investors, universities, and technical partners.' },
+    'providence-tv': { title: 'Providence TV | Ghana TV Box Sales, Installation & Support', description: 'Order a Providence TV box, arrange installation, choose a service plan, or get customer support in Ghana.' },
+    services: { title: 'Providence TV | Ghana TV Box Services', description: 'TV box purchase, installation, monthly and three-month plans, and equipment support from Providence Ghana.' },
+    leadership: { title: 'Leadership | Providence Ghana', description: 'Providence Ghana leadership profile architecture; verified biographies and qualifications will be published when supplied.' },
+    governance: { title: 'Governance & Accountability | Providence Ghana', description: 'Providence Ghana governance, ethics, accountability, and policy publication architecture.' },
+    contact: { title: 'Contact Providence Ghana', description: 'Contact Providence Ghana about business advisory, institutional partnerships, research collaboration, general inquiries, or Providence TV.' },
   },
 };
 

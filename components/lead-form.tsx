@@ -51,7 +51,7 @@ export function LeadForm({ market, mode = 'general' }: { market: MarketName; mod
       ? { eyebrow: 'Staffing inquiry received', title: 'Thank you. We have your staffing details.', copy: 'Providence will review the role, location, schedule, and timing you shared, then follow up about a practical next step.' }
       : mode === 'worker'
         ? { eyebrow: 'Interest received', title: 'Thank you. We have your details.', copy: 'Providence will review your qualifications, availability, and work interests. Submitting this form does not guarantee a role or placement.' }
-        : { eyebrow: 'Request received', title: 'Thank you. We have your details.', copy: `Providence can now follow up about your ${market === 'ghana' ? 'TV box or service request' : 'Canada inquiry'}.` };
+        : { eyebrow: 'Request received', title: 'Thank you. We have your details.', copy: `Providence can now follow up about your ${market === 'ghana' ? 'Ghana inquiry' : 'Canada inquiry'}.` };
 
     return (
       <section className="form-success" aria-live="polite">

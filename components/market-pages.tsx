@@ -29,6 +29,7 @@ import { InteractiveHero } from '@/components/interactive-hero';
 import { InView } from '@/components/in-view';
 import { LeadForm } from '@/components/lead-form';
 import { MarketShell } from '@/components/market-shell';
+import { GhanaPage } from '@/components/ghana-pages';
 import { Reveal } from '@/components/reveal';
 import {
   businessServices,
@@ -679,7 +680,8 @@ function ContactPage({ market }: { market: MarketName }) {
 }
 
 export function MarketPage({ market, section }: { market: MarketName; section: SiteSection }) {
-  if (section === 'home') return market === 'canada' ? <CanadaHome /> : <GhanaHome />;
+  if (market === 'ghana') return <GhanaPage section={section} />;
+  if (section === 'home') return <CanadaHome />;
   if (market === 'canada') {
     if (section === 'residential') return <ResidentialPage />;
     if (section === 'business') return <BusinessPage />;
@@ -690,7 +692,6 @@ export function MarketPage({ market, section }: { market: MarketName; section: S
     if (section === 'healthcare-workers') return <HealthcareWorkersPage />;
     if (section === 'telecom') return <TelecomPage />;
   }
-  if (market === 'ghana' && section === 'services') return <GhanaServicesPage />;
   if (section === 'about') return <AboutPage market={market} />;
   return <ContactPage market={market} />;
 }

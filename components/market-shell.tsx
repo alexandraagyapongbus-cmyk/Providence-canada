@@ -38,8 +38,24 @@ const navItems: Record<MarketName, NavEntry[]> = {
   ],
   ghana: [
     { label: 'Home', path: '' },
-    { label: 'TV Services', path: '/services' },
-    { label: 'About', path: '/about' },
+    { label: 'About', items: [
+      { label: 'Who We Are', path: '/about' },
+      { label: 'Our Approach', path: '/methodology' },
+      { label: 'Leadership', path: '/leadership' },
+      { label: 'Governance', path: '/governance' },
+    ] },
+    { label: 'Capabilities', items: [
+      { label: 'What We Do', path: '/what-we-do' },
+      { label: 'Development Programs', path: '/development-programs' },
+      { label: 'Industries', path: '/industries' },
+      { label: 'Methodology', path: '/methodology' },
+    ] },
+    { label: 'Evidence', items: [
+      { label: 'Projects & Impact', path: '/projects-impact' },
+      { label: 'Insights & Research', path: '/insights' },
+    ] },
+    { label: 'Partnerships', path: '/partnerships' },
+    { label: 'Providence TV', path: '/providence-tv' },
     { label: 'Contact', path: '/contact' },
   ],
 };
@@ -58,12 +74,23 @@ const footerNavItems: Record<MarketName, NavLink[]> = {
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ],
-  ghana: navItems.ghana as NavLink[],
+  ghana: [
+    { label: 'Home', path: '' },
+    { label: 'About', path: '/about' },
+    { label: 'What We Do', path: '/what-we-do' },
+    { label: 'Our Methodology', path: '/methodology' },
+    { label: 'Development Programs', path: '/development-programs' },
+    { label: 'Projects & Impact', path: '/projects-impact' },
+    { label: 'Insights', path: '/insights' },
+    { label: 'Partnerships', path: '/partnerships' },
+    { label: 'Providence TV', path: '/providence-tv' },
+    { label: 'Contact', path: '/contact' },
+  ],
 };
 
 const marketDescriptions: Record<MarketName, string> = {
   canada: 'Telecom & Healthcare Staffing',
-  ghana: 'TV Services',
+  ghana: 'Advisory & Enterprise Development',
 };
 
 const marketFlags: Record<MarketName, string> = {
@@ -169,7 +196,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
           })}
         </nav>
         <div className="header-actions">
-          {market === 'ghana' && <a className="crm-link" href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
+          {market === 'ghana' && <a className="crm-link" href="/ghana/contact?interest=Development%20%2F%20institutional%20partnership">Discuss a partnership <ArrowUpRight /></a>}
           {market === 'canada' && <div className="header-pathway-actions">
             <a className="header-action header-action-solid" href="/canada/contact">Get a Quote</a>
           </div>}
@@ -215,7 +242,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
               }
               return <a key={entry.label} href={`/${market}${entry.path}`}>{entry.label}</a>;
             })}
-            {market === 'ghana' && <a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a>}
+            {market === 'ghana' && <a href="/ghana/contact?interest=Development%20%2F%20institutional%20partnership">Discuss a partnership <ArrowUpRight /></a>}
           </nav>
           <a className="mobile-market-switch" href={otherPath} onClick={() => rememberMarket(otherMarket)}>
             <span aria-hidden="true">{marketFlags[market]}</span>
@@ -228,7 +255,7 @@ export function MarketShell({ market, children }: { market: MarketName; children
       <footer className="site-footer">
         <div className="footer-brand">
           <a className="wordmark" href={`/${market}`}><span className="wordmark-logo footer-wordmark-logo"><Image src="/providence-logo-mark.png" alt="" width={512} height={320} /></span><span>Providence</span></a>
-          <p>Helpful service. Dependable communication. Practical technology.</p>
+          <p>{market === 'ghana' ? 'Built in Africa. Informed by evidence. Designed for growth.' : 'Helpful service. Dependable communication. Practical technology.'}</p>
         </div>
         <div className="footer-links">
           <div><strong>{markets[market].shortLabel}</strong>{footerNavItems[market].map((item) => <a key={item.label} href={`/${market}${item.path}`}>{item.label}</a>)}</div>

@@ -5,7 +5,7 @@ import { isMarket, pageMeta, type MarketName, type SiteSection } from '@/lib/con
 
 const sections: Record<MarketName, SiteSection[]> = {
   canada: ['residential', 'business', 'solutions', 'why-providence', 'healthcare-staffing', 'care-organizations', 'healthcare-workers', 'telecom', 'services', 'about', 'contact'],
-  ghana: ['services', 'about', 'contact'],
+  ghana: ['services', 'about', 'what-we-do', 'methodology', 'development-programs', 'industries', 'projects-impact', 'insights', 'partnerships', 'providence-tv', 'leadership', 'governance', 'contact'],
 };
 
 function isSection(market: MarketName, value: string): value is SiteSection {
