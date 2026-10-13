@@ -154,10 +154,10 @@ img { max-width: 100%; }
 .market-hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding: 10rem clamp(1.25rem, 6.4vw, 7.5rem) 7rem; color: white; background: var(--navy); isolation: isolate; }
 .market-hero-image { z-index: -3; object-fit: cover; object-position: center; animation: hero-arrive 1.35s cubic-bezier(.2,.8,.2,1) both; }
 .market-ghana .market-hero-image { object-position: 68% center; }
-.healthcare-hero .market-hero-image { object-position: center 42%; }
+.canada-hero .market-hero-image { object-position: center 42%; }
 .market-hero-overlay { position: absolute; inset: 0; z-index: -2; background: linear-gradient(90deg,rgba(6,24,48,.97) 0%,rgba(7,28,55,.86) 31%,rgba(8,35,68,.3) 65%,rgba(8,35,68,.1)),linear-gradient(0deg,rgba(5,21,43,.86),transparent 56%); }
-.healthcare-hero .market-hero-overlay { background: linear-gradient(100deg,rgba(9,45,84,.93) 0%,rgba(12,58,105,.84) 34%,rgba(14,79,143,.4) 66%,rgba(14,79,143,.14)),linear-gradient(0deg,rgba(8,38,72,.78),transparent 58%); }
-.no-photo-hero.healthcare-hero .market-hero-overlay { background: linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 55%,var(--navy-3) 100%); }
+.canada-hero .market-hero-overlay { background: linear-gradient(100deg,rgba(9,45,84,.93) 0%,rgba(12,58,105,.84) 34%,rgba(14,79,143,.4) 66%,rgba(14,79,143,.14)),linear-gradient(0deg,rgba(8,38,72,.78),transparent 58%); }
+.no-photo-hero.canada-hero .market-hero-overlay { background: linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 55%,var(--navy-3) 100%); }
 .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .market-hero-content { position: relative; z-index: 3; width: min(720px, 64vw); animation: content-rise .85s .12s cubic-bezier(.2,.8,.2,1) both; }
 .kicker, .section-kicker { display: flex; align-items: center; gap: .55rem; margin: 0 0 1.2rem; color: #dcecff; font-size: .72rem; font-weight: 850; letter-spacing: .16em; text-transform: uppercase; }
@@ -456,7 +456,7 @@ img { max-width: 100%; }
   .market-switcher summary { min-width: 124px; }
   .market-hero { min-height: 88svh; padding-top: 8rem; padding-bottom: 4.2rem; }
   .market-hero-image { object-position: 57% center; }
-  .healthcare-hero .market-hero-image { object-position: 55% center; }
+  .canada-hero .market-hero-image { object-position: 55% center; }
   .market-ghana .market-hero-image { object-position: 70% center; }
   .market-hero-overlay { background: linear-gradient(0deg,rgba(5,22,44,.98) 5%,rgba(7,28,55,.89) 57%,rgba(8,35,68,.22)); }
   .market-hero-content, .interior-hero .market-hero-content { width: 100%; }

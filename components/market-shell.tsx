@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Image from 'next/image';
-import { GHANA_CRM_URL, markets, marketUrl, type MarketName } from '@/lib/content';
+import { GHANA_CRM_URL, HEALTHCARE_CONTENT_ENABLED, markets, marketUrl, type MarketName } from '@/lib/content';
 
 type NavLink = { label: string; path: string };
 type NavDropdown = { label: string; items: NavLink[] };
@@ -32,7 +32,7 @@ const navItems: Record<MarketName, NavEntry[]> = {
     ] },
     { label: 'Solutions', path: '/solutions' },
     { label: 'Why Providence', path: '/why-providence' },
-    { label: 'Healthcare', path: '/healthcare-staffing' },
+    ...(HEALTHCARE_CONTENT_ENABLED ? [{ label: 'Healthcare', path: '/healthcare-staffing' }] : []),
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ],
@@ -52,9 +52,11 @@ const footerNavItems: Record<MarketName, NavLink[]> = {
     { label: 'Solutions', path: '/solutions' },
     { label: 'Why Providence', path: '/why-providence' },
     { label: 'Partner With Providence', path: '/telecom' },
-    { label: 'Healthcare staffing', path: '/healthcare-staffing' },
-    { label: 'For care organizations', path: '/care-organizations' },
-    { label: 'For healthcare workers', path: '/healthcare-workers' },
+    ...(HEALTHCARE_CONTENT_ENABLED ? [
+      { label: 'Healthcare staffing', path: '/healthcare-staffing' },
+      { label: 'For care organizations', path: '/care-organizations' },
+      { label: 'For healthcare workers', path: '/healthcare-workers' },
+    ] : []),
     { label: 'About', path: '/about' },
     { label: 'Contact', path: '/contact' },
   ],
@@ -62,7 +64,7 @@ const footerNavItems: Record<MarketName, NavLink[]> = {
 };
 
 const marketDescriptions: Record<MarketName, string> = {
-  canada: 'Telecom & Healthcare Staffing',
+  canada: HEALTHCARE_CONTENT_ENABLED ? 'Telecom & Healthcare Staffing' : 'Home & Business Connectivity',
   ghana: 'TV Services',
 };
 

@@ -41,6 +41,9 @@ import {
 export type MarketName = 'canada' | 'ghana';
 export type SiteSection = 'home' | 'residential' | 'business' | 'solutions' | 'why-providence' | 'healthcare-staffing' | 'care-organizations' | 'healthcare-workers' | 'telecom' | 'services' | 'about' | 'contact';
 
+// Keep the healthcare division implemented but remove it from the public site
+// until Providence is ready to enable it again.
+export const HEALTHCARE_CONTENT_ENABLED = false;
 export const GHANA_CRM_URL = 'https://providence-ghana-crm.agyapongalexandra.chatgpt.site';
 export const MARKET_ORIGINS: Record<MarketName, string> = {
   canada: 'https://providencecanada.ca',
@@ -61,14 +64,16 @@ export const markets = {
     heroCopy: 'Providence connects homes and businesses with internet, TV, phone, and connectivity solutions, with real people available to help you understand your options, choose what fits, and get connected.',
     primaryCta: 'For my home',
     secondaryCta: 'For my business',
-    contactIntro: 'Tell us whether you need home services, business services, are a telecom provider, or have a healthcare inquiry. We will route your request to the right Providence Canada conversation.',
+    contactIntro: 'Tell us whether you need home services, business services, connection help, or are a telecom provider. We will route your request to the right Providence Canada conversation.',
     contactOptions: [
       'Home telecom services',
       'Business telecom services',
       'Telecom provider / partnership inquiry',
-      'Find staff for a care organization',
-      'Explore healthcare work opportunities',
-      'Healthcare staffing question',
+      ...(HEALTHCARE_CONTENT_ENABLED ? [
+        'Find staff for a care organization',
+        'Explore healthcare work opportunities',
+        'Healthcare staffing question',
+      ] : []),
       'General inquiry',
     ],
     services: [
@@ -240,8 +245,8 @@ export const pageMeta: Record<MarketName, Partial<Record<SiteSection, { title: s
     'healthcare-workers': { title: 'Find Healthcare Work | Providence Canada', description: 'Healthcare and care-support professionals can share qualifications, availability, and work interests with Providence Canada.' },
     telecom: { title: 'Partner With Providence | Telecom Sales & Customer Acquisition', description: 'Providence Canada performs telesales, sales representation, lead generation, campaign execution, and business development directly for telecom partners.' },
     services: { title: 'Healthcare Staffing (Developing Division) | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations.' },
-    about: { title: 'About Providence Canada', description: 'Providence connects residential and business customers with internet, TV, and phone solutions, with healthcare staffing and recruitment as a developing second division.' },
-    contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about home or business telecom service, a telecom partnership, or a healthcare inquiry.' },
+    about: { title: 'About Providence Canada', description: 'Providence connects residential and business customers with internet, TV, phone, and connectivity solutions.' },
+    contact: { title: 'Contact Providence Canada', description: 'Contact Providence Canada about home or business telecom service, connection problems, or a telecom partnership.' },
   },
   ghana: {
     home: { title: 'Providence Ghana | TV Box Sales, Installation & Support', description: 'Order a Providence TV box, arrange installation, choose a service plan, or get customer support in Ghana.' },

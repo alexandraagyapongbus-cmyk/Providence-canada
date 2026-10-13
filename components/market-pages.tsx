@@ -36,6 +36,7 @@ import {
   candidateJourney,
   careIndustries,
   GHANA_CRM_URL,
+  HEALTHCARE_CONTENT_ENABLED,
   healthcareRoles,
   howProvidenceWorksSteps,
   markets,
@@ -65,7 +66,7 @@ function Hero({ market, interior = false, title, copy, photo = true, eyebrow, ey
   const showPhoto = isCanada ? photo : true;
   const Icon = EyebrowIcon || (isCanada ? RadioTower : Tv);
   return (
-    <section className={`market-hero ${interior ? 'interior-hero' : ''} ${isCanada ? 'healthcare-hero' : ''} ${!showPhoto ? 'no-photo-hero' : ''}`}>
+    <section className={`market-hero ${interior ? 'interior-hero' : ''} ${isCanada ? 'canada-hero' : ''} ${!showPhoto ? 'no-photo-hero' : ''}`}>
       {showPhoto && (
         <Image
           className="market-hero-image"
@@ -170,7 +171,7 @@ function AboutTeaserSection() {
   return <section className="canada-section canada-section-light">
     <div className="canada-about-teaser">
       <div>
-        <SectionHeading eyebrow="About Providence" title="Connection, service, and choice — with a growing second division." copy="Providence Canada connects residential and business customers with internet, TV, and phone solutions, and is developing healthcare staffing and recruitment as an expanding second division." />
+        <SectionHeading eyebrow="About Providence" title={HEALTHCARE_CONTENT_ENABLED ? 'Connection, service, and choice — with a growing second division.' : 'Connection, service, and choice for homes and businesses.'} copy={HEALTHCARE_CONTENT_ENABLED ? 'Providence Canada connects residential and business customers with internet, TV, and phone solutions, and is developing healthcare staffing and recruitment as an expanding second division.' : 'Providence Canada helps residential and business customers understand internet, TV, phone, and connectivity options and organize the next step.'} />
       </div>
       <a className="button button-dark" href="/canada/about">About Providence <ArrowRight /></a>
     </div>
@@ -269,7 +270,7 @@ function HomeBusinessHealthcareFinalCta() {
     <section className="canada-section canada-section-blue telecom-final-cta-intro">
       <SectionHeading light eyebrow="Get started" title="What brings you to Providence?" />
     </section>
-    <section className="telecom-final-cta">
+    <section className={`telecom-final-cta ${HEALTHCARE_CONTENT_ENABLED ? '' : 'two-up'}`}>
       <article>
         <p>I need home services</p>
         <h3>For My Home</h3>
@@ -280,11 +281,11 @@ function HomeBusinessHealthcareFinalCta() {
         <h3>For My Business</h3>
         <a className="text-link" href="/canada/business">Get a business quote <ArrowRight /></a>
       </article>
-      <article>
+      {HEALTHCARE_CONTENT_ENABLED && <article>
         <p>I'm interested in healthcare</p>
         <h3>Explore Healthcare</h3>
         <a className="text-link" href="/canada/healthcare-staffing">Explore healthcare <ArrowRight /></a>
-      </article>
+      </article>}
     </section>
   </>;
 }
@@ -301,7 +302,7 @@ function CanadaHome() {
     <SolutionsTeaserSection />
     <HowProvidenceWorksSection />
     <WhyBuyThroughProvidenceSection />
-    <HealthcareSecondaryDivisionSection />
+    {HEALTHCARE_CONTENT_ENABLED && <HealthcareSecondaryDivisionSection />}
     <AboutTeaserSection />
     <HomeBusinessHealthcareFinalCta />
   </MarketShell>;
@@ -655,7 +656,7 @@ function GhanaServicesPage() {
 function AboutPage({ market }: { market: MarketName }) {
   return <MarketShell market={market}>
     <Hero market={market} interior title="One Providence. Two focused markets." copy="Providence operates across Canada and Ghana with distinct local services and one shared commitment to helpful, dependable communication." />
-    <section className="about-story"><Reveal className="about-copy"><p className="section-kicker">Who we are</p><h2>Connection, service, and choice — built around what people need.</h2><p>In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions — one conversation with Providence, with real people to help along the way. Healthcare staffing and recruitment is a developing second division, connecting care organizations with healthcare professionals as it grows.</p><p>In Ghana, Providence continues to focus on its TV box offer, installation, service plans, and customer support. The services differ, but the standard is the same: listen carefully, communicate clearly, and organize the next step.</p></Reveal><div className="market-story-grid"><a href={market === 'canada' ? '/canada' : marketUrl('canada')}><RadioTower /><small>Canada</small><strong>Telecom services & healthcare staffing</strong><ArrowUpRight /></a><a href={market === 'ghana' ? '/ghana' : marketUrl('ghana')}><Tv /><small>Ghana</small><strong>TV box sales, setup & support</strong><ArrowUpRight /></a></div></section>
+    <section className="about-story"><Reveal className="about-copy"><p className="section-kicker">Who we are</p><h2>Connection, service, and choice — built around what people need.</h2><p>{HEALTHCARE_CONTENT_ENABLED ? 'In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions — one conversation with Providence, with real people to help along the way. Healthcare staffing and recruitment is a developing second division, connecting care organizations with healthcare professionals as it grows.' : 'In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions — one conversation with Providence, with real people to help along the way.'}</p><p>In Ghana, Providence continues to focus on its TV box offer, installation, service plans, and customer support. The services differ, but the standard is the same: listen carefully, communicate clearly, and organize the next step.</p></Reveal><div className="market-story-grid"><a href={market === 'canada' ? '/canada' : marketUrl('canada')}><RadioTower /><small>Canada</small><strong>{HEALTHCARE_CONTENT_ENABLED ? 'Telecom services & healthcare staffing' : 'Home & business connectivity'}</strong><ArrowUpRight /></a><a href={market === 'ghana' ? '/ghana' : marketUrl('ghana')}><Tv /><small>Ghana</small><strong>TV box sales, setup & support</strong><ArrowUpRight /></a></div></section>
     <section className="values-section"><SectionHeading eyebrow="What connects our work" title="A shared service standard." /><div className="value-grid">{storyValues.map((value) => { const Icon = value.icon; return <article key={value.title}><Icon /><h3>{value.title}</h3><p>{value.text}</p></article>; })}</div></section>
     <section className="truth-section"><Globe2 /><div><p className="section-kicker">Grounded, not overstated</p><h2>We say what Providence does—and leave unsupported claims out.</h2><p>This website does not claim confirmed provider partnerships, carrier authorization, staffing contracts, current job openings, guaranteed placements, licence status, invented customer numbers, or sales results. Verified details can be added as the business develops.</p></div></section>
     {market === 'canada' && <section className="canada-employer-band canada-employer-band-alt"><div><h2>Interested in partnering with Providence?</h2><p>Providence also performs telesales and customer-acquisition work directly for telecom companies.</p></div><a className="button button-dark" href="/canada/telecom">Partner With Providence <ArrowRight /></a></section>}
@@ -674,7 +675,7 @@ function ContactPage({ market }: { market: MarketName }) {
         <a className="canada-lookup-tile" href="/canada/contact?interest=General%20inquiry"><Sparkles /><span>Something else</span></a>
       </div>
     </section>}
-    <section className="contact-section"><div className="contact-context"><p className="section-kicker">Contact {markets[market].shortLabel}</p><h2>Tell us what brings you here.</h2><p>{markets[market].contactIntro}</p>{market === 'canada' && <div className="contact-path-links"><a href="/canada/care-organizations">Need healthcare staff? Use the organization form <ArrowRight /></a><a href="/canada/healthcare-workers">Looking for healthcare work? Use the worker form <ArrowRight /></a></div>}<div className="contact-reassurance"><ShieldCheck /><span><strong>Useful details only</strong>Your information is used to respond to this request.</span></div><div className="contact-reassurance"><Sparkles /><span><strong>Market-specific follow-up</strong>Your inquiry is routed as a {markets[market].name} request.</span></div>{market === 'ghana' && <div className="staff-callout"><small>Providence staff</small><p>Customer ordering is handled through this form. Staff access remains separate.</p><a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a></div>}</div><div className="form-panel"><LeadForm market={market} /></div></section>
+    <section className="contact-section"><div className="contact-context"><p className="section-kicker">Contact {markets[market].shortLabel}</p><h2>Tell us what brings you here.</h2><p>{markets[market].contactIntro}</p>{market === 'canada' && HEALTHCARE_CONTENT_ENABLED && <div className="contact-path-links"><a href="/canada/care-organizations">Need healthcare staff? Use the organization form <ArrowRight /></a><a href="/canada/healthcare-workers">Looking for healthcare work? Use the worker form <ArrowRight /></a></div>}<div className="contact-reassurance"><ShieldCheck /><span><strong>Useful details only</strong>Your information is used to respond to this request.</span></div><div className="contact-reassurance"><Sparkles /><span><strong>Market-specific follow-up</strong>Your inquiry is routed as a {markets[market].name} request.</span></div>{market === 'ghana' && <div className="staff-callout"><small>Providence staff</small><p>Customer ordering is handled through this form. Staff access remains separate.</p><a href={GHANA_CRM_URL} target="_blank" rel="noreferrer">Staff CRM Login <ArrowUpRight /></a></div>}</div><div className="form-panel"><LeadForm market={market} /></div></section>
   </MarketShell>;
 }
 
@@ -685,9 +686,9 @@ export function MarketPage({ market, section }: { market: MarketName; section: S
     if (section === 'business') return <BusinessPage />;
     if (section === 'solutions') return <SolutionsPage />;
     if (section === 'why-providence') return <WhyProvidencePage />;
-    if (section === 'healthcare-staffing' || section === 'services') return <HealthcareStaffingPage />;
-    if (section === 'care-organizations') return <CareOrganizationsPage />;
-    if (section === 'healthcare-workers') return <HealthcareWorkersPage />;
+    if (HEALTHCARE_CONTENT_ENABLED && (section === 'healthcare-staffing' || section === 'services')) return <HealthcareStaffingPage />;
+    if (HEALTHCARE_CONTENT_ENABLED && section === 'care-organizations') return <CareOrganizationsPage />;
+    if (HEALTHCARE_CONTENT_ENABLED && section === 'healthcare-workers') return <HealthcareWorkersPage />;
     if (section === 'telecom') return <TelecomPage />;
   }
   if (market === 'ghana' && section === 'services') return <GhanaServicesPage />;

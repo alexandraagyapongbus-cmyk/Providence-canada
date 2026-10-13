@@ -11,7 +11,7 @@ const destinations = [
     country: 'Canada',
     flag: '🇨🇦',
     title: 'Providence Canada',
-    description: 'Healthcare staffing and recruitment, with telecom sales and marketing services.',
+    description: 'Internet, TV, phone and connectivity solutions for homes and businesses.',
   },
   {
     market: 'ghana' as const,

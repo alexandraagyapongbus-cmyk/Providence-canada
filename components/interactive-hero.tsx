@@ -84,7 +84,7 @@ export function InteractiveHero() {
 
   return (
     <div className={`hero-pin-wrap ${reducedMotion ? 'no-pin' : ''}`}>
-      <section className="market-hero healthcare-hero interactive-hero" ref={stageRef}>
+      <section className="market-hero canada-hero interactive-hero" ref={stageRef}>
         <Image className="market-hero-image" src={MEDIA.poster} alt={MEDIA.alt} fill priority sizes="100vw" />
         {showVideo && (
           <video className="market-hero-image hero-video" autoPlay muted loop playsInline preload="auto" poster={MEDIA.poster} aria-hidden="true">

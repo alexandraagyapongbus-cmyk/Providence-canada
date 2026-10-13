@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { MarketPage } from '@/components/market-pages';
-import { isMarket, pageMeta, type MarketName, type SiteSection } from '@/lib/content';
+import { HEALTHCARE_CONTENT_ENABLED, isMarket, pageMeta, type MarketName, type SiteSection } from '@/lib/content';
 
 const sections: Record<MarketName, SiteSection[]> = {
-  canada: ['residential', 'business', 'solutions', 'why-providence', 'healthcare-staffing', 'care-organizations', 'healthcare-workers', 'telecom', 'services', 'about', 'contact'],
+  canada: [
+    'residential', 'business', 'solutions', 'why-providence', 'telecom', 'about', 'contact',
+    ...(HEALTHCARE_CONTENT_ENABLED ? ['healthcare-staffing', 'care-organizations', 'healthcare-workers', 'services'] as SiteSection[] : []),
+  ],
   ghana: ['services', 'about', 'contact'],
 };
 
