@@ -18,7 +18,7 @@ const destinations = [
     country: 'Ghana',
     flag: '🇬🇭',
     title: 'Providence Ghana',
-    description: 'TV box services, professional setup and dependable customer support.',
+    description: 'Business advisory, enterprise development and implementation support across Africa.',
   },
 ];
 
