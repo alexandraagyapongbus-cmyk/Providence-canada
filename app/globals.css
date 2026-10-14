@@ -530,7 +530,7 @@ img { max-width: 100%; }
 }
 
 /* ---------------------------------------------------------------------- */
-/* Providence Canada — hub motion system                                  */
+/* Providence Canada - hub motion system                                  */
 /* Scoped to .market-canada so Ghana's calmer, established look is        */
 /* untouched. Everything here still respects prefers-reduced-motion via   */
 /* the global rule at the bottom of this file.                            */
@@ -594,7 +594,7 @@ img { max-width: 100%; }
 .market-canada .process-grid article:hover span { animation: float-soft 1.6s ease-in-out infinite; }
 
 /* ---------------------------------------------------------------------- */
-/* Providence Canada — deep mid-blue palette + homepage rebuild            */
+/* Providence Canada - deep mid-blue palette + homepage rebuild            */
 /* Overriding --navy/-2/-3 here re-themes every var(--navy*) consumer      */
 /* inside Canada pages (hero, dark-section, connection graphic, footer     */
 /* tiles, buttons) without touching Ghana, which never sits inside         */
@@ -749,7 +749,7 @@ img { max-width: 100%; }
   .interactive-hero .market-hero-content { transform: none; opacity: 1; }
 }
 
-/* Providence Ghana — institutional advisory and enterprise development */
+/* Providence Ghana - institutional advisory and enterprise development */
 .market-ghana { --ghana-ink:#091b2c; --ghana-deep:#071a2a; --ghana-blue:#0b3a5b; --ghana-copper:#c78b45; --ghana-sand:#ead9bd; --ghana-mist:#e9eef1; --ghana-green:#3d6c5e; color:var(--ghana-ink); background:#f7f8f7; }
 .market-ghana .site-header { background:rgba(5,22,35,.94); }
 .desktop-nav-ghana { gap:clamp(.55rem,1vw,1.15rem); font-size:.69rem; }

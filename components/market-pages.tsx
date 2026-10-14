@@ -172,7 +172,7 @@ function AboutTeaserSection() {
   return <section className="canada-section canada-section-light">
     <div className="canada-about-teaser">
       <div>
-        <SectionHeading eyebrow="About Providence" title={HEALTHCARE_CONTENT_ENABLED ? 'Connection, service, and choice — with a growing second division.' : 'Connection, service, and choice for homes and businesses.'} copy={HEALTHCARE_CONTENT_ENABLED ? 'Providence Canada connects residential and business customers with internet, TV, and phone solutions, and is developing healthcare staffing and recruitment as an expanding second division.' : 'Providence Canada helps residential and business customers understand internet, TV, phone, and connectivity options and organize the next step.'} />
+        <SectionHeading eyebrow="About Providence" title={HEALTHCARE_CONTENT_ENABLED ? 'Connection, service, and choice, with a growing second division.' : 'Connection, service, and choice for homes and businesses.'} copy={HEALTHCARE_CONTENT_ENABLED ? 'Providence Canada connects residential and business customers with internet, TV, and phone solutions, and is developing healthcare staffing and recruitment as an expanding second division.' : 'Providence Canada helps residential and business customers understand internet, TV, phone, and connectivity options and organize the next step.'} />
       </div>
       <a className="button button-dark" href="/canada/about">About Providence <ArrowRight /></a>
     </div>
@@ -180,7 +180,7 @@ function AboutTeaserSection() {
 }
 
 function CanadaFinalCta() {
-  return <section className="final-cta"><div><p className="section-kicker">Start the right conversation</p><h2>Need staff—or ready to explore healthcare work?</h2></div><div className="final-cta-actions"><a className="button button-primary" href="/canada/care-organizations">I'm looking for staff <ArrowUpRight /></a><a className="button button-outline-light" href="/canada/healthcare-workers">I'm looking for work</a></div></section>;
+  return <section className="final-cta"><div><p className="section-kicker">Start the right conversation</p><h2>Need staff, or ready to explore healthcare work?</h2></div><div className="final-cta-actions"><a className="button button-primary" href="/canada/care-organizations">I'm looking for staff <ArrowUpRight /></a><a className="button button-outline-light" href="/canada/healthcare-workers">I'm looking for work</a></div></section>;
 }
 
 function WhatAreYouLookingForSection() {
@@ -227,7 +227,7 @@ function ResidentialBusinessSplitSection() {
 
 function SolutionsTeaserSection() {
   return <section className="canada-employer-band">
-    <div><h2>One place for everything you need.</h2><p>Internet, TV, phone, and connectivity — see the full range of solutions Providence can help with, for home or business.</p></div>
+    <div><h2>One place for everything you need.</h2><p>Internet, TV, phone, and connectivity. See the full range of solutions Providence can help with, for home or business.</p></div>
     <a className="button button-primary" href="/canada/solutions">Explore Solutions <ArrowUpRight /></a>
   </section>;
 }
@@ -344,8 +344,8 @@ function HealthcareStaffingPage() {
 function CareOrganizationsPage() {
   return <MarketShell market="canada">
     <Hero market="canada" interior eyebrow="Healthcare staffing & recruitment · Ontario" eyebrowIcon={Stethoscope} image="/providence-canada-hero-poster.jpg" imageAlt="Healthcare professionals conferring in a hospital corridor" title="Tell us where your care team needs support." copy="Share the role, location, schedule, and timing. Providence will review the need and coordinate an appropriate next conversation." />
-    <section className="inquiry-overview"><div><p className="section-kicker">For care organizations</p><h2>Useful staffing details, without a lengthy intake.</h2><p>Providence welcomes inquiries from Ontario care organizations, including retirement and long-term care homes, hospices, hospitals, and home and community care providers.</p><p>These categories indicate the kinds of conversations we are open to—not a claim of an existing contract with every type of organization.</p></div><div className="inquiry-facts"><div><Users /><strong>Role & headcount</strong><span>Who you need and approximately how many.</span></div><div><MapPin /><strong>Location & setting</strong><span>Where the work takes place and the care environment.</span></div><div><CalendarDays /><strong>Schedule & timing</strong><span>Shift pattern, duration, and expected start.</span></div></div></section>
-    <section className="contact-section focused-form-section"><div className="contact-context"><p className="section-kicker">Find staff</p><h2>Start a staffing conversation.</h2><p>Provide the core details below. Providence will use them to understand the request and follow up—not to imply that staffing is already confirmed.</p><div className="contact-reassurance"><ShieldCheck /><span><strong>Needs-led review</strong>We begin with the role, setting, schedule, and practical requirements.</span></div><div className="contact-reassurance"><HeartHandshake /><span><strong>Human follow-through</strong>A Providence team member can clarify details and discuss next steps.</span></div></div><div className="form-panel"><LeadForm market="canada" mode="organization" /></div></section>
+    <section className="inquiry-overview"><div><p className="section-kicker">For care organizations</p><h2>Useful staffing details, without a lengthy intake.</h2><p>Providence welcomes inquiries from Ontario care organizations, including retirement and long-term care homes, hospices, hospitals, and home and community care providers.</p><p>These categories indicate the kinds of conversations we are open to, not a claim of an existing contract with every type of organization.</p></div><div className="inquiry-facts"><div><Users /><strong>Role & headcount</strong><span>Who you need and approximately how many.</span></div><div><MapPin /><strong>Location & setting</strong><span>Where the work takes place and the care environment.</span></div><div><CalendarDays /><strong>Schedule & timing</strong><span>Shift pattern, duration, and expected start.</span></div></div></section>
+    <section className="contact-section focused-form-section"><div className="contact-context"><p className="section-kicker">Find staff</p><h2>Start a staffing conversation.</h2><p>Provide the core details below. Providence will use them to understand the request and follow up. This does not imply that staffing is already confirmed.</p><div className="contact-reassurance"><ShieldCheck /><span><strong>Needs-led review</strong>We begin with the role, setting, schedule, and practical requirements.</span></div><div className="contact-reassurance"><HeartHandshake /><span><strong>Human follow-through</strong>A Providence team member can clarify details and discuss next steps.</span></div></div><div className="form-panel"><LeadForm market="canada" mode="organization" /></div></section>
   </MarketShell>;
 }
 
@@ -353,17 +353,17 @@ function HealthcareWorkersPage() {
   return <MarketShell market="canada">
     <Hero market="canada" interior eyebrow="Healthcare staffing & recruitment · Ontario" eyebrowIcon={Stethoscope} image="/providence-canada-hero-poster.jpg" imageAlt="Healthcare professionals conferring in a hospital corridor" title="Bring your skills to the right care setting." copy="PSWs, RPNs, RNs, support workers, and other care professionals can share their qualifications, availability, and work interests with Providence Canada." />
     <section className="inquiry-overview worker-overview"><div><p className="section-kicker">For healthcare workers</p><h2>Let us understand what a suitable opportunity means to you.</h2><p>Tell us about your role, experience, Ontario location, availability, and preferred care environment. Providence can use that information when considering relevant staffing conversations.</p><p>This is an expression of interest, not a job application to a named opening and not a guarantee of placement.</p></div><div className="inquiry-facts"><div><Stethoscope /><strong>Role & qualifications</strong><span>Your professional background and relevant credentials.</span></div><div><Clock3 /><strong>Availability</strong><span>Full-time, part-time, casual, or flexible preferences.</span></div><div><Building2 /><strong>Preferred settings</strong><span>The care environments and locations that suit you.</span></div></div></section>
-    <section className="roles-section"><SectionHeading eyebrow="Professionals we want to hear from" title="A focused set of care roles—with room for others." /><HealthcareRoleGrid /></section>
+    <section className="roles-section"><SectionHeading eyebrow="Professionals we want to hear from" title="A focused set of care roles, with room for others." /><HealthcareRoleGrid /></section>
     <section className="contact-section focused-form-section"><div className="contact-context"><p className="section-kicker">Find work</p><h2>Share your healthcare work interests.</h2><p>Provide a concise overview. You do not need to upload a résumé at this stage; Providence can request supporting information later if an appropriate next step emerges.</p><div className="contact-reassurance"><ShieldCheck /><span><strong>Your information has a purpose</strong>Details are collected to respond and consider suitable opportunities.</span></div><div className="contact-reassurance"><Sparkles /><span><strong>No automatic promises</strong>Submitting interest does not create employment or guarantee placement.</span></div></div><div className="form-panel"><LeadForm market="canada" mode="worker" /></div></section>
   </MarketShell>;
 }
 
 function TelecomPage() {
   return <MarketShell market="canada">
-    <Hero market="canada" interior photo={false} eyebrow="Partner With Providence · Telecom Sales" title="We help telecom companies reach more customers." copy="Providence performs telesales, sales representation, lead generation, and campaign execution directly for telecom partners — this page is for telecom companies, not their customers." />
+    <Hero market="canada" interior photo={false} eyebrow="Partner With Providence · Telecom Sales" title="We help telecom companies reach more customers." copy="Providence performs telesales, sales representation, lead generation, and campaign execution directly for telecom partners. This page is for telecom companies, not their customers." />
 
     <section className="canada-section canada-section-blue" style={{ paddingBottom: 0 }} id="overview">
-      <SectionHeading light eyebrow="Overview" title="We connect telecom providers with the customers who need them." copy="Providence Canada performs the sales, telesales, and customer-acquisition work that brings telecommunications products and services to residential and business customers — directly, as our own team, not as supplied staff." />
+      <SectionHeading light eyebrow="Overview" title="We connect telecom providers with the customers who need them." copy="Providence Canada performs the sales, telesales, and customer-acquisition work that brings telecommunications products and services to residential and business customers directly, as our own team, not as supplied staff." />
     </section>
     <ConnectionGraphic
       ariaLabel="Telecom providers connect with residential and business customers through Providence's sales and customer-acquisition work"
@@ -371,17 +371,17 @@ function TelecomPage() {
       leftSub="Products · services · offers"
       rightLabel="Customers"
       rightSub="Residential · business"
-      caption="Sales, telesales, and customer-acquisition work — performed directly, on a partner's behalf."
+      caption="Sales, telesales, and customer-acquisition work performed directly on a partner's behalf."
     />
 
-    <section className="content-section page-intro" id="capabilities"><Reveal><SectionHeading eyebrow="For telecom companies & business partners" title="Sales and customer-acquisition work, performed directly." copy="Telesales, customer acquisition, sales representation, lead generation, campaign execution, and business development — Providence's own team does the outreach and campaign work, and does not supply or place sales staff on behalf of another organization." /></Reveal><ServiceGrid market="canada" />
+    <section className="content-section page-intro" id="capabilities"><Reveal><SectionHeading eyebrow="For telecom companies & business partners" title="Sales and customer-acquisition work, performed directly." copy="Telesales, customer acquisition, sales representation, lead generation, campaign execution, and business development. Providence's own team does the outreach and campaign work, and does not supply or place sales staff on behalf of another organization." /></Reveal><ServiceGrid market="canada" />
       <div className="telecom-audience-actions">
         <a className="button button-primary" href="/canada/contact?interest=Telecom%20provider%20%2F%20partnership%20inquiry">Partner with Providence <ArrowUpRight /></a>
         <a className="button button-outline-dark" href="/canada/contact?interest=Telecom%20provider%20%2F%20partnership%20inquiry">Discuss a sales campaign</a>
       </div>
     </section>
 
-    <section className="grounded-note"><ShieldCheck /><div><p className="section-kicker">A clear distinction</p><h2>We sell and reach customers. We do not supply sales employees.</h2><p>Providence performs telesales, representation, and customer-acquisition work directly for telecom partners. We do not recruit, place, or supply sales workers or staff to another company — that is a different service, and not one Providence offers today.</p></div></section>
+    <section className="grounded-note"><ShieldCheck /><div><p className="section-kicker">A clear distinction</p><h2>We sell and reach customers. We do not supply sales employees.</h2><p>Providence performs telesales, representation, and customer-acquisition work directly for telecom partners. We do not recruit, place, or supply sales workers or staff to another company. That is a different service, and not one Providence offers today.</p></div></section>
 
     <section className="canada-section canada-section-blue" id="sales-campaigns">
       <Reveal><SectionHeading light eyebrow="How a Providence sales campaign works" title="A clear process from strategy to results." /></Reveal>
@@ -410,9 +410,9 @@ type TelecomAudience = 'residential' | 'business';
 
 const residentialOverview = [
   { slug: 'internet', icon: residentialServices[0].icon, title: 'Home Internet', text: 'Choose around the number of people and devices in your home, what you do online, and what is available at your address.', image: '/service-images/residential-internet.png', alt: 'A family using connected devices together at home' },
-  { slug: 'tv', icon: residentialServices[1].icon, title: 'TV', text: 'Start with what you actually watch—live channels, news, sports, family programming, or streaming—and then compare equipment and packages.', image: '/service-images/residential-tv.png', alt: 'A multigenerational family enjoying television together' },
+  { slug: 'tv', icon: residentialServices[1].icon, title: 'TV', text: 'Start with what you actually watch, including live channels, news, sports, family programming, or streaming, and then compare equipment and packages.', image: '/service-images/residential-tv.png', alt: 'A multigenerational family enjoying television together' },
   { slug: 'home-phone', icon: residentialServices[2].icon, title: 'Home Phone', text: 'Explore a dependable home line, calling features, voicemail, number transfer, and long-distance choices where available.', image: '/service-images/residential-phone.png', alt: 'A woman speaking on a home telephone' },
-  { slug: 'bundles', icon: residentialServices[3].icon, title: 'Home Bundles', text: 'Bring internet, TV, and home phone into one conversation and compare the complete cost—not just the introductory price.', image: '/service-images/residential-bundles.png', alt: 'A couple reviewing home service options on a laptop' },
+  { slug: 'bundles', icon: residentialServices[3].icon, title: 'Home Bundles', text: 'Bring internet, TV, and home phone into one conversation and compare the complete cost, not just the introductory price.', image: '/service-images/residential-bundles.png', alt: 'A couple reviewing home service options on a laptop' },
 ];
 
 const businessOverview = [
@@ -459,7 +459,7 @@ const telecomServiceDetails = {
   residential: {
     internet: {
       icon: residentialServices[0].icon, title: 'Home Internet', eyebrow: 'Residential · Internet', image: '/service-images/residential-internet.png', alt: 'A family using several internet-connected devices at home',
-      intro: 'The right internet option begins with your address and how your household uses the connection—not with the biggest number on a plan.',
+      intro: 'The right internet option begins with your address and how your household uses the connection, not with the biggest number on a plan.',
       fit: [['Everyday connection', 'Browsing, email, schoolwork, and a smaller number of connected devices.'], ['Busy household', 'Several people streaming, working, studying, or joining video calls at the same time.'], ['Performance-focused', 'Gaming, frequent large downloads, content creation, or work that depends on upload performance.']],
       compare: [['Availability at your address', 'The connection technologies and providers available can differ from one street or building to another.'], ['Download and upload needs', 'Streaming and downloads rely heavily on download speed; video calls, cloud backups, and sending large files also depend on upload performance.'], ['Usage and equipment', 'Ask whether usage is unlimited, what modem or router is supplied, and whether your home may need additional Wi-Fi coverage.'], ['Full cost and terms', 'Review installation, equipment, promotional periods, regular pricing, term commitments, and cancellation conditions before deciding.']],
       questions: ['How many people and devices are usually online?', 'Do you work or study from home?', 'Do you stream, game, or upload large files?', 'Where does Wi-Fi need to reach in your home?'],
@@ -475,7 +475,7 @@ const telecomServiceDetails = {
     },
     'home-phone': {
       icon: residentialServices[2].icon, title: 'Home Phone', eyebrow: 'Residential · Home Phone', image: '/service-images/residential-phone.png', alt: 'A woman speaking on a cordless home telephone',
-      intro: 'A dedicated home line can keep household calling simple. The details—number transfer, features, calling areas, and how the service operates—are what matter.',
+      intro: 'A dedicated home line can keep household calling simple. The details that matter are number transfer, features, calling areas, and how the service operates.',
       fit: [['Everyday household line', 'A shared number for family calls, appointments, schools, services, and household contacts.'], ['Feature-conscious calling', 'Households that value caller ID, voicemail, call waiting, or other available calling features.'], ['Frequent or long-distance calling', 'People who need to understand local calling areas and domestic or international options before choosing.']],
       compare: [['Keep or change your number', 'Ask whether an existing telephone number can be transferred and avoid cancelling the current line before transfer instructions are confirmed.'], ['Calling features', 'Confirm which features are included and which cost extra; availability varies by provider and plan.'], ['Long-distance details', 'Review rates, included destinations, calling limits, and any add-ons that match who you call.'], ['How the line operates', 'Ask how the service connects, what equipment it uses, and what happens during an internet or power interruption.']],
       questions: ['Do you want to keep an existing number?', 'Which calling features do you use?', 'Do you make long-distance or international calls?', 'Is the line used for household, accessibility, or emergency-related needs?'],
@@ -483,17 +483,17 @@ const telecomServiceDetails = {
     },
     bundles: {
       icon: residentialServices[3].icon, title: 'Home Bundles', eyebrow: 'Residential · Bundles', image: '/service-images/residential-bundles.png', alt: 'A couple comparing home service options on a laptop',
-      intro: 'A bundle is useful when the combination fits—not simply because several services appear on one offer. Compare the complete setup and the cost after any promotion.',
+      intro: 'A bundle is useful when the combination fits, not simply because several services appear on one offer. Compare the complete setup and the cost after any promotion.',
       fit: [['Internet + TV', 'For households that want connected viewing and live or packaged television.'], ['Internet + Home Phone', 'For households that want online service and a dedicated shared calling line.'], ['Internet + TV + Phone', 'For households that prefer to coordinate all three services through one conversation.']],
       compare: [['The services you will use', 'Remove features or services that do not solve a real household need before comparing totals.'], ['Bundle versus separate pricing', 'Compare the complete monthly cost, equipment, installation, and the price after introductory periods.'], ['Terms and flexibility', 'Understand commitment periods and what happens to pricing if one service is changed or removed.'], ['Installation and account details', 'Ask whether services are installed together, what equipment is required, and how billing and support are handled.']],
-      questions: ['Which services do you already have?', 'What works well—and what needs to improve?', 'Which channels, calling features, or internet activities matter?', 'Are you comfortable with a term, or is flexibility more important?'],
+      questions: ['Which services do you already have?', 'What works well, and what needs to improve?', 'Which channels, calling features, or internet activities matter?', 'Are you comfortable with a term, or is flexibility more important?'],
       cta: 'Compare a home bundle', interest: 'Home bundle', related: [['Home Internet', '/canada/residential/internet'], ['TV', '/canada/residential/tv']],
     },
   },
   business: {
     internet: {
       icon: businessServices[0].icon, title: 'Business Internet', eyebrow: 'Business · Internet', image: '/service-images/business-connectivity.png', alt: 'A business team using connected technology in a modern office',
-      intro: 'Business internet should be planned around the work that stops when the connection slows or fails—not around speed alone.',
+      intro: 'Business internet should be planned around the work that stops when the connection slows or fails, not around speed alone.',
       fit: [['Connected office', 'Email, cloud software, file sharing, video meetings, and day-to-day team collaboration.'], ['Customer transactions', 'Point-of-sale, online ordering, bookings, guest Wi-Fi, or other customer-facing systems.'], ['Demanding operations', 'Larger teams, frequent uploads, multiple simultaneous calls, or systems that depend on consistent performance.']],
       compare: [['Users and simultaneous activity', 'Count staff, devices, guests, video meetings, payments, cloud systems, and busy periods.'], ['Upload as well as download', 'Cloud backups, shared files, cameras, and video calls may make upload performance especially important.'], ['Continuity needs', 'Consider support expectations, backup options, and the operational impact of an outage.'], ['Location, installation, and terms', 'Service type, installation timing, equipment, commitments, and pricing depend on the address and provider.']],
       questions: ['How many staff and devices connect during busy periods?', 'Which systems cannot operate without internet?', 'Do customers or guests use your Wi-Fi?', 'Do you upload large files or rely on video calls?'],
@@ -509,7 +509,7 @@ const telecomServiceDetails = {
     },
     tv: {
       icon: businessServices[2].icon, title: 'Business TV', eyebrow: 'Business · TV', image: '/service-images/business-customer-space.png', alt: 'A modern customer-facing business with a television in a shared area',
-      intro: 'TV in a business should support the environment—whether that means news in a waiting area, sports in hospitality, or programming in a common space.',
+      intro: 'TV in a business should support the environment, whether that means news in a waiting area, sports in hospitality, or programming in a common space.',
       fit: [['Waiting and reception areas', 'Programming that helps create a comfortable experience while customers or visitors wait.'], ['Hospitality and shared spaces', 'Content selected for dining, lounge, fitness, staff, or other communal environments.'], ['Multiple screens or zones', 'Businesses that need to think through where screens are located and whether different spaces need different content.']],
       compare: [['Business use and content', 'Describe the setting, audience, operating hours, and must-have channels before comparing packages.'], ['Commercial account requirements', 'Business viewing can have different terms from residential service; confirm the applicable service and permissions.'], ['Screens and equipment', 'Count televisions, identify their locations, and ask what equipment or wiring each screen requires.'], ['Installation and ongoing changes', 'Plan installation around operations and clarify how channel, equipment, or location changes are handled.']],
       questions: ['What type of space will show television?', 'How many screens and viewing areas are involved?', 'Which content is important to customers or staff?', 'Are there different needs in different areas?'],
@@ -603,7 +603,7 @@ function SolutionsPage() {
       </div>
     </section>
     <section className="canada-section canada-section-blue solution-process-section">
-      <Reveal><SectionHeading light eyebrow="How Providence approaches it" title="Start with the problem—not another generic recommendation." copy="We organize the information needed to understand the situation, identify realistic avenues to explore, and help coordinate the next conversation." /></Reveal>
+      <Reveal><SectionHeading light eyebrow="How Providence approaches it" title="Start with the problem, not another generic recommendation." copy="We organize the information needed to understand the situation, identify realistic avenues to explore, and help coordinate the next conversation." /></Reveal>
       <div className="solution-process-grid">
         <article><span>01</span><h3>Describe the symptoms</h3><p>Tell us what fails, where it fails, when it happens, and which activities are affected.</p></article>
         <article><span>02</span><h3>Map the environment</h3><p>We gather the address, building layout, service, equipment, users, devices, and fixes already attempted.</p></article>
@@ -657,9 +657,9 @@ function GhanaServicesPage() {
 function AboutPage({ market }: { market: MarketName }) {
   return <MarketShell market={market}>
     <Hero market={market} interior title="One Providence. Two focused markets." copy="Providence operates across Canada and Ghana with distinct local services and one shared commitment to helpful, dependable communication." />
-    <section className="about-story"><Reveal className="about-copy"><p className="section-kicker">Who we are</p><h2>Connection, service, and choice — built around what people need.</h2><p>{HEALTHCARE_CONTENT_ENABLED ? 'In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions — one conversation with Providence, with real people to help along the way. Healthcare staffing and recruitment is a developing second division, connecting care organizations with healthcare professionals as it grows.' : 'In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions — one conversation with Providence, with real people to help along the way.'}</p><p>In Ghana, Providence continues to focus on its TV box offer, installation, service plans, and customer support. The services differ, but the standard is the same: listen carefully, communicate clearly, and organize the next step.</p></Reveal><div className="market-story-grid"><a href={market === 'canada' ? '/canada' : marketUrl('canada')}><RadioTower /><small>Canada</small><strong>{HEALTHCARE_CONTENT_ENABLED ? 'Telecom services & healthcare staffing' : 'Home & business connectivity'}</strong><ArrowUpRight /></a><a href={market === 'ghana' ? '/ghana' : marketUrl('ghana')}><Tv /><small>Ghana</small><strong>TV box sales, setup & support</strong><ArrowUpRight /></a></div></section>
+    <section className="about-story"><Reveal className="about-copy"><p className="section-kicker">Who we are</p><h2>Connection, service, and choice, built around what people need.</h2><p>{HEALTHCARE_CONTENT_ENABLED ? 'In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions in one conversation, with real people to help along the way. Healthcare staffing and recruitment is a developing second division, connecting care organizations with healthcare professionals as it grows.' : 'In Canada, Providence connects residential and business customers with internet, TV, phone, and connectivity solutions in one conversation, with real people to help along the way.'}</p><p>In Ghana, Providence continues to focus on its TV box offer, installation, service plans, and customer support. The services differ, but the standard is the same: listen carefully, communicate clearly, and organize the next step.</p></Reveal><div className="market-story-grid"><a href={market === 'canada' ? '/canada' : marketUrl('canada')}><RadioTower /><small>Canada</small><strong>{HEALTHCARE_CONTENT_ENABLED ? 'Telecom services & healthcare staffing' : 'Home & business connectivity'}</strong><ArrowUpRight /></a><a href={market === 'ghana' ? '/ghana' : marketUrl('ghana')}><Tv /><small>Ghana</small><strong>TV box sales, setup & support</strong><ArrowUpRight /></a></div></section>
     <section className="values-section"><SectionHeading eyebrow="What connects our work" title="A shared service standard." /><div className="value-grid">{storyValues.map((value) => { const Icon = value.icon; return <article key={value.title}><Icon /><h3>{value.title}</h3><p>{value.text}</p></article>; })}</div></section>
-    <section className="truth-section"><Globe2 /><div><p className="section-kicker">Grounded, not overstated</p><h2>We say what Providence does—and leave unsupported claims out.</h2><p>This website does not claim confirmed provider partnerships, carrier authorization, staffing contracts, current job openings, guaranteed placements, licence status, invented customer numbers, or sales results. Verified details can be added as the business develops.</p></div></section>
+    <section className="truth-section"><Globe2 /><div><p className="section-kicker">Grounded, not overstated</p><h2>We say what Providence does and leave unsupported claims out.</h2><p>This website does not claim confirmed provider partnerships, carrier authorization, staffing contracts, current job openings, guaranteed placements, licence status, invented customer numbers, or sales results. Verified details can be added as the business develops.</p></div></section>
     {market === 'canada' && <section className="canada-employer-band canada-employer-band-alt"><div><h2>Interested in partnering with Providence?</h2><p>Providence also performs telesales and customer-acquisition work directly for telecom companies.</p></div><a className="button button-dark" href="/canada/telecom">Partner With Providence <ArrowRight /></a></section>}
     {market === 'canada' ? <HomeBusinessHealthcareFinalCta /> : <GhanaFinalCta />}
   </MarketShell>;

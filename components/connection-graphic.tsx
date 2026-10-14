@@ -6,7 +6,7 @@ export function ConnectionGraphic({
   leftSub = 'Roles · settings · schedules',
   rightLabel = 'Healthcare workers',
   rightSub = 'Qualifications · availability',
-  caption = 'Recruiting, matching, and staffing coordination — organized around real needs on both sides.',
+  caption = 'Recruiting, matching, and staffing coordination organized around real needs on both sides.',
 }: {
   ariaLabel?: string;
   leftLabel?: string;

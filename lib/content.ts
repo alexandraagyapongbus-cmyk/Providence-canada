@@ -60,7 +60,7 @@ export const markets = {
     shortLabel: 'Providence Canada',
     eyebrow: 'Internet, TV & phone solutions · Ontario',
     heroTitle: 'Everything you need to stay connected.',
-    heroTagline: 'Internet, TV, phone, and connectivity — through Providence, for home and business.',
+    heroTagline: 'Internet, TV, phone, and connectivity through Providence, for home and business.',
     heroCopy: 'Providence connects homes and businesses with internet, TV, phone, and connectivity solutions, with real people available to help you understand your options, choose what fits, and get connected.',
     primaryCta: 'For my home',
     secondaryCta: 'For my business',
@@ -209,7 +209,7 @@ export const howProvidenceWorksSteps = [
 ] as const;
 
 export const whyBuyThroughProvidence = [
-  { icon: Layers, title: 'One place for everything', text: 'Internet, TV, phone, and connectivity — handled through a single conversation with Providence.' },
+  { icon: Layers, title: 'One place for everything', text: 'Internet, TV, phone, and connectivity handled through a single conversation with Providence.' },
   { icon: MessageCircle, title: 'Human assistance', text: 'Talk to someone who can explain the options in plain terms.' },
   { icon: Building, title: 'Residential + business expertise', text: 'Providence supports both home and business customers.' },
   { icon: UserRoundCheck, title: 'Help choosing the right package', text: 'We help you compare options rather than guess.' },
@@ -240,7 +240,7 @@ export const pageMeta: Record<MarketName, Partial<Record<SiteSection, { title: s
     business: { title: 'Business Internet, Phone & Connectivity | Providence Canada', description: 'Explore business internet, phone, TV, connectivity, and package options for your organization, through Providence.' },
     solutions: { title: 'Connection Problems & Wi-Fi Solutions | Providence Canada', description: 'Get help exploring slow internet, Wi-Fi dead zones, unreliable connections, difficult buildings, and more complex home or business connectivity problems.' },
     'why-providence': { title: 'Why Providence | Providence Canada', description: 'Why customers choose Providence for their internet, TV, and phone needs.' },
-    'healthcare-staffing': { title: 'Healthcare Staffing (Developing Division) | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations — a developing second division of Providence Canada.' },
+    'healthcare-staffing': { title: 'Healthcare Staffing (Developing Division) | Providence Canada', description: 'Recruiting, matching, placement, and staffing coordination for Ontario healthcare workers and care organizations. This is a developing second division of Providence Canada.' },
     'care-organizations': { title: 'Find Healthcare Staff | Providence Canada', description: 'Tell Providence Canada about your healthcare staffing needs, roles, locations, schedules, and timing.' },
     'healthcare-workers': { title: 'Find Healthcare Work | Providence Canada', description: 'Healthcare and care-support professionals can share qualifications, availability, and work interests with Providence Canada.' },
     telecom: { title: 'Partner With Providence | Telecom Sales & Customer Acquisition', description: 'Providence Canada performs telesales, sales representation, lead generation, campaign execution, and business development directly for telecom partners.' },
